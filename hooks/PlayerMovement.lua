@@ -16,3 +16,4 @@ function PlayerMovement:_change_stamina(value)
         return orig_change_stamina(self, value)
     end
 end
+

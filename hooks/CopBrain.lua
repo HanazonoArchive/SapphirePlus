@@ -68,3 +68,4 @@ Hooks:PostHook(CopBrain, "set_data", "Sapphire_RandomPagersFinalize", function(s
     disable_pager(self._unit)
     self._Sapphire_pager_pending = nil
 end)
+

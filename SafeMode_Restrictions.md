@@ -35,6 +35,7 @@ These features are considered unfair advantages in a standard lobby and are enti
 - **No Weapon Restrictions** (Heavy bags will restrict weapons as normal)
 - **Auto-Answer Pagers**
 - **Affect Body Bags**
+- **AI Can't Alarm** (Includes God Mode)
 
 ### 2. Acceptable but Regulated (Capped)
 These features are allowed but heavily throttled to look like normal network desync or minor latency rather than blatant cheating:

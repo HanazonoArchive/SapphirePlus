@@ -37,6 +37,8 @@ function Sapphire:NormalizeSettings()
     self.Settings.RandomPagers = self.Settings.RandomPagers == true
     self.Settings.RandomPagerChance = self:ClampNumber(self.Settings.RandomPagerChance, 0, 100, 35)
     self.Settings.AutoAnswerPagers = self.Settings.AutoAnswerPagers == true
+
+    self.Settings.AICantAlarm = self.Settings.AICantAlarm == true
 end
 
 function Sapphire:IsMultiplayerSessionActive()
@@ -89,6 +91,7 @@ function Sapphire:GetEffectiveSettings()
         RandomPagers = self.Settings.RandomPagers,
         RandomPagerChance = self.Settings.RandomPagerChance,
         AutoAnswerPagers = self.Settings.AutoAnswerPagers,
+        AICantAlarm = self.Settings.AICantAlarm,
         SafeModeActive = false,
         ForceSafeModeHost = self.Settings.ForceSafeModeHost
     }
@@ -118,6 +121,7 @@ function Sapphire:GetEffectiveSettings()
         effective.JumpHeight = math.min(effective.JumpHeight, 1.1)
         effective.ThrowDistance = math.min(effective.ThrowDistance, 1.25)
         effective.AffectBodyBags = false
+        effective.AICantAlarm = false
     end
 
     return effective

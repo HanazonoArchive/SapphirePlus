@@ -29,6 +29,7 @@ local setting_keys = {
     Sapphire_RandomPagers      = "RandomPagers",
     Sapphire_RandomPagerChance = "RandomPagerChance",
     Sapphire_AutoAnswerPagers  = "AutoAnswerPagers",
+    Sapphire_AICantAlarm         = "AICantAlarm",
 }
 
 local function parse_item_value(item, key)
@@ -36,7 +37,7 @@ local function parse_item_value(item, key)
        key == "ForceSafeModeHost" or key == "NoInteractionCooldown" or
        key == "RandomPagers" or key == "InfiniteStamina" or
        key == "AutoAnswerPagers" or key == "NoFallDamage" or key == "IgnoreArmorPenalty" or
-       key == "AffectBodyBags" or key == "NoWeaponRestrictions" then
+       key == "AffectBodyBags" or key == "NoWeaponRestrictions" or key == "AICantAlarm" then
         return item:value() == "on"
     end
 
@@ -95,6 +96,9 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
 
         Sapphire_no_weapon_restrictions_title = "[Extra - C2] No Weapon Restrictions",
         Sapphire_no_weapon_restrictions_desc  = "Allows you to use primary weapons while carrying heavy bags.",
+
+        Sapphire_ai_cant_alarm_title = "[Extra - S1] AI Can't Alarm",
+        Sapphire_ai_cant_alarm_desc  = "Enemies can detect you and fight, but they cannot call the police to trigger a loud heist.",
 
         -- [Pager] Pagers
         Sapphire_random_pagers_title = "[Pager - 1] Random Pagers",
@@ -351,6 +355,15 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         desc = "Sapphire_auto_answer_pagers_desc",
         callback = callback_id,
         value = Sapphire.Settings.AutoAnswerPagers,
+        menu_id = menu_id
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_AICantAlarm",
+        title = "Sapphire_ai_cant_alarm_title",
+        desc = "Sapphire_ai_cant_alarm_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.AICantAlarm,
         menu_id = menu_id
     })
 end)

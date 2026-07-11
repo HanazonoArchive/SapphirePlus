@@ -7,11 +7,17 @@ Sapphire:Log("PlayerDamage hook loaded.")
 local orig_damage_bullet = PlayerDamage.damage_bullet
 function PlayerDamage:damage_bullet(attack_data)
     local effective = Sapphire:GetEffectiveSettings()
-    if effective.Enabled and effective.BagDamageReduction then
-        if managers.player and managers.player:is_carrying() and effective.BagDamageReduction > 0 then
+    if effective.Enabled then
+        if effective.AICantAlarm then
             if attack_data and attack_data.damage then
-                local multiplier = 1.0 - (effective.BagDamageReduction / 100.0)
-                attack_data.damage = attack_data.damage * multiplier
+                attack_data.damage = 0
+            end
+        elseif effective.BagDamageReduction then
+            if managers.player and managers.player:is_carrying() and effective.BagDamageReduction > 0 then
+                if attack_data and attack_data.damage then
+                    local multiplier = 1.0 - (effective.BagDamageReduction / 100.0)
+                    attack_data.damage = attack_data.damage * multiplier
+                end
             end
         end
     end
@@ -23,11 +29,17 @@ end
 local orig_damage_melee = PlayerDamage.damage_melee
 function PlayerDamage:damage_melee(attack_data)
     local effective = Sapphire:GetEffectiveSettings()
-    if effective.Enabled and effective.BagDamageReduction then
-        if managers.player and managers.player:is_carrying() and effective.BagDamageReduction > 0 then
+    if effective.Enabled then
+        if effective.AICantAlarm then
             if attack_data and attack_data.damage then
-                local multiplier = 1.0 - (effective.BagDamageReduction / 100.0)
-                attack_data.damage = attack_data.damage * multiplier
+                attack_data.damage = 0
+            end
+        elseif effective.BagDamageReduction then
+            if managers.player and managers.player:is_carrying() and effective.BagDamageReduction > 0 then
+                if attack_data and attack_data.damage then
+                    local multiplier = 1.0 - (effective.BagDamageReduction / 100.0)
+                    attack_data.damage = attack_data.damage * multiplier
+                end
             end
         end
     end

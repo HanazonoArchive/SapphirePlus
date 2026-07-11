@@ -19,7 +19,8 @@ Sapphire.DefaultSettings = {
     NoWeaponRestrictions = false,
     RandomPagers = false,
     RandomPagerChance = 35,
-    AutoAnswerPagers = false
+    AutoAnswerPagers = false,
+    AICantAlarm = false
 }
 
 Sapphire.Settings = {}
