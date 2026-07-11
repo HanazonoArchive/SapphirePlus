@@ -40,28 +40,19 @@ function Sapphire:NormalizeSettings()
 end
 
 function Sapphire:IsMultiplayerSessionActive()
+    -- Check if the user is playing "Play Offline"
     if type(Global) == "table" and type(Global.game_settings) == "table" then
         if Global.game_settings.single_player == true then
             return false
         end
     end
 
-    if type(managers) ~= "table" or type(managers.network) ~= "table" or type(managers.network.session) ~= "function" then
-        return false
-    end
-
-    local session = managers.network:session()
-    if type(session) ~= "table" then
-        return false
-    end
-
-    if type(session.amount_of_players) == "function" then
-        return session:amount_of_players() > 1
-    end
-
-    if type(session.all_peers) == "function" then
-        local peers = session:all_peers()
-        return type(peers) == "table" and next(peers) ~= nil
+    -- If there's an active network session, it's a multiplayer lobby (even if solo)
+    if type(managers) == "table" and type(managers.network) == "table" and type(managers.network.session) == "function" then
+        local session = managers.network:session()
+        if type(session) == "table" then
+            return true
+        end
     end
 
     return false
