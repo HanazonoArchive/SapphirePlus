@@ -20,7 +20,8 @@ Sapphire.DefaultSettings = {
     RandomPagers = false,
     RandomPagerChance = 35,
     AutoAnswerPagers = false,
-    AICantAlarm = false
+    AICantAlarm = false,
+    UnlockDLCHeists = false
 }
 
 Sapphire.Settings = {}

@@ -30,6 +30,7 @@ local setting_keys = {
     Sapphire_RandomPagerChance = "RandomPagerChance",
     Sapphire_AutoAnswerPagers  = "AutoAnswerPagers",
     Sapphire_AICantAlarm         = "AICantAlarm",
+    Sapphire_UnlockDLCHeists     = "UnlockDLCHeists",
 }
 
 local function parse_item_value(item, key)
@@ -37,7 +38,7 @@ local function parse_item_value(item, key)
        key == "ForceSafeModeHost" or key == "NoInteractionCooldown" or
        key == "RandomPagers" or key == "InfiniteStamina" or
        key == "AutoAnswerPagers" or key == "NoFallDamage" or key == "IgnoreArmorPenalty" or
-       key == "AffectBodyBags" or key == "NoWeaponRestrictions" or key == "AICantAlarm" then
+       key == "AffectBodyBags" or key == "NoWeaponRestrictions" or key == "AICantAlarm" or key == "UnlockDLCHeists" then
         return item:value() == "on"
     end
 
@@ -109,6 +110,10 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
 
         Sapphire_auto_answer_pagers_title = "[Pager - 3] Auto-Answer Pagers",
         Sapphire_auto_answer_pagers_desc  = "Automatically answers any pagers that spawn.",
+
+        -- [DLC] DLC Management
+        Sapphire_unlock_dlc_heists_title = "[DLC - 1] Unlock DLC Heists",
+        Sapphire_unlock_dlc_heists_desc  = "Unlocks specific DLC heists listed in dlcs-to-unlock.txt (Requires a game restart to take effect).",
     })
 end)
 
@@ -364,6 +369,15 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         desc = "Sapphire_ai_cant_alarm_desc",
         callback = callback_id,
         value = Sapphire.Settings.AICantAlarm,
+        menu_id = menu_id
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_UnlockDLCHeists",
+        title = "Sapphire_unlock_dlc_heists_title",
+        desc = "Sapphire_unlock_dlc_heists_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.UnlockDLCHeists,
         menu_id = menu_id
     })
 end)

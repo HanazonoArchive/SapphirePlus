@@ -39,6 +39,7 @@ function Sapphire:NormalizeSettings()
     self.Settings.AutoAnswerPagers = self.Settings.AutoAnswerPagers == true
 
     self.Settings.AICantAlarm = self.Settings.AICantAlarm == true
+    self.Settings.UnlockDLCHeists = self.Settings.UnlockDLCHeists == true
 end
 
 function Sapphire:IsMultiplayerSessionActive()
@@ -92,6 +93,7 @@ function Sapphire:GetEffectiveSettings()
         RandomPagerChance = self.Settings.RandomPagerChance,
         AutoAnswerPagers = self.Settings.AutoAnswerPagers,
         AICantAlarm = self.Settings.AICantAlarm,
+        UnlockDLCHeists = self.Settings.UnlockDLCHeists,
         SafeModeActive = false,
         ForceSafeModeHost = self.Settings.ForceSafeModeHost
     }
