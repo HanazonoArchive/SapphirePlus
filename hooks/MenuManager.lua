@@ -308,8 +308,8 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         callback = callback_id,
         value = Sapphire.Settings.ExtendedInteract,
         min = 1.0,
-        max = 5.0,
-        step = 0.25,
+        max = 30.0,
+        step = 0.5,
         show_value = true,
         menu_id = menu_id
     })
