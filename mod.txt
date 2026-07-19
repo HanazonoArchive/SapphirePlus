@@ -39,6 +39,10 @@
         {
             "hook_id": "lib/managers/dlcmanager",
             "script_path": "hooks/DLCManager.lua"
+        },
+        {
+            "hook_id": "lib/units/props/timergui",
+            "script_path": "hooks/TimerGui.lua"
         }
     ],
     "keybinds": [

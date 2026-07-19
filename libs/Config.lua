@@ -21,7 +21,8 @@ Sapphire.DefaultSettings = {
     RandomPagerChance = 35,
     AutoAnswerPagers = false,
     AICantAlarm = false,
-    UnlockDLCHeists = false
+    UnlockDLCHeists = false,
+    ReliableDrills = true
 }
 
 Sapphire.Settings = {}

@@ -31,6 +31,7 @@ local setting_keys = {
     Sapphire_AutoAnswerPagers  = "AutoAnswerPagers",
     Sapphire_AICantAlarm         = "AICantAlarm",
     Sapphire_UnlockDLCHeists     = "UnlockDLCHeists",
+    Sapphire_ReliableDrills      = "ReliableDrills",
 }
 
 local function parse_item_value(item, key)
@@ -38,7 +39,7 @@ local function parse_item_value(item, key)
        key == "ForceSafeModeHost" or key == "NoInteractionCooldown" or
        key == "RandomPagers" or key == "InfiniteStamina" or
        key == "AutoAnswerPagers" or key == "NoFallDamage" or key == "IgnoreArmorPenalty" or
-       key == "AffectBodyBags" or key == "NoWeaponRestrictions" or key == "AICantAlarm" or key == "UnlockDLCHeists" then
+       key == "AffectBodyBags" or key == "NoWeaponRestrictions" or key == "AICantAlarm" or key == "UnlockDLCHeists" or key == "ReliableDrills" then
         return item:value() == "on"
     end
 
@@ -100,6 +101,9 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
 
         Sapphire_ai_cant_alarm_title = "[Extra - S1] AI Can't Alarm",
         Sapphire_ai_cant_alarm_desc  = "Enemies can detect you and fight, but they cannot call the police to trigger a loud heist.",
+
+        Sapphire_reliable_drills_title = "[Extra - S2] Reliable Drills",
+        Sapphire_reliable_drills_desc  = "Drills will never randomly break down or be sabotaged by cops.",
 
         -- [Pager] Pagers
         Sapphire_random_pagers_title = "[Pager - 1] Random Pagers",
@@ -378,6 +382,15 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         desc = "Sapphire_unlock_dlc_heists_desc",
         callback = callback_id,
         value = Sapphire.Settings.UnlockDLCHeists,
+        menu_id = menu_id
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_ReliableDrills",
+        title = "Sapphire_reliable_drills_title",
+        desc = "Sapphire_reliable_drills_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.ReliableDrills,
         menu_id = menu_id
     })
 end)
