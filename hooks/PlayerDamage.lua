@@ -52,9 +52,7 @@ local orig_damage_fall = PlayerDamage.damage_fall
 function PlayerDamage:damage_fall(data)
     local effective = Sapphire:GetEffectiveSettings()
     if effective.Enabled and effective.NoFallDamage then
-        if managers.player and managers.player:is_carrying() then
-            return false
-        end
+        return false
     end
     if orig_damage_fall then
         return orig_damage_fall(self, data)

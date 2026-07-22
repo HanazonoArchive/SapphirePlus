@@ -86,8 +86,8 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
         Sapphire_bag_damage_reduction_title = "[Extra - A2] Bag Shield (%)",
         Sapphire_bag_damage_reduction_desc  = "Percentage of damage to ignore while carrying a bag (0 = none, 100 = invincible).",
 
-        Sapphire_no_fall_damage_title = "[Extra - B2] No Fall Damage (With Bag)",
-        Sapphire_no_fall_damage_desc  = "You will not take any fall damage while carrying a bag.",
+        Sapphire_no_fall_damage_title = "[Extra - B2] No Fall Damage",
+        Sapphire_no_fall_damage_desc  = "You will not take any fall damage.",
 
         Sapphire_extended_interact_title = "[Extra - B3] Interaction Range Multiplier",
         Sapphire_extended_interact_desc  = "Multiplier for your interaction distance (useful for catching bags).",
