@@ -28,7 +28,7 @@ local orig_mod_movement_penalty = PlayerManager.mod_movement_penalty
 function PlayerManager:mod_movement_penalty(...)
     local penalty = orig_mod_movement_penalty and orig_mod_movement_penalty(self, ...) or 1.0
     local effective = Sapphire:GetEffectiveSettings()
-    if effective.Enabled and effective.IgnoreArmorPenalty and self:is_carrying() then
+    if effective.Enabled and effective.IgnoreArmorPenalty then
         return 1.0
     end
     return penalty

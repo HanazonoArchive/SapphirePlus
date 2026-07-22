@@ -31,7 +31,6 @@ local setting_keys = {
     Sapphire_AutoAnswerPagers  = "AutoAnswerPagers",
     Sapphire_AICantAlarm         = "AICantAlarm",
     Sapphire_UnlockDLCHeists     = "UnlockDLCHeists",
-    Sapphire_ReliableDrills      = "ReliableDrills",
 }
 
 local function parse_item_value(item, key)
@@ -39,7 +38,7 @@ local function parse_item_value(item, key)
        key == "ForceSafeModeHost" or key == "NoInteractionCooldown" or
        key == "RandomPagers" or key == "InfiniteStamina" or
        key == "AutoAnswerPagers" or key == "NoFallDamage" or key == "IgnoreArmorPenalty" or
-       key == "AffectBodyBags" or key == "NoWeaponRestrictions" or key == "AICantAlarm" or key == "UnlockDLCHeists" or key == "ReliableDrills" then
+       key == "AffectBodyBags" or key == "NoWeaponRestrictions" or key == "AICantAlarm" or key == "UnlockDLCHeists" then
         return item:value() == "on"
     end
 
@@ -94,16 +93,13 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
         Sapphire_extended_interact_desc  = "Multiplier for your interaction distance (useful for catching bags).",
 
         Sapphire_ignore_armor_penalty_title = "[Extra - B4] Ignore Armor Speed Penalty",
-        Sapphire_ignore_armor_penalty_desc  = "Wearing heavy armor no longer slows you down while carrying bags.",
+        Sapphire_ignore_armor_penalty_desc  = "Wearing heavy armor no longer slows you down.",
 
         Sapphire_no_weapon_restrictions_title = "[Extra - C2] No Weapon Restrictions",
         Sapphire_no_weapon_restrictions_desc  = "Allows you to use primary weapons while carrying heavy bags.",
 
         Sapphire_ai_cant_alarm_title = "[Extra - S1] AI Can't Alarm",
         Sapphire_ai_cant_alarm_desc  = "Enemies can detect you and fight, but they cannot call the police to trigger a loud heist.",
-
-        Sapphire_reliable_drills_title = "[Extra - S2] Reliable Drills",
-        Sapphire_reliable_drills_desc  = "Drills will never randomly break down or be sabotaged by cops.",
 
         -- [Pager] Pagers
         Sapphire_random_pagers_title = "[Pager - 1] Random Pagers",
@@ -382,15 +378,6 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         desc = "Sapphire_unlock_dlc_heists_desc",
         callback = callback_id,
         value = Sapphire.Settings.UnlockDLCHeists,
-        menu_id = menu_id
-    })
-
-    MenuHelper:AddToggle({
-        id = "Sapphire_ReliableDrills",
-        title = "Sapphire_reliable_drills_title",
-        desc = "Sapphire_reliable_drills_desc",
-        callback = callback_id,
-        value = Sapphire.Settings.ReliableDrills,
         menu_id = menu_id
     })
 end)
