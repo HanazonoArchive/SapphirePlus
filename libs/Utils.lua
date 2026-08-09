@@ -44,6 +44,8 @@ function Sapphire:NormalizeSettings()
     self.Settings.UnlimitedFavors = self.Settings.UnlimitedFavors == true
     self.Settings.InfiniteCameraLoop = self.Settings.InfiniteCameraLoop == true
     self.Settings.MinDetectionRisk = self.Settings.MinDetectionRisk == true
+    self.Settings.DrillNoJams = self.Settings.DrillNoJams == true
+    self.Settings.InstantDrills = self.Settings.InstantDrills == true
 end
 
 function Sapphire:IsMultiplayerSessionActive()
@@ -102,6 +104,8 @@ function Sapphire:GetEffectiveSettings()
         UnlimitedFavors = self.Settings.UnlimitedFavors,
         InfiniteCameraLoop = self.Settings.InfiniteCameraLoop,
         MinDetectionRisk = self.Settings.MinDetectionRisk,
+        DrillNoJams = self.Settings.DrillNoJams,
+        InstantDrills = self.Settings.InstantDrills,
         SafeModeActive = false,
         ForceSafeModeHost = self.Settings.ForceSafeModeHost
     }
@@ -136,6 +140,8 @@ function Sapphire:GetEffectiveSettings()
         effective.UnlimitedFavors = false
         effective.InfiniteCameraLoop = false
         effective.MinDetectionRisk = false
+        effective.DrillNoJams = false
+        effective.InstantDrills = false
     end
 
     return effective

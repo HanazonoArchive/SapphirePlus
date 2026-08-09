@@ -59,6 +59,14 @@
         {
             "hook_id": "lib/managers/blackmarketmanager",
             "script_path": "hooks/MinDetectionRisk.lua"
+        },
+        {
+            "hook_id": "lib/units/props/timergui",
+            "script_path": "hooks/DrillOverhaul.lua"
+        },
+        {
+            "hook_id": "lib/units/props/drill",
+            "script_path": "hooks/DrillOverhaul.lua"
         }
     ],
     "keybinds": [

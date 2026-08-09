@@ -38,6 +38,8 @@ local setting_keys = {
     Sapphire_UnlimitedFavors     = "UnlimitedFavors",
     Sapphire_InfiniteCameraLoop  = "InfiniteCameraLoop",
     Sapphire_MinDetectionRisk    = "MinDetectionRisk",
+    Sapphire_DrillNoJams         = "DrillNoJams",
+    Sapphire_InstantDrills       = "InstantDrills",
 }
 
 local function parse_item_value(item, key)
@@ -49,7 +51,9 @@ local function parse_item_value(item, key)
        key == "MultiPickup" or
        key == "UnlimitedFavors" or
        key == "InfiniteCameraLoop" or
-       key == "MinDetectionRisk" then
+       key == "MinDetectionRisk" or
+       key == "DrillNoJams" or
+       key == "InstantDrills" then
         return item:value() == "on"
     end
 
@@ -125,6 +129,12 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
 
         Sapphire_extended_interact_title = "Interaction Range Multiplier",
         Sapphire_extended_interact_desc  = "Multiplier for your interaction distance (useful for catching bags).",
+
+        Sapphire_drill_no_jams_title = "Drills Never Jam",
+        Sapphire_drill_no_jams_desc  = "Prevents drills, saws, and hacking devices from ever breaking down. (Disabled in Safe Mode)",
+
+        Sapphire_instant_drills_title = "Instant Drills (Zero Timer)",
+        Sapphire_instant_drills_desc  = "Drills, saws, and hacking devices complete instantly upon placement. (Disabled in Safe Mode)",
 
         -- Stealth Tools
         Sapphire_ai_cant_alarm_title = "AI Can't Alarm",
@@ -450,6 +460,26 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         show_value = true,
         menu_id = menu_id,
         priority = 694
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_DrillNoJams",
+        title = "Sapphire_drill_no_jams_title",
+        desc = "Sapphire_drill_no_jams_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.DrillNoJams,
+        menu_id = menu_id,
+        priority = 693
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_InstantDrills",
+        title = "Sapphire_instant_drills_title",
+        desc = "Sapphire_instant_drills_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.InstantDrills,
+        menu_id = menu_id,
+        priority = 692
     })
 
     MenuHelper:AddDivider({

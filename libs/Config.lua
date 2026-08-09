@@ -25,7 +25,9 @@ Sapphire.DefaultSettings = {
     MultiPickup = false,
     UnlimitedFavors = false,
     InfiniteCameraLoop = false,
-    MinDetectionRisk = false
+    MinDetectionRisk = false,
+    DrillNoJams = false,
+    InstantDrills = false
 }
 
 Sapphire.Settings = {}
