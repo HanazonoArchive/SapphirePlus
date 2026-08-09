@@ -134,7 +134,7 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
         Sapphire_multi_pickup_desc  = "Pick up keycards and other consumable items multiple times. Essential for solo stealth on maps like Shadow Raid.",
 
         Sapphire_infinite_camera_loop_title = "Infinite Camera Loop",
-        Sapphire_infinite_camera_loop_desc  = "Camera loops last forever instead of timing out. Loop once, forget about it. (Disabled in Safe Mode)",
+        Sapphire_infinite_camera_loop_desc  = "Camera loops last forever and multiple cameras can be looped simultaneously. (Disabled in Safe Mode)",
 
         Sapphire_min_detection_risk_title = "Minimum Detection Risk (Always 3)",
         Sapphire_min_detection_risk_desc  = "Forces your detection risk to 3 regardless of what armor or weapons you wear. (Disabled in Safe Mode)",
