@@ -9,6 +9,10 @@
             "script_path": "hooks/PlayerManager.lua"
         },
         {
+            "hook_id": "lib/managers/playermanager",
+            "script_path": "hooks/MultiPickup.lua"
+        },
+        {
             "hook_id": "lib/managers/menumanager",
             "script_path": "hooks/MenuManager.lua"
         },
@@ -39,6 +43,18 @@
         {
             "hook_id": "lib/managers/dlcmanager",
             "script_path": "hooks/DLCManager.lua"
+        },
+        {
+            "hook_id": "lib/managers/preplanningmanager",
+            "script_path": "hooks/UnlimitedFavors.lua"
+        },
+        {
+            "hook_id": "lib/managers/moneymanager",
+            "script_path": "hooks/UnlimitedFavors.lua"
+        },
+        {
+            "hook_id": "lib/units/props/securitycamera",
+            "script_path": "hooks/InfiniteCameraLoop.lua"
         }
     ],
     "keybinds": [

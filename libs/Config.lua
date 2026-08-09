@@ -21,7 +21,10 @@ Sapphire.DefaultSettings = {
     RandomPagerChance = 35,
     AutoAnswerPagers = false,
     AICantAlarm = false,
-    UnlockDLCHeists = false
+    UnlockDLCHeists = false,
+    MultiPickup = false,
+    UnlimitedFavors = false,
+    InfiniteCameraLoop = false
 }
 
 Sapphire.Settings = {}

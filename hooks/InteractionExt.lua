@@ -1,5 +1,4 @@
-local effective = Sapphire:GetEffectiveSettings()
-if not effective.Enabled then return end
+dofile(ModPath .. "core.lua")
 
 -- ============================================================
 -- EHI SPOOF
@@ -46,6 +45,7 @@ end
 -- INTERACTION OVERRIDES
 -- ============================================================
 if BaseInteractionExt then
+    -- Interaction distance multiplier
     local orig_interact_distance = BaseInteractionExt.interact_distance
     function BaseInteractionExt:interact_distance(...)
         local distance = orig_interact_distance(self, ...)
@@ -56,6 +56,7 @@ if BaseInteractionExt then
         return distance
     end
 
+    -- Instant / no interaction cooldown
     local orig_timer = BaseInteractionExt._get_timer
     function BaseInteractionExt:_get_timer(...)
         local timer = orig_timer(self, ...)
@@ -64,5 +65,74 @@ if BaseInteractionExt then
             return 0
         end
         return timer
+    end
+
+    -- Helper to check if special_equipment_block should be bypassed
+    local function is_managed_block(blocker)
+        if not blocker then return false end
+        if blocker == "cable_tie" or blocker == "crowbar" or blocker == "glass_cutter" then
+            return false
+        end
+        return true
+    end
+
+    -- Bypass special_equipment_block in can_select
+    local orig_can_select = BaseInteractionExt.can_select
+    function BaseInteractionExt:can_select(player, locator, ...)
+        local current_effective = Sapphire:GetEffectiveSettings()
+        if current_effective.Enabled and current_effective.MultiPickup then
+            local orig_block = self._tweak_data and self._tweak_data.special_equipment_block
+            if orig_block then
+                local should_bypass = false
+                if type(orig_block) == "string" and is_managed_block(orig_block) then
+                    should_bypass = true
+                elseif type(orig_block) == "table" then
+                    for _, b in pairs(orig_block) do
+                        if is_managed_block(b) then
+                            should_bypass = true
+                            break
+                        end
+                    end
+                end
+
+                if should_bypass then
+                    self._tweak_data.special_equipment_block = nil
+                    local res = orig_can_select(self, player, locator, ...)
+                    self._tweak_data.special_equipment_block = orig_block
+                    return res
+                end
+            end
+        end
+        return orig_can_select(self, player, locator, ...)
+    end
+
+    -- Bypass special_equipment_block in can_interact
+    local orig_can_interact = BaseInteractionExt.can_interact
+    function BaseInteractionExt:can_interact(player, ...)
+        local current_effective = Sapphire:GetEffectiveSettings()
+        if current_effective.Enabled and current_effective.MultiPickup then
+            local orig_block = self._tweak_data and self._tweak_data.special_equipment_block
+            if orig_block then
+                local should_bypass = false
+                if type(orig_block) == "string" and is_managed_block(orig_block) then
+                    should_bypass = true
+                elseif type(orig_block) == "table" then
+                    for _, b in pairs(orig_block) do
+                        if is_managed_block(b) then
+                            should_bypass = true
+                            break
+                        end
+                    end
+                end
+
+                if should_bypass then
+                    self._tweak_data.special_equipment_block = nil
+                    local res = orig_can_interact(self, player, ...)
+                    self._tweak_data.special_equipment_block = orig_block
+                    return res
+                end
+            end
+        end
+        return orig_can_interact(self, player, ...)
     end
 end

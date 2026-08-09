@@ -1,15 +1,18 @@
 dofile(ModPath .. "core.lua")
 
+-- ============================================================
+-- MENU SYSTEM: Single page with category headers and dividers
+-- ============================================================
+-- All settings on one scrollable page, organized by category.
+-- Uses priority values to enforce order (higher = appears first).
+-- Dividers and header buttons separate each section visually.
+-- ============================================================
+
 local menu_id = "Sapphire_options_menu"
 local callback_id = "Sapphire_MenuSettingChanged"
+local dummy_callback_id = "Sapphire_DummyCallback"
 local menu_populated = false
 
--- MenuHelper sorts items by their localized display title alphabetically.
--- The [N] prefix scheme in each title naturally groups settings:
---   [1]-[3]      = Core
---   [4]-[4F]     = Movement & Carry
---   [5],[Extra]  = Extras
---   [Pager]      = Random Pagers
 local setting_keys = {
     Sapphire_Enabled           = "Enabled",
     Sapphire_SafeMode          = "SafeMode",
@@ -31,6 +34,9 @@ local setting_keys = {
     Sapphire_AutoAnswerPagers  = "AutoAnswerPagers",
     Sapphire_AICantAlarm         = "AICantAlarm",
     Sapphire_UnlockDLCHeists     = "UnlockDLCHeists",
+    Sapphire_MultiPickup         = "MultiPickup",
+    Sapphire_UnlimitedFavors     = "UnlimitedFavors",
+    Sapphire_InfiniteCameraLoop  = "InfiniteCameraLoop",
 }
 
 local function parse_item_value(item, key)
@@ -38,84 +44,117 @@ local function parse_item_value(item, key)
        key == "ForceSafeModeHost" or key == "NoInteractionCooldown" or
        key == "RandomPagers" or key == "InfiniteStamina" or
        key == "AutoAnswerPagers" or key == "NoFallDamage" or key == "IgnoreArmorPenalty" or
-       key == "AffectBodyBags" or key == "NoWeaponRestrictions" or key == "AICantAlarm" or key == "UnlockDLCHeists" then
+       key == "AffectBodyBags" or key == "NoWeaponRestrictions" or key == "AICantAlarm" or key == "UnlockDLCHeists" or
+       key == "MultiPickup" or
+       key == "UnlimitedFavors" or
+       key == "InfiniteCameraLoop" then
         return item:value() == "on"
     end
 
     return tonumber(item:value()) or Sapphire.DefaultSettings[key]
 end
 
+-- ============================================================
+-- LOCALIZATION
+-- ============================================================
+
 Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
     loc:add_localized_strings({
+        -- Root menu
         Sapphire_menu_title = "Sapphire+ Options",
         Sapphire_menu_desc  = "Configure Sapphire+ behavior and save settings.",
 
-        -- [1]-[3] Core
-        Sapphire_enabled_title = "[1] Enable Sapphire+",
+        -- Category headers
+        Sapphire_header_core_title    = "--- Core Settings ---",
+        Sapphire_header_core_desc     = "",
+        Sapphire_header_carry_title   = "--- Carry & Movement ---",
+        Sapphire_header_carry_desc    = "",
+        Sapphire_header_qol_title     = "--- Quality of Life ---",
+        Sapphire_header_qol_desc      = "",
+        Sapphire_header_stealth_title = "--- Stealth Tools ---",
+        Sapphire_header_stealth_desc  = "",
+        Sapphire_header_extras_title  = "--- Extras ---",
+        Sapphire_header_extras_desc   = "",
+
+        -- Core Settings
+        Sapphire_enabled_title = "Enable Sapphire+",
         Sapphire_enabled_desc  = "Master toggle for all Sapphire+ effects.",
 
-        Sapphire_safe_mode_title = "[2A] Safe Mode (Multiplayer)",
+        Sapphire_safe_mode_title = "Safe Mode (Multiplayer)",
         Sapphire_safe_mode_desc  = "Automatically cap settings when joining other lobbies.",
 
-        Sapphire_force_safe_mode_host_title = "[2B] Force Safe Mode (Host)",
+        Sapphire_force_safe_mode_host_title = "Force Safe Mode (Host)",
         Sapphire_force_safe_mode_host_desc  = "Apply Safe Mode restrictions even when you are the host.",
 
-        Sapphire_debug_title = "[3] Debug Logging",
+        Sapphire_debug_title = "Debug Logging",
         Sapphire_debug_desc  = "Enable or disable Sapphire+ debug logging.",
 
-        -- [4]-[4F] Movement & Carry
-        Sapphire_always_sprint_title = "[4A] Always Sprint With Carry",
+        -- Carry & Movement
+        Sapphire_always_sprint_title = "Always Sprint With Carry",
         Sapphire_always_sprint_desc  = "Allow sprinting while carrying bags.",
 
-        Sapphire_jump_height_title = "[4B] Carry Jump Height",
+        Sapphire_jump_height_title = "Carry Jump Height",
         Sapphire_jump_height_desc  = "Jump strength multiplier while carrying.",
 
-        Sapphire_throw_distance_title = "[4C] Carry Throw Distance",
+        Sapphire_throw_distance_title = "Carry Throw Distance",
         Sapphire_throw_distance_desc  = "Throw distance multiplier for carried bags.",
 
-        Sapphire_affect_body_bags_title = "[4D] Affect Body Bags",
+        Sapphire_affect_body_bags_title = "Affect Body Bags",
         Sapphire_affect_body_bags_desc  = "Apply carry speed and distance tweaks to body bags.",
 
-        -- [5] + [Extra] Extras
-        Sapphire_no_interaction_cd_title = "[5] No Interaction Timer",
-        Sapphire_no_interaction_cd_desc  = "Removes interaction timer.",
-
-        Sapphire_infinite_stamina_title = "[Extra - A1] Infinite Stamina With Carry",
-        Sapphire_infinite_stamina_desc  = "Sprint infinitely while carrying a bag.",
-
-        Sapphire_bag_damage_reduction_title = "[Extra - A2] Bag Shield (%)",
-        Sapphire_bag_damage_reduction_desc  = "Percentage of damage to ignore while carrying a bag (0 = none, 100 = invincible).",
-
-        Sapphire_no_fall_damage_title = "[Extra - B2] No Fall Damage",
-        Sapphire_no_fall_damage_desc  = "You will not take any fall damage.",
-
-        Sapphire_extended_interact_title = "[Extra - B3] Interaction Range Multiplier",
-        Sapphire_extended_interact_desc  = "Multiplier for your interaction distance (useful for catching bags).",
-
-        Sapphire_ignore_armor_penalty_title = "[Extra - B4] Ignore Armor Speed Penalty",
+        Sapphire_ignore_armor_penalty_title = "Ignore Armor Speed Penalty",
         Sapphire_ignore_armor_penalty_desc  = "Wearing heavy armor no longer slows you down.",
 
-        Sapphire_no_weapon_restrictions_title = "[Extra - C2] No Weapon Restrictions",
+        Sapphire_no_weapon_restrictions_title = "No Weapon Restrictions",
         Sapphire_no_weapon_restrictions_desc  = "Allows you to use primary weapons while carrying heavy bags.",
 
-        Sapphire_ai_cant_alarm_title = "[Extra - S1] AI Can't Alarm",
+        -- Quality of Life
+        Sapphire_no_interaction_cd_title = "No Interaction Timer",
+        Sapphire_no_interaction_cd_desc  = "Removes interaction timer.",
+
+        Sapphire_infinite_stamina_title = "Infinite Stamina With Carry",
+        Sapphire_infinite_stamina_desc  = "Sprint infinitely while carrying a bag.",
+
+        Sapphire_bag_damage_reduction_title = "Bag Shield (%)",
+        Sapphire_bag_damage_reduction_desc  = "Percentage of damage to ignore while carrying a bag (0 = none, 100 = invincible).",
+
+        Sapphire_no_fall_damage_title = "No Fall Damage",
+        Sapphire_no_fall_damage_desc  = "You will not take any fall damage.",
+
+        Sapphire_extended_interact_title = "Interaction Range Multiplier",
+        Sapphire_extended_interact_desc  = "Multiplier for your interaction distance (useful for catching bags).",
+
+        -- Stealth Tools
+        Sapphire_ai_cant_alarm_title = "AI Can't Alarm",
         Sapphire_ai_cant_alarm_desc  = "Enemies can detect you and fight, but they cannot call the police to trigger a loud heist.",
 
-        -- [Pager] Pagers
-        Sapphire_random_pagers_title = "[Pager - 1] Random Pagers",
+        Sapphire_multi_pickup_title = "Multi-Pickup (Solo Stealth)",
+        Sapphire_multi_pickup_desc  = "Pick up keycards and other consumable items multiple times. Essential for solo stealth on maps like Shadow Raid.",
+
+        Sapphire_infinite_camera_loop_title = "Infinite Camera Loop",
+        Sapphire_infinite_camera_loop_desc  = "Camera loops last forever instead of timing out. Loop once, forget about it.",
+
+        Sapphire_random_pagers_title = "Random Pagers",
         Sapphire_random_pagers_desc  = "Randomly remove alarm pagers from security guards.",
 
-        Sapphire_random_pager_chance_title = "[Pager - 2] No Pager Chance (%)",
+        Sapphire_random_pager_chance_title = "No Pager Chance (%)",
         Sapphire_random_pager_chance_desc  = "Percentage chance that a guard has no pager.",
 
-        Sapphire_auto_answer_pagers_title = "[Pager - 3] Auto-Answer Pagers",
+        Sapphire_auto_answer_pagers_title = "Auto-Answer Pagers",
         Sapphire_auto_answer_pagers_desc  = "Automatically answers any pagers that spawn.",
 
-        -- [DLC] DLC Management
-        Sapphire_unlock_dlc_heists_title = "[DLC - 1] Unlock DLC Heists",
+        -- Extras
+        Sapphire_unlock_dlc_heists_title = "Unlock DLC Heists",
         Sapphire_unlock_dlc_heists_desc  = "Unlocks specific DLC heists listed in dlcs-to-unlock.txt (Requires a game restart to take effect).",
+
+        Sapphire_unlimited_favors_title = "Unlimited Favors",
+        Sapphire_unlimited_favors_desc  = "Removes the pre-planning favor budget. Select as many assets as you want at zero cost.",
     })
 end)
+
+-- ============================================================
+-- MENU SETUP
+-- ============================================================
 
 Hooks:Add("MenuManagerSetupCustomMenus", "Sapphire_MenuSetup", function(menu_manager, nodes)
     if MenuHelper == nil then
@@ -124,6 +163,17 @@ Hooks:Add("MenuManagerSetupCustomMenus", "Sapphire_MenuSetup", function(menu_man
     end
     MenuHelper:NewMenu(menu_id)
 end)
+
+-- ============================================================
+-- MENU POPULATE: Single page with priority-ordered categories
+-- ============================================================
+-- Priority ranges (higher = appears first):
+--   Core:     900-999
+--   Carry:    700-899
+--   QoL:      500-699
+--   Stealth:  300-499
+--   Extras:   100-299
+-- ============================================================
 
 Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(menu_manager, nodes)
     if MenuHelper == nil then
@@ -136,6 +186,10 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
     end
     menu_populated = true
 
+    -- Dummy callback for category headers (does nothing when clicked)
+    MenuCallbackHandler[dummy_callback_id] = function() end
+
+    -- Shared callback for all real settings
     MenuCallbackHandler[callback_id] = function(_, item)
         local item_name = item:name()
         local option_key = setting_keys[item_name]
@@ -148,7 +202,6 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
             if tweak_data and tweak_data.carry and tweak_data.carry.types then
                 local effective = Sapphire:GetEffectiveSettings()
                 for id, data in pairs(tweak_data.carry.types) do
-                    -- If the setting is disabled, or it's a body bag and AffectBodyBags is false, restore vanilla
                     if not effective.Enabled or (id == "person" and not effective.AffectBodyBags) then
                         if Sapphire.VanillaCarryTypes and Sapphire.VanillaCarryTypes[id] then
                             local vanilla = Sapphire.VanillaCarryTypes[id]
@@ -159,7 +212,6 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
                             data.can_run = vanilla.can_run
                         end
                     else
-                        -- Apply Carry++ active modifiers
                         data.move_speed_modifier = 1.0
                         data.sprint_speed_modifier = 1.0
                         data.jump_modifier = effective.JumpHeight
@@ -177,9 +229,19 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
             end
             return
         end
-
-        Sapphire:Log("Unknown menu action id: " .. tostring(item_name))
     end
+
+    -- ========================================================
+    -- CORE SETTINGS (priority 900-999)
+    -- ========================================================
+    MenuHelper:AddButton({
+        id = "Sapphire_header_core",
+        title = "Sapphire_header_core_title",
+        desc = "Sapphire_header_core_desc",
+        callback = dummy_callback_id,
+        menu_id = menu_id,
+        priority = 999
+    })
 
     MenuHelper:AddToggle({
         id = "Sapphire_Enabled",
@@ -187,7 +249,8 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         desc = "Sapphire_enabled_desc",
         callback = callback_id,
         value = Sapphire.Settings.Enabled,
-        menu_id = menu_id
+        menu_id = menu_id,
+        priority = 998
     })
 
     MenuHelper:AddToggle({
@@ -196,7 +259,8 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         desc = "Sapphire_safe_mode_desc",
         callback = callback_id,
         value = Sapphire.Settings.SafeMode,
-        menu_id = menu_id
+        menu_id = menu_id,
+        priority = 997
     })
 
     MenuHelper:AddToggle({
@@ -205,7 +269,8 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         desc = "Sapphire_force_safe_mode_host_desc",
         callback = callback_id,
         value = Sapphire.Settings.ForceSafeModeHost,
-        menu_id = menu_id
+        menu_id = menu_id,
+        priority = 996
     })
 
     MenuHelper:AddToggle({
@@ -214,7 +279,27 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         desc = "Sapphire_debug_desc",
         callback = callback_id,
         value = Sapphire.Settings.Debug,
-        menu_id = menu_id
+        menu_id = menu_id,
+        priority = 995
+    })
+
+    MenuHelper:AddDivider({
+        id = "Sapphire_div_core",
+        size = 16,
+        menu_id = menu_id,
+        priority = 900
+    })
+
+    -- ========================================================
+    -- CARRY & MOVEMENT (priority 700-899)
+    -- ========================================================
+    MenuHelper:AddButton({
+        id = "Sapphire_header_carry",
+        title = "Sapphire_header_carry_title",
+        desc = "Sapphire_header_carry_desc",
+        callback = dummy_callback_id,
+        menu_id = menu_id,
+        priority = 899
     })
 
     MenuHelper:AddToggle({
@@ -223,7 +308,8 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         desc = "Sapphire_always_sprint_desc",
         callback = callback_id,
         value = Sapphire.Settings.AlwaysSprint,
-        menu_id = menu_id
+        menu_id = menu_id,
+        priority = 898
     })
 
     MenuHelper:AddSlider({
@@ -236,7 +322,8 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         max = 5,
         step = 0.1,
         show_value = true,
-        menu_id = menu_id
+        menu_id = menu_id,
+        priority = 897
     })
 
     MenuHelper:AddSlider({
@@ -249,7 +336,8 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         max = 20,
         step = 0.1,
         show_value = true,
-        menu_id = menu_id
+        menu_id = menu_id,
+        priority = 896
     })
 
     MenuHelper:AddToggle({
@@ -258,7 +346,47 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         desc = "Sapphire_affect_body_bags_desc",
         callback = callback_id,
         value = Sapphire.Settings.AffectBodyBags,
-        menu_id = menu_id
+        menu_id = menu_id,
+        priority = 895
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_IgnoreArmorPenalty",
+        title = "Sapphire_ignore_armor_penalty_title",
+        desc = "Sapphire_ignore_armor_penalty_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.IgnoreArmorPenalty,
+        menu_id = menu_id,
+        priority = 894
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_NoWeaponRestrictions",
+        title = "Sapphire_no_weapon_restrictions_title",
+        desc = "Sapphire_no_weapon_restrictions_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.NoWeaponRestrictions,
+        menu_id = menu_id,
+        priority = 893
+    })
+
+    MenuHelper:AddDivider({
+        id = "Sapphire_div_carry",
+        size = 16,
+        menu_id = menu_id,
+        priority = 700
+    })
+
+    -- ========================================================
+    -- QUALITY OF LIFE (priority 500-699)
+    -- ========================================================
+    MenuHelper:AddButton({
+        id = "Sapphire_header_qol",
+        title = "Sapphire_header_qol_title",
+        desc = "Sapphire_header_qol_desc",
+        callback = dummy_callback_id,
+        menu_id = menu_id,
+        priority = 699
     })
 
     MenuHelper:AddToggle({
@@ -267,7 +395,8 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         desc = "Sapphire_no_interaction_cd_desc",
         callback = callback_id,
         value = Sapphire.Settings.NoInteractionCooldown,
-        menu_id = menu_id
+        menu_id = menu_id,
+        priority = 698
     })
 
     MenuHelper:AddToggle({
@@ -276,7 +405,8 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         desc = "Sapphire_infinite_stamina_desc",
         callback = callback_id,
         value = Sapphire.Settings.InfiniteStamina,
-        menu_id = menu_id
+        menu_id = menu_id,
+        priority = 697
     })
 
     MenuHelper:AddSlider({
@@ -289,7 +419,8 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         max = 100,
         step = 1,
         show_value = true,
-        menu_id = menu_id
+        menu_id = menu_id,
+        priority = 696
     })
 
     MenuHelper:AddToggle({
@@ -298,7 +429,8 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         desc = "Sapphire_no_fall_damage_desc",
         callback = callback_id,
         value = Sapphire.Settings.NoFallDamage,
-        menu_id = menu_id
+        menu_id = menu_id,
+        priority = 695
     })
 
     MenuHelper:AddSlider({
@@ -311,25 +443,57 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         max = 30.0,
         step = 0.5,
         show_value = true,
-        menu_id = menu_id
+        menu_id = menu_id,
+        priority = 694
+    })
+
+    MenuHelper:AddDivider({
+        id = "Sapphire_div_qol",
+        size = 16,
+        menu_id = menu_id,
+        priority = 500
+    })
+
+    -- ========================================================
+    -- STEALTH TOOLS (priority 300-499)
+    -- ========================================================
+    MenuHelper:AddButton({
+        id = "Sapphire_header_stealth",
+        title = "Sapphire_header_stealth_title",
+        desc = "Sapphire_header_stealth_desc",
+        callback = dummy_callback_id,
+        menu_id = menu_id,
+        priority = 499
     })
 
     MenuHelper:AddToggle({
-        id = "Sapphire_IgnoreArmorPenalty",
-        title = "Sapphire_ignore_armor_penalty_title",
-        desc = "Sapphire_ignore_armor_penalty_desc",
+        id = "Sapphire_AICantAlarm",
+        title = "Sapphire_ai_cant_alarm_title",
+        desc = "Sapphire_ai_cant_alarm_desc",
         callback = callback_id,
-        value = Sapphire.Settings.IgnoreArmorPenalty,
-        menu_id = menu_id
+        value = Sapphire.Settings.AICantAlarm,
+        menu_id = menu_id,
+        priority = 498
     })
 
     MenuHelper:AddToggle({
-        id = "Sapphire_NoWeaponRestrictions",
-        title = "Sapphire_no_weapon_restrictions_title",
-        desc = "Sapphire_no_weapon_restrictions_desc",
+        id = "Sapphire_MultiPickup",
+        title = "Sapphire_multi_pickup_title",
+        desc = "Sapphire_multi_pickup_desc",
         callback = callback_id,
-        value = Sapphire.Settings.NoWeaponRestrictions,
-        menu_id = menu_id
+        value = Sapphire.Settings.MultiPickup,
+        menu_id = menu_id,
+        priority = 497
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_InfiniteCameraLoop",
+        title = "Sapphire_infinite_camera_loop_title",
+        desc = "Sapphire_infinite_camera_loop_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.InfiniteCameraLoop,
+        menu_id = menu_id,
+        priority = 496
     })
 
     MenuHelper:AddToggle({
@@ -338,7 +502,8 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         desc = "Sapphire_random_pagers_desc",
         callback = callback_id,
         value = Sapphire.Settings.RandomPagers,
-        menu_id = menu_id
+        menu_id = menu_id,
+        priority = 495
     })
 
     MenuHelper:AddSlider({
@@ -351,7 +516,8 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         max = 100,
         step = 1,
         show_value = true,
-        menu_id = menu_id
+        menu_id = menu_id,
+        priority = 494
     })
 
     MenuHelper:AddToggle({
@@ -360,16 +526,27 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         desc = "Sapphire_auto_answer_pagers_desc",
         callback = callback_id,
         value = Sapphire.Settings.AutoAnswerPagers,
-        menu_id = menu_id
+        menu_id = menu_id,
+        priority = 493
     })
 
-    MenuHelper:AddToggle({
-        id = "Sapphire_AICantAlarm",
-        title = "Sapphire_ai_cant_alarm_title",
-        desc = "Sapphire_ai_cant_alarm_desc",
-        callback = callback_id,
-        value = Sapphire.Settings.AICantAlarm,
-        menu_id = menu_id
+    MenuHelper:AddDivider({
+        id = "Sapphire_div_stealth",
+        size = 16,
+        menu_id = menu_id,
+        priority = 300
+    })
+
+    -- ========================================================
+    -- EXTRAS (priority 100-299)
+    -- ========================================================
+    MenuHelper:AddButton({
+        id = "Sapphire_header_extras",
+        title = "Sapphire_header_extras_title",
+        desc = "Sapphire_header_extras_desc",
+        callback = dummy_callback_id,
+        menu_id = menu_id,
+        priority = 299
     })
 
     MenuHelper:AddToggle({
@@ -378,9 +555,24 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         desc = "Sapphire_unlock_dlc_heists_desc",
         callback = callback_id,
         value = Sapphire.Settings.UnlockDLCHeists,
-        menu_id = menu_id
+        menu_id = menu_id,
+        priority = 298
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_UnlimitedFavors",
+        title = "Sapphire_unlimited_favors_title",
+        desc = "Sapphire_unlimited_favors_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.UnlimitedFavors,
+        menu_id = menu_id,
+        priority = 297
     })
 end)
+
+-- ============================================================
+-- MENU BUILD
+-- ============================================================
 
 Hooks:Add("MenuManagerBuildCustomMenus", "Sapphire_MenuBuild", function(menu_manager, nodes)
     if MenuHelper == nil then

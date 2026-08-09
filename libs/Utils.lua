@@ -40,6 +40,9 @@ function Sapphire:NormalizeSettings()
 
     self.Settings.AICantAlarm = self.Settings.AICantAlarm == true
     self.Settings.UnlockDLCHeists = self.Settings.UnlockDLCHeists == true
+    self.Settings.MultiPickup = self.Settings.MultiPickup == true
+    self.Settings.UnlimitedFavors = self.Settings.UnlimitedFavors == true
+    self.Settings.InfiniteCameraLoop = self.Settings.InfiniteCameraLoop == true
 end
 
 function Sapphire:IsMultiplayerSessionActive()
@@ -94,6 +97,9 @@ function Sapphire:GetEffectiveSettings()
         AutoAnswerPagers = self.Settings.AutoAnswerPagers,
         AICantAlarm = self.Settings.AICantAlarm,
         UnlockDLCHeists = self.Settings.UnlockDLCHeists,
+        MultiPickup = self.Settings.MultiPickup,
+        UnlimitedFavors = self.Settings.UnlimitedFavors,
+        InfiniteCameraLoop = self.Settings.InfiniteCameraLoop,
         SafeModeActive = false,
         ForceSafeModeHost = self.Settings.ForceSafeModeHost
     }
@@ -124,6 +130,9 @@ function Sapphire:GetEffectiveSettings()
         effective.ThrowDistance = math.min(effective.ThrowDistance, 1.25)
         effective.AffectBodyBags = false
         effective.AICantAlarm = false
+        effective.MultiPickup = false
+        effective.UnlimitedFavors = false
+        effective.InfiniteCameraLoop = false
     end
 
     return effective
