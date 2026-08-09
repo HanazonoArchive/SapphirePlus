@@ -378,7 +378,31 @@ The single-page menu in `MenuManager.lua` uses `priority` values (higher = appea
 
 ---
 
-## 9. Summary Checklist for Any New Feature
+---
+
+## 9. Updating the Showcase Website & Devlog (`docs/`)
+
+Whenever you release an update or add features, updating the website is a 1-step edit:
+
+1. **Add a Devlog Entry in `docs/app.js`**:
+   Add a new object at the top of the `devlogs` array:
+   ```javascript
+   {
+       version: "v0.6.0",
+       isLatest: true, // Auto-updates the navbar version badge
+       tag: "Heist & Stealth Expansion",
+       items: [
+           { label: "Feature Name", desc: "Short description of what was added or fixed." },
+           { label: "Another Feature", desc: "Details about the change." }
+       ]
+   }
+   ```
+2. **Add to Feature Grid in `docs/app.js` (Optional)**:
+   Add any new feature card to the `features` array in `docs/app.js`. The website will automatically render the card and filter tabs.
+
+---
+
+## 10. Summary Checklist for Any New Feature
 
 - [ ] Researched decompiled source on `Payday-2-LuaJIT-Complete` or modding archive for real class signatures.
 - [ ] Checked `logs/FunctionsDump.txt` or `logs/playermanager.lua` for local verified methods.
@@ -391,4 +415,5 @@ The single-page menu in `MenuManager.lua` uses `priority` values (higher = appea
 - [ ] Added localization string keys in `hooks/MenuManager.lua`.
 - [ ] Added UI widget (`MenuHelper:AddToggle` or `AddSlider`) with correct priority.
 - [ ] Added keybind in `mod.txt` and `keybinds/` if a hotkey is desired.
+- [ ] (Optional) Added release entry to `devlogs` in `docs/app.js`.
 - [ ] Tested live in-game: toggle on/off, host vs client behavior, and persistence after restart.
