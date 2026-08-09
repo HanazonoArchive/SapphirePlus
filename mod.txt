@@ -55,6 +55,10 @@
         {
             "hook_id": "lib/units/props/securitycamera",
             "script_path": "hooks/InfiniteCameraLoop.lua"
+        },
+        {
+            "hook_id": "lib/managers/blackmarketmanager",
+            "script_path": "hooks/MinDetectionRisk.lua"
         }
     ],
     "keybinds": [

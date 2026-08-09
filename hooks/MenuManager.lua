@@ -37,6 +37,7 @@ local setting_keys = {
     Sapphire_MultiPickup         = "MultiPickup",
     Sapphire_UnlimitedFavors     = "UnlimitedFavors",
     Sapphire_InfiniteCameraLoop  = "InfiniteCameraLoop",
+    Sapphire_MinDetectionRisk    = "MinDetectionRisk",
 }
 
 local function parse_item_value(item, key)
@@ -47,7 +48,8 @@ local function parse_item_value(item, key)
        key == "AffectBodyBags" or key == "NoWeaponRestrictions" or key == "AICantAlarm" or key == "UnlockDLCHeists" or
        key == "MultiPickup" or
        key == "UnlimitedFavors" or
-       key == "InfiniteCameraLoop" then
+       key == "InfiniteCameraLoop" or
+       key == "MinDetectionRisk" then
         return item:value() == "on"
     end
 
@@ -132,7 +134,10 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
         Sapphire_multi_pickup_desc  = "Pick up keycards and other consumable items multiple times. Essential for solo stealth on maps like Shadow Raid.",
 
         Sapphire_infinite_camera_loop_title = "Infinite Camera Loop",
-        Sapphire_infinite_camera_loop_desc  = "Camera loops last forever instead of timing out. Loop once, forget about it.",
+        Sapphire_infinite_camera_loop_desc  = "Camera loops last forever instead of timing out. Loop once, forget about it. (Disabled in Safe Mode)",
+
+        Sapphire_min_detection_risk_title = "Minimum Detection Risk (Always 3)",
+        Sapphire_min_detection_risk_desc  = "Forces your detection risk to 3 regardless of what armor or weapons you wear. (Disabled in Safe Mode)",
 
         Sapphire_random_pagers_title = "Random Pagers",
         Sapphire_random_pagers_desc  = "Randomly remove alarm pagers from security guards.",
@@ -497,13 +502,23 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
     })
 
     MenuHelper:AddToggle({
+        id = "Sapphire_MinDetectionRisk",
+        title = "Sapphire_min_detection_risk_title",
+        desc = "Sapphire_min_detection_risk_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.MinDetectionRisk,
+        menu_id = menu_id,
+        priority = 495
+    })
+
+    MenuHelper:AddToggle({
         id = "Sapphire_RandomPagers",
         title = "Sapphire_random_pagers_title",
         desc = "Sapphire_random_pagers_desc",
         callback = callback_id,
         value = Sapphire.Settings.RandomPagers,
         menu_id = menu_id,
-        priority = 495
+        priority = 494
     })
 
     MenuHelper:AddSlider({
@@ -517,7 +532,7 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         step = 1,
         show_value = true,
         menu_id = menu_id,
-        priority = 494
+        priority = 493
     })
 
     MenuHelper:AddToggle({
@@ -527,7 +542,7 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         callback = callback_id,
         value = Sapphire.Settings.AutoAnswerPagers,
         menu_id = menu_id,
-        priority = 493
+        priority = 492
     })
 
     MenuHelper:AddDivider({

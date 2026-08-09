@@ -43,6 +43,7 @@ function Sapphire:NormalizeSettings()
     self.Settings.MultiPickup = self.Settings.MultiPickup == true
     self.Settings.UnlimitedFavors = self.Settings.UnlimitedFavors == true
     self.Settings.InfiniteCameraLoop = self.Settings.InfiniteCameraLoop == true
+    self.Settings.MinDetectionRisk = self.Settings.MinDetectionRisk == true
 end
 
 function Sapphire:IsMultiplayerSessionActive()
@@ -100,6 +101,7 @@ function Sapphire:GetEffectiveSettings()
         MultiPickup = self.Settings.MultiPickup,
         UnlimitedFavors = self.Settings.UnlimitedFavors,
         InfiniteCameraLoop = self.Settings.InfiniteCameraLoop,
+        MinDetectionRisk = self.Settings.MinDetectionRisk,
         SafeModeActive = false,
         ForceSafeModeHost = self.Settings.ForceSafeModeHost
     }
@@ -133,6 +135,7 @@ function Sapphire:GetEffectiveSettings()
         effective.MultiPickup = false
         effective.UnlimitedFavors = false
         effective.InfiniteCameraLoop = false
+        effective.MinDetectionRisk = false
     end
 
     return effective

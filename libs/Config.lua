@@ -24,7 +24,8 @@ Sapphire.DefaultSettings = {
     UnlockDLCHeists = false,
     MultiPickup = false,
     UnlimitedFavors = false,
-    InfiniteCameraLoop = false
+    InfiniteCameraLoop = false,
+    MinDetectionRisk = false
 }
 
 Sapphire.Settings = {}
