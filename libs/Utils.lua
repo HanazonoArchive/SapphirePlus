@@ -46,6 +46,7 @@ function Sapphire:NormalizeSettings()
     self.Settings.MinDetectionRisk = self.Settings.MinDetectionRisk == true
     self.Settings.DrillNoJams = self.Settings.DrillNoJams == true
     self.Settings.InstantDrills = self.Settings.InstantDrills == true
+    self.Settings.AutoCooker = self.Settings.AutoCooker == true
 end
 
 function Sapphire:IsMultiplayerSessionActive()
@@ -106,6 +107,7 @@ function Sapphire:GetEffectiveSettings()
         MinDetectionRisk = self.Settings.MinDetectionRisk,
         DrillNoJams = self.Settings.DrillNoJams,
         InstantDrills = self.Settings.InstantDrills,
+        AutoCooker = self.Settings.AutoCooker,
         SafeModeActive = false,
         ForceSafeModeHost = self.Settings.ForceSafeModeHost
     }
@@ -142,6 +144,7 @@ function Sapphire:GetEffectiveSettings()
         effective.MinDetectionRisk = false
         effective.DrillNoJams = false
         effective.InstantDrills = false
+        effective.AutoCooker = false
     end
 
     return effective

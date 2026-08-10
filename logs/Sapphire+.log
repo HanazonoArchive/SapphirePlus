@@ -2184,3 +2184,1110 @@
 [02:14:40] UnlimitedFavors hook loaded.
 [02:14:40] UnlimitedFavors: PrePlanningManager overrides applied.
 [02:14:40] UnlimitedFavors: MoneyManager overrides applied.
+[02:34:41] Core initialized.
+[02:34:41] DLCManager hook loaded.
+[02:34:41] DLC Heist Unlocker is enabled.
+[02:34:41] CarryTweakData hook loaded.
+[02:34:41] Carry++ physics modifiers applied.
+[02:34:41] PlayerManager hook loaded.
+[02:34:41] MultiPickup hook loaded.
+[02:34:41] MultiPickup: Managed consumable special registered: c4_x1
+[02:34:41] MultiPickup: Managed consumable special registered: lance_part
+[02:34:41] MultiPickup: Managed consumable special registered: cas_data_usb_key
+[02:34:41] MultiPickup: Managed consumable special registered: compound_c
+[02:34:41] MultiPickup: Managed consumable special registered: corp_achi_blueprint
+[02:34:41] MultiPickup: Managed consumable special registered: receiver
+[02:34:41] MultiPickup: Managed consumable special registered: scythe
+[02:34:41] MultiPickup: Managed consumable special registered: keychain
+[02:34:41] MultiPickup: Managed consumable special registered: gold
+[02:34:41] MultiPickup: Managed consumable special registered: globe
+[02:34:41] MultiPickup: Managed consumable special registered: c4_x10
+[02:34:41] MultiPickup: Managed consumable special registered: concoction
+[02:34:41] MultiPickup: Managed consumable special registered: compound_b
+[02:34:41] MultiPickup: Managed consumable special registered: laxative
+[02:34:41] MultiPickup: Managed consumable special registered: chainsaw
+[02:34:41] MultiPickup: Managed consumable special registered: laptop
+[02:34:41] MultiPickup: Managed consumable special registered: boards
+[02:34:41] MultiPickup: Managed consumable special registered: organs
+[02:34:41] MultiPickup: Managed consumable special registered: ticket
+[02:34:41] MultiPickup: Managed consumable special registered: chimichanga
+[02:34:41] MultiPickup: Managed consumable special registered: c4_stackable
+[02:34:41] MultiPickup: Managed consumable special registered: drill
+[02:34:41] MultiPickup: Managed consumable special registered: chavez_key
+[02:34:41] MultiPickup: Managed consumable special registered: bottle
+[02:34:41] MultiPickup: Managed consumable special registered: gas
+[02:34:41] MultiPickup: Managed consumable special registered: printer_ink
+[02:34:41] MultiPickup: Managed consumable special registered: hydrogen_chloride
+[02:34:41] MultiPickup: Managed consumable special registered: wire
+[02:34:41] MultiPickup: Managed consumable special registered: fingerprint
+[02:34:41] MultiPickup: Managed consumable special registered: hand
+[02:34:41] MultiPickup: Managed consumable special registered: paper_roll
+[02:34:41] MultiPickup: Managed consumable special registered: flammable_liquid
+[02:34:41] MultiPickup: Managed consumable special registered: car_jack
+[02:34:41] MultiPickup: Managed consumable special registered: cas_sleeping_gas
+[02:34:41] MultiPickup: Managed consumable special registered: crowbar_stack
+[02:34:41] MultiPickup: Managed consumable special registered: ranc_hammer
+[02:34:41] MultiPickup: Managed consumable special registered: alarm_clock
+[02:34:41] MultiPickup: Managed consumable special registered: c4
+[02:34:41] MultiPickup: Managed consumable special registered: ranc_mould
+[02:34:41] MultiPickup: Managed consumable special registered: tool
+[02:34:41] MultiPickup: Managed consumable special registered: fertilizer
+[02:34:41] MultiPickup: Managed consumable special registered: thick_skin
+[02:34:41] MultiPickup: Managed consumable special registered: cas_elevator_key
+[02:34:41] MultiPickup: Managed consumable special registered: fire_extinguisher
+[02:34:41] MultiPickup: Managed consumable special registered: barcode_edgewater
+[02:34:41] MultiPickup: Managed consumable special registered: blood_sample
+[02:34:41] MultiPickup: Managed consumable special registered: scubagear_vest
+[02:34:41] MultiPickup: Managed consumable special registered: barcode_isles_beach
+[02:34:41] MultiPickup: Managed consumable special registered: deep_oil_sample
+[02:34:41] MultiPickup: Managed consumable special registered: bridge
+[02:34:41] MultiPickup: Managed consumable special registered: medallion
+[02:34:41] MultiPickup: Managed consumable special registered: liquid_nitrogen
+[02:34:41] MultiPickup: Managed consumable special registered: mayan_gold_bar
+[02:34:41] MultiPickup: Managed consumable special registered: trai_usb_key
+[02:34:41] MultiPickup: Managed consumable special registered: ranc_sheriff_star
+[02:34:41] MultiPickup: Managed consumable special registered: caustic_soda
+[02:34:41] MultiPickup: Managed consumable special registered: lrm_keycard
+[02:34:41] MultiPickup: Managed consumable special registered: president_key
+[02:34:41] MultiPickup: Managed consumable special registered: mus_glas_cutter
+[02:34:41] MultiPickup: Managed consumable special registered: blow_torch
+[02:34:41] MultiPickup: Managed consumable special registered: chas_keychain_forklift
+[02:34:41] MultiPickup: Managed consumable special registered: trai_container_key
+[02:34:41] MultiPickup: Managed consumable special registered: saw
+[02:34:41] MultiPickup: Managed consumable special registered: documents
+[02:34:41] MultiPickup: Managed consumable special registered: corp_key_fob
+[02:34:41] MultiPickup: Managed consumable special registered: barrel
+[02:34:41] MultiPickup: Managed consumable special registered: acid
+[02:34:41] MultiPickup: Managed consumable special registered: lance
+[02:34:41] MultiPickup: Managed consumable special registered: intimidation
+[02:34:41] MultiPickup: Managed consumable special registered: manifest
+[02:34:41] MultiPickup: Managed consumable special registered: harddrive
+[02:34:41] MultiPickup: Managed consumable special registered: cargo_strap
+[02:34:41] MultiPickup: Managed consumable special registered: notepad
+[02:34:41] MultiPickup: Managed consumable special registered: hotel_room_key
+[02:34:41] MultiPickup: Managed consumable special registered: blueprints
+[02:34:41] MultiPickup: Managed consumable special registered: scubagear_tank_and_flippers
+[02:34:41] MultiPickup: Managed consumable special registered: tape
+[02:34:41] MultiPickup: Managed consumable special registered: bleed_out_increase
+[02:34:41] MultiPickup: Managed consumable special registered: compound_a
+[02:34:41] MultiPickup: Managed consumable special registered: briefcase
+[02:34:41] MultiPickup: Managed consumable special registered: defibrillator_paddles
+[02:34:41] MultiPickup: Managed consumable special registered: bank_manager_key
+[02:34:41] MultiPickup: Managed consumable special registered: gas_canister
+[02:34:41] MultiPickup: Managed consumable special registered: barcode_brickell
+[02:34:41] MultiPickup: Managed consumable special registered: business_card
+[02:34:41] MultiPickup: Managed consumable special registered: files
+[02:34:41] MultiPickup: Managed consumable special registered: circle_cutter
+[02:34:41] MultiPickup: Managed consumable special registered: c_keys
+[02:34:41] MultiPickup: Managed consumable special registered: ranc_silver_ingot
+[02:34:41] MultiPickup: Managed consumable special registered: server
+[02:34:41] MultiPickup: Managed consumable special registered: compound_d
+[02:34:41] MultiPickup: Managed consumable special registered: barcode_downtown
+[02:34:41] MultiPickup: Managed consumable special registered: toolset
+[02:34:41] MultiPickup: Managed consumable special registered: police_uniform
+[02:34:41] MultiPickup: Managed consumable special registered: thermite_paste
+[02:34:41] MultiPickup: Managed consumable special registered: extra_cable_tie
+[02:34:41] MultiPickup: Managed consumable special registered: equipment_blueprint
+[02:34:41] MultiPickup: Managed consumable special registered: adrenaline
+[02:34:41] MultiPickup: Managed consumable special registered: thermite
+[02:34:41] MultiPickup: Managed consumable special registered: money_bag
+[02:34:41] MultiPickup: Managed consumable special registered: planks
+[02:34:41] MultiPickup: Managed consumable special registered: blood_sample_verified
+[02:34:41] MultiPickup: Managed consumable special registered: plates
+[02:34:41] MultiPickup: Managed consumable special registered: cas_winch_hook
+[02:34:41] MultiPickup: Managed consumable special registered: chrome_skull
+[02:34:41] MultiPickup: Managed consumable special registered: cas_bfd_tool
+[02:34:41] MultiPickup: Managed consumable special registered: gold_bag_equip
+[02:34:41] MultiPickup: Managed consumable special registered: briefcase_diamond
+[02:34:41] MultiPickup: Managed consumable special registered: soda
+[02:34:41] MultiPickup: Managed consumable special registered: stapler
+[02:34:41] MultiPickup: Managed consumable special registered: help_keycard
+[02:34:41] MultiPickup: Managed consumable special registered: cas_usb_key
+[02:34:41] MultiPickup: Managed consumable special registered: saw_blade
+[02:34:41] MultiPickup: Managed consumable special registered: evidence
+[02:34:41] MultiPickup: Managed consumable special registered: barcode_opa_locka
+[02:34:41] MultiPickup: Managed consumable special registered: diesel
+[02:34:41] MultiPickup: Managed consumable special registered: body_armor
+[02:34:41] MultiPickup: Managed consumable special registered: wanker_keys
+[02:34:41] MultiPickup: Managed consumable special registered: c4_x3
+[02:34:41] MultiPickup: Managed consumable special registered: pex_loaded_card
+[02:34:41] MultiPickup: Managed consumable special registered: ranc_acid
+[02:34:41] MultiPickup: Managed consumable special registered: extra_start_out_ammo
+[02:34:41] MultiPickup: Managed consumable special registered: pex_cutter
+[02:34:41] MultiPickup: Managed consumable special registered: pex_loaded_card_lvl_2
+[02:34:41] MultiPickup: Managed consumable special registered: pex_unloaded_card
+[02:34:41] MultiPickup: Managed consumable special registered: audio_device
+[02:34:41] MultiPickup: Managed consumable special registered: stock
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: stash_server_pickup_server
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: take_ticket
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: hold_take_medallion
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: cas_take_sleeping_gas
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: hold_take_sample
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: pickup_hotel_room_keycard
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: hold_take_compound_d
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_timer
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: gen_pku_blow_torch
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: hold_take_hand
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_isles_beach
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_brickell
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_edgewater
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: gen_pku_crowbar_stack
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: gen_pku_saw
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: cas_bfd_drill_toolbox
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: sfm_take_usb_key
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: press_printer_paper
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_timer_3sec
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: hold_take_compound_a
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: ranc_take_acid
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: hydrogen_chloride
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: press_take_chimichanga
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_opa_locka
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: caustic_soda
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_paste_z_axis
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: take_jfr_briefcase
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: cas_take_usb_key
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: gen_pku_saw_axis
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: computer_blueprints
+[02:34:41] MultiPickup: Removed special_equipment_block from interaction: ranc_hold_take_barrel
+[02:34:42] MinDetectionRisk hook loaded.
+[02:34:42] MinDetectionRisk: BlackMarketManager overrides applied.
+[02:34:42] UnlimitedFavors hook loaded.
+[02:34:42] UnlimitedFavors: PrePlanningManager overrides applied.
+[02:34:42] MinDetectionRisk hook loaded.
+[02:34:42] MinDetectionRisk: BlackMarketManager overrides applied.
+[02:34:42] PlayerDamage hook loaded.
+[02:34:42] PlayerMovement hook loaded.
+[02:34:42] UnlimitedFavors hook loaded.
+[02:34:42] UnlimitedFavors: PrePlanningManager overrides applied.
+[02:34:42] UnlimitedFavors: MoneyManager overrides applied.
+[02:35:01] Core initialized.
+[02:35:01] DLCManager hook loaded.
+[02:35:01] DLC Heist Unlocker is enabled.
+[02:35:01] CarryTweakData hook loaded.
+[02:35:01] Carry++ physics modifiers applied.
+[02:35:01] PlayerManager hook loaded.
+[02:35:01] MultiPickup hook loaded.
+[02:35:01] MultiPickup: Managed consumable special registered: c4_x1
+[02:35:01] MultiPickup: Managed consumable special registered: lance_part
+[02:35:01] MultiPickup: Managed consumable special registered: cas_data_usb_key
+[02:35:01] MultiPickup: Managed consumable special registered: compound_c
+[02:35:01] MultiPickup: Managed consumable special registered: corp_achi_blueprint
+[02:35:01] MultiPickup: Managed consumable special registered: receiver
+[02:35:01] MultiPickup: Managed consumable special registered: scythe
+[02:35:01] MultiPickup: Managed consumable special registered: keychain
+[02:35:01] MultiPickup: Managed consumable special registered: gold
+[02:35:01] MultiPickup: Managed consumable special registered: globe
+[02:35:01] MultiPickup: Managed consumable special registered: c4_x10
+[02:35:01] MultiPickup: Managed consumable special registered: concoction
+[02:35:01] MultiPickup: Managed consumable special registered: compound_b
+[02:35:01] MultiPickup: Managed consumable special registered: laxative
+[02:35:01] MultiPickup: Managed consumable special registered: chainsaw
+[02:35:01] MultiPickup: Managed consumable special registered: laptop
+[02:35:01] MultiPickup: Managed consumable special registered: boards
+[02:35:01] MultiPickup: Managed consumable special registered: organs
+[02:35:01] MultiPickup: Managed consumable special registered: ticket
+[02:35:01] MultiPickup: Managed consumable special registered: chimichanga
+[02:35:01] MultiPickup: Managed consumable special registered: c4_stackable
+[02:35:01] MultiPickup: Managed consumable special registered: drill
+[02:35:01] MultiPickup: Managed consumable special registered: chavez_key
+[02:35:01] MultiPickup: Managed consumable special registered: bottle
+[02:35:01] MultiPickup: Managed consumable special registered: gas
+[02:35:01] MultiPickup: Managed consumable special registered: printer_ink
+[02:35:01] MultiPickup: Managed consumable special registered: hydrogen_chloride
+[02:35:01] MultiPickup: Managed consumable special registered: wire
+[02:35:01] MultiPickup: Managed consumable special registered: fingerprint
+[02:35:01] MultiPickup: Managed consumable special registered: hand
+[02:35:01] MultiPickup: Managed consumable special registered: paper_roll
+[02:35:01] MultiPickup: Managed consumable special registered: flammable_liquid
+[02:35:01] MultiPickup: Managed consumable special registered: car_jack
+[02:35:01] MultiPickup: Managed consumable special registered: cas_sleeping_gas
+[02:35:01] MultiPickup: Managed consumable special registered: crowbar_stack
+[02:35:01] MultiPickup: Managed consumable special registered: ranc_hammer
+[02:35:01] MultiPickup: Managed consumable special registered: alarm_clock
+[02:35:01] MultiPickup: Managed consumable special registered: c4
+[02:35:01] MultiPickup: Managed consumable special registered: ranc_mould
+[02:35:01] MultiPickup: Managed consumable special registered: tool
+[02:35:01] MultiPickup: Managed consumable special registered: fertilizer
+[02:35:01] MultiPickup: Managed consumable special registered: thick_skin
+[02:35:01] MultiPickup: Managed consumable special registered: cas_elevator_key
+[02:35:01] MultiPickup: Managed consumable special registered: fire_extinguisher
+[02:35:01] MultiPickup: Managed consumable special registered: barcode_edgewater
+[02:35:01] MultiPickup: Managed consumable special registered: blood_sample
+[02:35:01] MultiPickup: Managed consumable special registered: scubagear_vest
+[02:35:01] MultiPickup: Managed consumable special registered: barcode_isles_beach
+[02:35:01] MultiPickup: Managed consumable special registered: deep_oil_sample
+[02:35:01] MultiPickup: Managed consumable special registered: bridge
+[02:35:01] MultiPickup: Managed consumable special registered: medallion
+[02:35:01] MultiPickup: Managed consumable special registered: liquid_nitrogen
+[02:35:01] MultiPickup: Managed consumable special registered: mayan_gold_bar
+[02:35:01] MultiPickup: Managed consumable special registered: trai_usb_key
+[02:35:01] MultiPickup: Managed consumable special registered: ranc_sheriff_star
+[02:35:01] MultiPickup: Managed consumable special registered: caustic_soda
+[02:35:01] MultiPickup: Managed consumable special registered: lrm_keycard
+[02:35:01] MultiPickup: Managed consumable special registered: president_key
+[02:35:01] MultiPickup: Managed consumable special registered: mus_glas_cutter
+[02:35:01] MultiPickup: Managed consumable special registered: blow_torch
+[02:35:01] MultiPickup: Managed consumable special registered: chas_keychain_forklift
+[02:35:01] MultiPickup: Managed consumable special registered: trai_container_key
+[02:35:01] MultiPickup: Managed consumable special registered: saw
+[02:35:01] MultiPickup: Managed consumable special registered: documents
+[02:35:01] MultiPickup: Managed consumable special registered: corp_key_fob
+[02:35:01] MultiPickup: Managed consumable special registered: barrel
+[02:35:01] MultiPickup: Managed consumable special registered: acid
+[02:35:01] MultiPickup: Managed consumable special registered: lance
+[02:35:01] MultiPickup: Managed consumable special registered: intimidation
+[02:35:01] MultiPickup: Managed consumable special registered: manifest
+[02:35:01] MultiPickup: Managed consumable special registered: harddrive
+[02:35:01] MultiPickup: Managed consumable special registered: cargo_strap
+[02:35:01] MultiPickup: Managed consumable special registered: notepad
+[02:35:01] MultiPickup: Managed consumable special registered: hotel_room_key
+[02:35:01] MultiPickup: Managed consumable special registered: blueprints
+[02:35:01] MultiPickup: Managed consumable special registered: scubagear_tank_and_flippers
+[02:35:01] MultiPickup: Managed consumable special registered: tape
+[02:35:01] MultiPickup: Managed consumable special registered: bleed_out_increase
+[02:35:01] MultiPickup: Managed consumable special registered: compound_a
+[02:35:01] MultiPickup: Managed consumable special registered: briefcase
+[02:35:01] MultiPickup: Managed consumable special registered: defibrillator_paddles
+[02:35:01] MultiPickup: Managed consumable special registered: bank_manager_key
+[02:35:01] MultiPickup: Managed consumable special registered: gas_canister
+[02:35:01] MultiPickup: Managed consumable special registered: barcode_brickell
+[02:35:01] MultiPickup: Managed consumable special registered: business_card
+[02:35:01] MultiPickup: Managed consumable special registered: files
+[02:35:01] MultiPickup: Managed consumable special registered: circle_cutter
+[02:35:01] MultiPickup: Managed consumable special registered: c_keys
+[02:35:01] MultiPickup: Managed consumable special registered: ranc_silver_ingot
+[02:35:01] MultiPickup: Managed consumable special registered: server
+[02:35:01] MultiPickup: Managed consumable special registered: compound_d
+[02:35:01] MultiPickup: Managed consumable special registered: barcode_downtown
+[02:35:01] MultiPickup: Managed consumable special registered: toolset
+[02:35:01] MultiPickup: Managed consumable special registered: police_uniform
+[02:35:01] MultiPickup: Managed consumable special registered: thermite_paste
+[02:35:01] MultiPickup: Managed consumable special registered: extra_cable_tie
+[02:35:01] MultiPickup: Managed consumable special registered: equipment_blueprint
+[02:35:01] MultiPickup: Managed consumable special registered: adrenaline
+[02:35:01] MultiPickup: Managed consumable special registered: thermite
+[02:35:01] MultiPickup: Managed consumable special registered: money_bag
+[02:35:01] MultiPickup: Managed consumable special registered: planks
+[02:35:01] MultiPickup: Managed consumable special registered: blood_sample_verified
+[02:35:01] MultiPickup: Managed consumable special registered: plates
+[02:35:01] MultiPickup: Managed consumable special registered: cas_winch_hook
+[02:35:01] MultiPickup: Managed consumable special registered: chrome_skull
+[02:35:01] MultiPickup: Managed consumable special registered: cas_bfd_tool
+[02:35:01] MultiPickup: Managed consumable special registered: gold_bag_equip
+[02:35:01] MultiPickup: Managed consumable special registered: briefcase_diamond
+[02:35:01] MultiPickup: Managed consumable special registered: soda
+[02:35:01] MultiPickup: Managed consumable special registered: stapler
+[02:35:01] MultiPickup: Managed consumable special registered: help_keycard
+[02:35:01] MultiPickup: Managed consumable special registered: cas_usb_key
+[02:35:01] MultiPickup: Managed consumable special registered: saw_blade
+[02:35:01] MultiPickup: Managed consumable special registered: evidence
+[02:35:01] MultiPickup: Managed consumable special registered: barcode_opa_locka
+[02:35:01] MultiPickup: Managed consumable special registered: diesel
+[02:35:01] MultiPickup: Managed consumable special registered: body_armor
+[02:35:01] MultiPickup: Managed consumable special registered: wanker_keys
+[02:35:01] MultiPickup: Managed consumable special registered: c4_x3
+[02:35:01] MultiPickup: Managed consumable special registered: pex_loaded_card
+[02:35:01] MultiPickup: Managed consumable special registered: ranc_acid
+[02:35:01] MultiPickup: Managed consumable special registered: extra_start_out_ammo
+[02:35:01] MultiPickup: Managed consumable special registered: pex_cutter
+[02:35:01] MultiPickup: Managed consumable special registered: pex_loaded_card_lvl_2
+[02:35:01] MultiPickup: Managed consumable special registered: pex_unloaded_card
+[02:35:01] MultiPickup: Managed consumable special registered: audio_device
+[02:35:01] MultiPickup: Managed consumable special registered: stock
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: stash_server_pickup_server
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: take_ticket
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: hold_take_medallion
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: cas_take_sleeping_gas
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: hold_take_sample
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: pickup_hotel_room_keycard
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: hold_take_compound_d
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_timer
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: gen_pku_blow_torch
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: hold_take_hand
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_isles_beach
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_brickell
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_edgewater
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: gen_pku_crowbar_stack
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: gen_pku_saw
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: cas_bfd_drill_toolbox
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: sfm_take_usb_key
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: press_printer_paper
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_timer_3sec
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: hold_take_compound_a
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: ranc_take_acid
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: hydrogen_chloride
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: press_take_chimichanga
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_opa_locka
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: caustic_soda
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_paste_z_axis
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: take_jfr_briefcase
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: cas_take_usb_key
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: gen_pku_saw_axis
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: computer_blueprints
+[02:35:01] MultiPickup: Removed special_equipment_block from interaction: ranc_hold_take_barrel
+[02:35:01] MinDetectionRisk hook loaded.
+[02:35:01] MinDetectionRisk: BlackMarketManager overrides applied.
+[02:35:01] UnlimitedFavors hook loaded.
+[02:35:01] UnlimitedFavors: PrePlanningManager overrides applied.
+[02:35:01] MinDetectionRisk hook loaded.
+[02:35:01] MinDetectionRisk: BlackMarketManager overrides applied.
+[02:35:02] UnlimitedFavors hook loaded.
+[02:35:02] UnlimitedFavors: PrePlanningManager overrides applied.
+[02:35:02] UnlimitedFavors: MoneyManager overrides applied.
+[02:35:02] GroupAIStateBase hook loaded.
+[02:35:02] PlayerDamage hook loaded.
+[02:35:02] PlayerMovement hook loaded.
+[02:35:02] CopBrain hook loaded.
+[02:35:02] PlayerDamage hook loaded.
+[02:35:02] InfiniteCameraLoop hook loaded.
+[02:35:02] InfiniteCameraLoop: SecurityCamera overrides applied (clean HUD & multi-loop active).
+[02:35:02] DrillOverhaul hook loaded.
+[02:35:02] DrillOverhaul: TimerGui overrides applied.
+[02:35:02] DrillOverhaul hook loaded.
+[02:35:02] DrillOverhaul: TimerGui overrides applied.
+[02:35:02] DrillOverhaul: Drill overrides applied.
+[02:35:02] PlayerDamage hook loaded.
+[02:35:02] PlayerMovement hook loaded.
+[02:35:19] Sapphire+: Bagging & gathering 20 loose loot items...
+[02:35:20] Sapphire+: Successfully gathered 20 loot items!
+[02:35:28] Silently wiped 14 enemies.
+[02:35:37] Tied 4 civilians.
+[02:35:41] Tied 4 civilians.
+[02:35:47] Tied 4 civilians.
+[02:37:18] Sapphire+: Bagging & gathering 2 loose loot items...
+[02:37:18] Sapphire+: Successfully gathered 2 loot items!
+[02:38:05] Core initialized.
+[02:38:05] DLCManager hook loaded.
+[02:38:05] DLC Heist Unlocker is enabled.
+[02:38:05] CarryTweakData hook loaded.
+[02:38:05] Carry++ physics modifiers applied.
+[02:38:05] PlayerManager hook loaded.
+[02:38:05] MultiPickup hook loaded.
+[02:38:05] MultiPickup: Managed consumable special registered: c4_x1
+[02:38:05] MultiPickup: Managed consumable special registered: lance_part
+[02:38:05] MultiPickup: Managed consumable special registered: cas_data_usb_key
+[02:38:05] MultiPickup: Managed consumable special registered: compound_c
+[02:38:05] MultiPickup: Managed consumable special registered: corp_achi_blueprint
+[02:38:05] MultiPickup: Managed consumable special registered: receiver
+[02:38:05] MultiPickup: Managed consumable special registered: scythe
+[02:38:05] MultiPickup: Managed consumable special registered: keychain
+[02:38:05] MultiPickup: Managed consumable special registered: gold
+[02:38:05] MultiPickup: Managed consumable special registered: globe
+[02:38:05] MultiPickup: Managed consumable special registered: c4_x10
+[02:38:05] MultiPickup: Managed consumable special registered: concoction
+[02:38:05] MultiPickup: Managed consumable special registered: compound_b
+[02:38:05] MultiPickup: Managed consumable special registered: laxative
+[02:38:05] MultiPickup: Managed consumable special registered: chainsaw
+[02:38:05] MultiPickup: Managed consumable special registered: laptop
+[02:38:05] MultiPickup: Managed consumable special registered: boards
+[02:38:05] MultiPickup: Managed consumable special registered: organs
+[02:38:05] MultiPickup: Managed consumable special registered: ticket
+[02:38:05] MultiPickup: Managed consumable special registered: chimichanga
+[02:38:05] MultiPickup: Managed consumable special registered: c4_stackable
+[02:38:05] MultiPickup: Managed consumable special registered: drill
+[02:38:05] MultiPickup: Managed consumable special registered: chavez_key
+[02:38:05] MultiPickup: Managed consumable special registered: bottle
+[02:38:05] MultiPickup: Managed consumable special registered: gas
+[02:38:05] MultiPickup: Managed consumable special registered: printer_ink
+[02:38:05] MultiPickup: Managed consumable special registered: hydrogen_chloride
+[02:38:05] MultiPickup: Managed consumable special registered: wire
+[02:38:05] MultiPickup: Managed consumable special registered: fingerprint
+[02:38:05] MultiPickup: Managed consumable special registered: hand
+[02:38:05] MultiPickup: Managed consumable special registered: paper_roll
+[02:38:05] MultiPickup: Managed consumable special registered: flammable_liquid
+[02:38:05] MultiPickup: Managed consumable special registered: car_jack
+[02:38:05] MultiPickup: Managed consumable special registered: cas_sleeping_gas
+[02:38:05] MultiPickup: Managed consumable special registered: crowbar_stack
+[02:38:05] MultiPickup: Managed consumable special registered: ranc_hammer
+[02:38:05] MultiPickup: Managed consumable special registered: alarm_clock
+[02:38:05] MultiPickup: Managed consumable special registered: c4
+[02:38:05] MultiPickup: Managed consumable special registered: ranc_mould
+[02:38:05] MultiPickup: Managed consumable special registered: tool
+[02:38:05] MultiPickup: Managed consumable special registered: fertilizer
+[02:38:05] MultiPickup: Managed consumable special registered: thick_skin
+[02:38:05] MultiPickup: Managed consumable special registered: cas_elevator_key
+[02:38:05] MultiPickup: Managed consumable special registered: fire_extinguisher
+[02:38:05] MultiPickup: Managed consumable special registered: barcode_edgewater
+[02:38:05] MultiPickup: Managed consumable special registered: blood_sample
+[02:38:05] MultiPickup: Managed consumable special registered: scubagear_vest
+[02:38:05] MultiPickup: Managed consumable special registered: barcode_isles_beach
+[02:38:05] MultiPickup: Managed consumable special registered: deep_oil_sample
+[02:38:05] MultiPickup: Managed consumable special registered: bridge
+[02:38:05] MultiPickup: Managed consumable special registered: medallion
+[02:38:05] MultiPickup: Managed consumable special registered: liquid_nitrogen
+[02:38:05] MultiPickup: Managed consumable special registered: mayan_gold_bar
+[02:38:05] MultiPickup: Managed consumable special registered: trai_usb_key
+[02:38:05] MultiPickup: Managed consumable special registered: ranc_sheriff_star
+[02:38:05] MultiPickup: Managed consumable special registered: caustic_soda
+[02:38:05] MultiPickup: Managed consumable special registered: lrm_keycard
+[02:38:05] MultiPickup: Managed consumable special registered: president_key
+[02:38:05] MultiPickup: Managed consumable special registered: mus_glas_cutter
+[02:38:05] MultiPickup: Managed consumable special registered: blow_torch
+[02:38:05] MultiPickup: Managed consumable special registered: chas_keychain_forklift
+[02:38:05] MultiPickup: Managed consumable special registered: trai_container_key
+[02:38:05] MultiPickup: Managed consumable special registered: saw
+[02:38:05] MultiPickup: Managed consumable special registered: documents
+[02:38:05] MultiPickup: Managed consumable special registered: corp_key_fob
+[02:38:05] MultiPickup: Managed consumable special registered: barrel
+[02:38:05] MultiPickup: Managed consumable special registered: acid
+[02:38:05] MultiPickup: Managed consumable special registered: lance
+[02:38:05] MultiPickup: Managed consumable special registered: intimidation
+[02:38:05] MultiPickup: Managed consumable special registered: manifest
+[02:38:05] MultiPickup: Managed consumable special registered: harddrive
+[02:38:05] MultiPickup: Managed consumable special registered: cargo_strap
+[02:38:05] MultiPickup: Managed consumable special registered: notepad
+[02:38:05] MultiPickup: Managed consumable special registered: hotel_room_key
+[02:38:05] MultiPickup: Managed consumable special registered: blueprints
+[02:38:05] MultiPickup: Managed consumable special registered: scubagear_tank_and_flippers
+[02:38:05] MultiPickup: Managed consumable special registered: tape
+[02:38:05] MultiPickup: Managed consumable special registered: bleed_out_increase
+[02:38:05] MultiPickup: Managed consumable special registered: compound_a
+[02:38:05] MultiPickup: Managed consumable special registered: briefcase
+[02:38:05] MultiPickup: Managed consumable special registered: defibrillator_paddles
+[02:38:05] MultiPickup: Managed consumable special registered: bank_manager_key
+[02:38:05] MultiPickup: Managed consumable special registered: gas_canister
+[02:38:05] MultiPickup: Managed consumable special registered: barcode_brickell
+[02:38:05] MultiPickup: Managed consumable special registered: business_card
+[02:38:05] MultiPickup: Managed consumable special registered: files
+[02:38:05] MultiPickup: Managed consumable special registered: circle_cutter
+[02:38:05] MultiPickup: Managed consumable special registered: c_keys
+[02:38:05] MultiPickup: Managed consumable special registered: ranc_silver_ingot
+[02:38:05] MultiPickup: Managed consumable special registered: server
+[02:38:05] MultiPickup: Managed consumable special registered: compound_d
+[02:38:05] MultiPickup: Managed consumable special registered: barcode_downtown
+[02:38:05] MultiPickup: Managed consumable special registered: toolset
+[02:38:05] MultiPickup: Managed consumable special registered: police_uniform
+[02:38:05] MultiPickup: Managed consumable special registered: thermite_paste
+[02:38:05] MultiPickup: Managed consumable special registered: extra_cable_tie
+[02:38:05] MultiPickup: Managed consumable special registered: equipment_blueprint
+[02:38:05] MultiPickup: Managed consumable special registered: adrenaline
+[02:38:05] MultiPickup: Managed consumable special registered: thermite
+[02:38:05] MultiPickup: Managed consumable special registered: money_bag
+[02:38:05] MultiPickup: Managed consumable special registered: planks
+[02:38:05] MultiPickup: Managed consumable special registered: blood_sample_verified
+[02:38:05] MultiPickup: Managed consumable special registered: plates
+[02:38:05] MultiPickup: Managed consumable special registered: cas_winch_hook
+[02:38:05] MultiPickup: Managed consumable special registered: chrome_skull
+[02:38:05] MultiPickup: Managed consumable special registered: cas_bfd_tool
+[02:38:05] MultiPickup: Managed consumable special registered: gold_bag_equip
+[02:38:05] MultiPickup: Managed consumable special registered: briefcase_diamond
+[02:38:05] MultiPickup: Managed consumable special registered: soda
+[02:38:05] MultiPickup: Managed consumable special registered: stapler
+[02:38:05] MultiPickup: Managed consumable special registered: help_keycard
+[02:38:05] MultiPickup: Managed consumable special registered: cas_usb_key
+[02:38:05] MultiPickup: Managed consumable special registered: saw_blade
+[02:38:05] MultiPickup: Managed consumable special registered: evidence
+[02:38:05] MultiPickup: Managed consumable special registered: barcode_opa_locka
+[02:38:05] MultiPickup: Managed consumable special registered: diesel
+[02:38:05] MultiPickup: Managed consumable special registered: body_armor
+[02:38:05] MultiPickup: Managed consumable special registered: wanker_keys
+[02:38:05] MultiPickup: Managed consumable special registered: c4_x3
+[02:38:05] MultiPickup: Managed consumable special registered: pex_loaded_card
+[02:38:05] MultiPickup: Managed consumable special registered: ranc_acid
+[02:38:05] MultiPickup: Managed consumable special registered: extra_start_out_ammo
+[02:38:05] MultiPickup: Managed consumable special registered: pex_cutter
+[02:38:05] MultiPickup: Managed consumable special registered: pex_loaded_card_lvl_2
+[02:38:05] MultiPickup: Managed consumable special registered: pex_unloaded_card
+[02:38:05] MultiPickup: Managed consumable special registered: audio_device
+[02:38:05] MultiPickup: Managed consumable special registered: stock
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: stash_server_pickup_server
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: take_ticket
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: hold_take_medallion
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: cas_take_sleeping_gas
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: hold_take_sample
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: pickup_hotel_room_keycard
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: hold_take_compound_d
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_timer
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: gen_pku_blow_torch
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: hold_take_hand
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_isles_beach
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_brickell
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_edgewater
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: gen_pku_crowbar_stack
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: gen_pku_saw
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: cas_bfd_drill_toolbox
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: sfm_take_usb_key
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: press_printer_paper
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_timer_3sec
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: hold_take_compound_a
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: ranc_take_acid
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: hydrogen_chloride
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: press_take_chimichanga
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_opa_locka
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: caustic_soda
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_paste_z_axis
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: take_jfr_briefcase
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: cas_take_usb_key
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: gen_pku_saw_axis
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: computer_blueprints
+[02:38:05] MultiPickup: Removed special_equipment_block from interaction: ranc_hold_take_barrel
+[02:38:05] MinDetectionRisk hook loaded.
+[02:38:05] MinDetectionRisk: BlackMarketManager overrides applied.
+[02:38:05] UnlimitedFavors hook loaded.
+[02:38:05] UnlimitedFavors: PrePlanningManager overrides applied.
+[02:38:05] MinDetectionRisk hook loaded.
+[02:38:05] MinDetectionRisk: BlackMarketManager overrides applied.
+[02:38:05] PlayerDamage hook loaded.
+[02:38:05] PlayerMovement hook loaded.
+[02:38:05] UnlimitedFavors hook loaded.
+[02:38:05] UnlimitedFavors: PrePlanningManager overrides applied.
+[02:38:05] UnlimitedFavors: MoneyManager overrides applied.
+[02:41:10] Core initialized.
+[02:41:10] DLCManager hook loaded.
+[02:41:10] DLC Heist Unlocker is enabled.
+[02:41:10] CarryTweakData hook loaded.
+[02:41:10] Carry++ physics modifiers applied.
+[02:41:10] PlayerManager hook loaded.
+[02:41:10] MultiPickup hook loaded.
+[02:41:10] MultiPickup: Managed consumable special registered: c4_x1
+[02:41:10] MultiPickup: Managed consumable special registered: lance_part
+[02:41:10] MultiPickup: Managed consumable special registered: cas_data_usb_key
+[02:41:10] MultiPickup: Managed consumable special registered: compound_c
+[02:41:10] MultiPickup: Managed consumable special registered: corp_achi_blueprint
+[02:41:10] MultiPickup: Managed consumable special registered: receiver
+[02:41:10] MultiPickup: Managed consumable special registered: scythe
+[02:41:10] MultiPickup: Managed consumable special registered: keychain
+[02:41:10] MultiPickup: Managed consumable special registered: gold
+[02:41:10] MultiPickup: Managed consumable special registered: globe
+[02:41:10] MultiPickup: Managed consumable special registered: c4_x10
+[02:41:10] MultiPickup: Managed consumable special registered: concoction
+[02:41:10] MultiPickup: Managed consumable special registered: compound_b
+[02:41:10] MultiPickup: Managed consumable special registered: laxative
+[02:41:10] MultiPickup: Managed consumable special registered: chainsaw
+[02:41:10] MultiPickup: Managed consumable special registered: laptop
+[02:41:10] MultiPickup: Managed consumable special registered: boards
+[02:41:10] MultiPickup: Managed consumable special registered: organs
+[02:41:10] MultiPickup: Managed consumable special registered: ticket
+[02:41:10] MultiPickup: Managed consumable special registered: chimichanga
+[02:41:10] MultiPickup: Managed consumable special registered: c4_stackable
+[02:41:10] MultiPickup: Managed consumable special registered: drill
+[02:41:10] MultiPickup: Managed consumable special registered: chavez_key
+[02:41:10] MultiPickup: Managed consumable special registered: bottle
+[02:41:10] MultiPickup: Managed consumable special registered: gas
+[02:41:10] MultiPickup: Managed consumable special registered: printer_ink
+[02:41:10] MultiPickup: Managed consumable special registered: hydrogen_chloride
+[02:41:10] MultiPickup: Managed consumable special registered: wire
+[02:41:10] MultiPickup: Managed consumable special registered: fingerprint
+[02:41:10] MultiPickup: Managed consumable special registered: hand
+[02:41:10] MultiPickup: Managed consumable special registered: paper_roll
+[02:41:10] MultiPickup: Managed consumable special registered: flammable_liquid
+[02:41:10] MultiPickup: Managed consumable special registered: car_jack
+[02:41:10] MultiPickup: Managed consumable special registered: cas_sleeping_gas
+[02:41:10] MultiPickup: Managed consumable special registered: crowbar_stack
+[02:41:10] MultiPickup: Managed consumable special registered: ranc_hammer
+[02:41:10] MultiPickup: Managed consumable special registered: alarm_clock
+[02:41:10] MultiPickup: Managed consumable special registered: c4
+[02:41:10] MultiPickup: Managed consumable special registered: ranc_mould
+[02:41:10] MultiPickup: Managed consumable special registered: tool
+[02:41:10] MultiPickup: Managed consumable special registered: fertilizer
+[02:41:10] MultiPickup: Managed consumable special registered: thick_skin
+[02:41:10] MultiPickup: Managed consumable special registered: cas_elevator_key
+[02:41:10] MultiPickup: Managed consumable special registered: fire_extinguisher
+[02:41:10] MultiPickup: Managed consumable special registered: barcode_edgewater
+[02:41:10] MultiPickup: Managed consumable special registered: blood_sample
+[02:41:10] MultiPickup: Managed consumable special registered: scubagear_vest
+[02:41:10] MultiPickup: Managed consumable special registered: barcode_isles_beach
+[02:41:10] MultiPickup: Managed consumable special registered: deep_oil_sample
+[02:41:10] MultiPickup: Managed consumable special registered: bridge
+[02:41:10] MultiPickup: Managed consumable special registered: medallion
+[02:41:10] MultiPickup: Managed consumable special registered: liquid_nitrogen
+[02:41:10] MultiPickup: Managed consumable special registered: mayan_gold_bar
+[02:41:10] MultiPickup: Managed consumable special registered: trai_usb_key
+[02:41:10] MultiPickup: Managed consumable special registered: ranc_sheriff_star
+[02:41:10] MultiPickup: Managed consumable special registered: caustic_soda
+[02:41:10] MultiPickup: Managed consumable special registered: lrm_keycard
+[02:41:10] MultiPickup: Managed consumable special registered: president_key
+[02:41:10] MultiPickup: Managed consumable special registered: mus_glas_cutter
+[02:41:10] MultiPickup: Managed consumable special registered: blow_torch
+[02:41:10] MultiPickup: Managed consumable special registered: chas_keychain_forklift
+[02:41:10] MultiPickup: Managed consumable special registered: trai_container_key
+[02:41:10] MultiPickup: Managed consumable special registered: saw
+[02:41:10] MultiPickup: Managed consumable special registered: documents
+[02:41:10] MultiPickup: Managed consumable special registered: corp_key_fob
+[02:41:10] MultiPickup: Managed consumable special registered: barrel
+[02:41:10] MultiPickup: Managed consumable special registered: acid
+[02:41:10] MultiPickup: Managed consumable special registered: lance
+[02:41:10] MultiPickup: Managed consumable special registered: intimidation
+[02:41:10] MultiPickup: Managed consumable special registered: manifest
+[02:41:10] MultiPickup: Managed consumable special registered: harddrive
+[02:41:10] MultiPickup: Managed consumable special registered: cargo_strap
+[02:41:10] MultiPickup: Managed consumable special registered: notepad
+[02:41:10] MultiPickup: Managed consumable special registered: hotel_room_key
+[02:41:10] MultiPickup: Managed consumable special registered: blueprints
+[02:41:10] MultiPickup: Managed consumable special registered: scubagear_tank_and_flippers
+[02:41:10] MultiPickup: Managed consumable special registered: tape
+[02:41:10] MultiPickup: Managed consumable special registered: bleed_out_increase
+[02:41:10] MultiPickup: Managed consumable special registered: compound_a
+[02:41:10] MultiPickup: Managed consumable special registered: briefcase
+[02:41:10] MultiPickup: Managed consumable special registered: defibrillator_paddles
+[02:41:10] MultiPickup: Managed consumable special registered: bank_manager_key
+[02:41:10] MultiPickup: Managed consumable special registered: gas_canister
+[02:41:10] MultiPickup: Managed consumable special registered: barcode_brickell
+[02:41:10] MultiPickup: Managed consumable special registered: business_card
+[02:41:10] MultiPickup: Managed consumable special registered: files
+[02:41:10] MultiPickup: Managed consumable special registered: circle_cutter
+[02:41:10] MultiPickup: Managed consumable special registered: c_keys
+[02:41:10] MultiPickup: Managed consumable special registered: ranc_silver_ingot
+[02:41:10] MultiPickup: Managed consumable special registered: server
+[02:41:10] MultiPickup: Managed consumable special registered: compound_d
+[02:41:10] MultiPickup: Managed consumable special registered: barcode_downtown
+[02:41:10] MultiPickup: Managed consumable special registered: toolset
+[02:41:10] MultiPickup: Managed consumable special registered: police_uniform
+[02:41:10] MultiPickup: Managed consumable special registered: thermite_paste
+[02:41:10] MultiPickup: Managed consumable special registered: extra_cable_tie
+[02:41:10] MultiPickup: Managed consumable special registered: equipment_blueprint
+[02:41:10] MultiPickup: Managed consumable special registered: adrenaline
+[02:41:10] MultiPickup: Managed consumable special registered: thermite
+[02:41:10] MultiPickup: Managed consumable special registered: money_bag
+[02:41:10] MultiPickup: Managed consumable special registered: planks
+[02:41:10] MultiPickup: Managed consumable special registered: blood_sample_verified
+[02:41:10] MultiPickup: Managed consumable special registered: plates
+[02:41:10] MultiPickup: Managed consumable special registered: cas_winch_hook
+[02:41:10] MultiPickup: Managed consumable special registered: chrome_skull
+[02:41:10] MultiPickup: Managed consumable special registered: cas_bfd_tool
+[02:41:10] MultiPickup: Managed consumable special registered: gold_bag_equip
+[02:41:10] MultiPickup: Managed consumable special registered: briefcase_diamond
+[02:41:10] MultiPickup: Managed consumable special registered: soda
+[02:41:10] MultiPickup: Managed consumable special registered: stapler
+[02:41:10] MultiPickup: Managed consumable special registered: help_keycard
+[02:41:10] MultiPickup: Managed consumable special registered: cas_usb_key
+[02:41:10] MultiPickup: Managed consumable special registered: saw_blade
+[02:41:10] MultiPickup: Managed consumable special registered: evidence
+[02:41:10] MultiPickup: Managed consumable special registered: barcode_opa_locka
+[02:41:10] MultiPickup: Managed consumable special registered: diesel
+[02:41:10] MultiPickup: Managed consumable special registered: body_armor
+[02:41:10] MultiPickup: Managed consumable special registered: wanker_keys
+[02:41:10] MultiPickup: Managed consumable special registered: c4_x3
+[02:41:10] MultiPickup: Managed consumable special registered: pex_loaded_card
+[02:41:10] MultiPickup: Managed consumable special registered: ranc_acid
+[02:41:10] MultiPickup: Managed consumable special registered: extra_start_out_ammo
+[02:41:10] MultiPickup: Managed consumable special registered: pex_cutter
+[02:41:10] MultiPickup: Managed consumable special registered: pex_loaded_card_lvl_2
+[02:41:10] MultiPickup: Managed consumable special registered: pex_unloaded_card
+[02:41:10] MultiPickup: Managed consumable special registered: audio_device
+[02:41:10] MultiPickup: Managed consumable special registered: stock
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: stash_server_pickup_server
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: take_ticket
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: hold_take_medallion
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: cas_take_sleeping_gas
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: hold_take_sample
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: pickup_hotel_room_keycard
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: hold_take_compound_d
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_timer
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: gen_pku_blow_torch
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: hold_take_hand
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_isles_beach
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_brickell
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_edgewater
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: gen_pku_crowbar_stack
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: gen_pku_saw
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: cas_bfd_drill_toolbox
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: sfm_take_usb_key
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: press_printer_paper
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_timer_3sec
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: hold_take_compound_a
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: ranc_take_acid
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: hydrogen_chloride
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: press_take_chimichanga
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_opa_locka
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: caustic_soda
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_paste_z_axis
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: take_jfr_briefcase
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: cas_take_usb_key
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: gen_pku_saw_axis
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: computer_blueprints
+[02:41:10] MultiPickup: Removed special_equipment_block from interaction: ranc_hold_take_barrel
+[02:41:10] MinDetectionRisk hook loaded.
+[02:41:10] MinDetectionRisk: BlackMarketManager overrides applied.
+[02:41:10] UnlimitedFavors hook loaded.
+[02:41:10] UnlimitedFavors: PrePlanningManager overrides applied.
+[02:41:10] MinDetectionRisk hook loaded.
+[02:41:10] MinDetectionRisk: BlackMarketManager overrides applied.
+[02:41:10] PlayerDamage hook loaded.
+[02:41:10] PlayerMovement hook loaded.
+[02:41:10] UnlimitedFavors hook loaded.
+[02:41:10] UnlimitedFavors: PrePlanningManager overrides applied.
+[02:41:10] UnlimitedFavors: MoneyManager overrides applied.
+[02:41:35] Core initialized.
+[02:41:35] DLCManager hook loaded.
+[02:41:35] DLC Heist Unlocker is enabled.
+[02:41:35] CarryTweakData hook loaded.
+[02:41:35] Carry++ physics modifiers applied.
+[02:41:36] PlayerManager hook loaded.
+[02:41:36] MultiPickup hook loaded.
+[02:41:36] MultiPickup: Managed consumable special registered: c4_x1
+[02:41:36] MultiPickup: Managed consumable special registered: lance_part
+[02:41:36] MultiPickup: Managed consumable special registered: cas_data_usb_key
+[02:41:36] MultiPickup: Managed consumable special registered: compound_c
+[02:41:36] MultiPickup: Managed consumable special registered: corp_achi_blueprint
+[02:41:36] MultiPickup: Managed consumable special registered: receiver
+[02:41:36] MultiPickup: Managed consumable special registered: scythe
+[02:41:36] MultiPickup: Managed consumable special registered: keychain
+[02:41:36] MultiPickup: Managed consumable special registered: gold
+[02:41:36] MultiPickup: Managed consumable special registered: globe
+[02:41:36] MultiPickup: Managed consumable special registered: c4_x10
+[02:41:36] MultiPickup: Managed consumable special registered: concoction
+[02:41:36] MultiPickup: Managed consumable special registered: compound_b
+[02:41:36] MultiPickup: Managed consumable special registered: laxative
+[02:41:36] MultiPickup: Managed consumable special registered: chainsaw
+[02:41:36] MultiPickup: Managed consumable special registered: laptop
+[02:41:36] MultiPickup: Managed consumable special registered: boards
+[02:41:36] MultiPickup: Managed consumable special registered: organs
+[02:41:36] MultiPickup: Managed consumable special registered: ticket
+[02:41:36] MultiPickup: Managed consumable special registered: chimichanga
+[02:41:36] MultiPickup: Managed consumable special registered: c4_stackable
+[02:41:36] MultiPickup: Managed consumable special registered: drill
+[02:41:36] MultiPickup: Managed consumable special registered: chavez_key
+[02:41:36] MultiPickup: Managed consumable special registered: bottle
+[02:41:36] MultiPickup: Managed consumable special registered: gas
+[02:41:36] MultiPickup: Managed consumable special registered: printer_ink
+[02:41:36] MultiPickup: Managed consumable special registered: hydrogen_chloride
+[02:41:36] MultiPickup: Managed consumable special registered: wire
+[02:41:36] MultiPickup: Managed consumable special registered: fingerprint
+[02:41:36] MultiPickup: Managed consumable special registered: hand
+[02:41:36] MultiPickup: Managed consumable special registered: paper_roll
+[02:41:36] MultiPickup: Managed consumable special registered: flammable_liquid
+[02:41:36] MultiPickup: Managed consumable special registered: car_jack
+[02:41:36] MultiPickup: Managed consumable special registered: cas_sleeping_gas
+[02:41:36] MultiPickup: Managed consumable special registered: crowbar_stack
+[02:41:36] MultiPickup: Managed consumable special registered: ranc_hammer
+[02:41:36] MultiPickup: Managed consumable special registered: alarm_clock
+[02:41:36] MultiPickup: Managed consumable special registered: c4
+[02:41:36] MultiPickup: Managed consumable special registered: ranc_mould
+[02:41:36] MultiPickup: Managed consumable special registered: tool
+[02:41:36] MultiPickup: Managed consumable special registered: fertilizer
+[02:41:36] MultiPickup: Managed consumable special registered: thick_skin
+[02:41:36] MultiPickup: Managed consumable special registered: cas_elevator_key
+[02:41:36] MultiPickup: Managed consumable special registered: fire_extinguisher
+[02:41:36] MultiPickup: Managed consumable special registered: barcode_edgewater
+[02:41:36] MultiPickup: Managed consumable special registered: blood_sample
+[02:41:36] MultiPickup: Managed consumable special registered: scubagear_vest
+[02:41:36] MultiPickup: Managed consumable special registered: barcode_isles_beach
+[02:41:36] MultiPickup: Managed consumable special registered: deep_oil_sample
+[02:41:36] MultiPickup: Managed consumable special registered: bridge
+[02:41:36] MultiPickup: Managed consumable special registered: medallion
+[02:41:36] MultiPickup: Managed consumable special registered: liquid_nitrogen
+[02:41:36] MultiPickup: Managed consumable special registered: mayan_gold_bar
+[02:41:36] MultiPickup: Managed consumable special registered: trai_usb_key
+[02:41:36] MultiPickup: Managed consumable special registered: ranc_sheriff_star
+[02:41:36] MultiPickup: Managed consumable special registered: caustic_soda
+[02:41:36] MultiPickup: Managed consumable special registered: lrm_keycard
+[02:41:36] MultiPickup: Managed consumable special registered: president_key
+[02:41:36] MultiPickup: Managed consumable special registered: mus_glas_cutter
+[02:41:36] MultiPickup: Managed consumable special registered: blow_torch
+[02:41:36] MultiPickup: Managed consumable special registered: chas_keychain_forklift
+[02:41:36] MultiPickup: Managed consumable special registered: trai_container_key
+[02:41:36] MultiPickup: Managed consumable special registered: saw
+[02:41:36] MultiPickup: Managed consumable special registered: documents
+[02:41:36] MultiPickup: Managed consumable special registered: corp_key_fob
+[02:41:36] MultiPickup: Managed consumable special registered: barrel
+[02:41:36] MultiPickup: Managed consumable special registered: acid
+[02:41:36] MultiPickup: Managed consumable special registered: lance
+[02:41:36] MultiPickup: Managed consumable special registered: intimidation
+[02:41:36] MultiPickup: Managed consumable special registered: manifest
+[02:41:36] MultiPickup: Managed consumable special registered: harddrive
+[02:41:36] MultiPickup: Managed consumable special registered: cargo_strap
+[02:41:36] MultiPickup: Managed consumable special registered: notepad
+[02:41:36] MultiPickup: Managed consumable special registered: hotel_room_key
+[02:41:36] MultiPickup: Managed consumable special registered: blueprints
+[02:41:36] MultiPickup: Managed consumable special registered: scubagear_tank_and_flippers
+[02:41:36] MultiPickup: Managed consumable special registered: tape
+[02:41:36] MultiPickup: Managed consumable special registered: bleed_out_increase
+[02:41:36] MultiPickup: Managed consumable special registered: compound_a
+[02:41:36] MultiPickup: Managed consumable special registered: briefcase
+[02:41:36] MultiPickup: Managed consumable special registered: defibrillator_paddles
+[02:41:36] MultiPickup: Managed consumable special registered: bank_manager_key
+[02:41:36] MultiPickup: Managed consumable special registered: gas_canister
+[02:41:36] MultiPickup: Managed consumable special registered: barcode_brickell
+[02:41:36] MultiPickup: Managed consumable special registered: business_card
+[02:41:36] MultiPickup: Managed consumable special registered: files
+[02:41:36] MultiPickup: Managed consumable special registered: circle_cutter
+[02:41:36] MultiPickup: Managed consumable special registered: c_keys
+[02:41:36] MultiPickup: Managed consumable special registered: ranc_silver_ingot
+[02:41:36] MultiPickup: Managed consumable special registered: server
+[02:41:36] MultiPickup: Managed consumable special registered: compound_d
+[02:41:36] MultiPickup: Managed consumable special registered: barcode_downtown
+[02:41:36] MultiPickup: Managed consumable special registered: toolset
+[02:41:36] MultiPickup: Managed consumable special registered: police_uniform
+[02:41:36] MultiPickup: Managed consumable special registered: thermite_paste
+[02:41:36] MultiPickup: Managed consumable special registered: extra_cable_tie
+[02:41:36] MultiPickup: Managed consumable special registered: equipment_blueprint
+[02:41:36] MultiPickup: Managed consumable special registered: adrenaline
+[02:41:36] MultiPickup: Managed consumable special registered: thermite
+[02:41:36] MultiPickup: Managed consumable special registered: money_bag
+[02:41:36] MultiPickup: Managed consumable special registered: planks
+[02:41:36] MultiPickup: Managed consumable special registered: blood_sample_verified
+[02:41:36] MultiPickup: Managed consumable special registered: plates
+[02:41:36] MultiPickup: Managed consumable special registered: cas_winch_hook
+[02:41:36] MultiPickup: Managed consumable special registered: chrome_skull
+[02:41:36] MultiPickup: Managed consumable special registered: cas_bfd_tool
+[02:41:36] MultiPickup: Managed consumable special registered: gold_bag_equip
+[02:41:36] MultiPickup: Managed consumable special registered: briefcase_diamond
+[02:41:36] MultiPickup: Managed consumable special registered: soda
+[02:41:36] MultiPickup: Managed consumable special registered: stapler
+[02:41:36] MultiPickup: Managed consumable special registered: help_keycard
+[02:41:36] MultiPickup: Managed consumable special registered: cas_usb_key
+[02:41:36] MultiPickup: Managed consumable special registered: saw_blade
+[02:41:36] MultiPickup: Managed consumable special registered: evidence
+[02:41:36] MultiPickup: Managed consumable special registered: barcode_opa_locka
+[02:41:36] MultiPickup: Managed consumable special registered: diesel
+[02:41:36] MultiPickup: Managed consumable special registered: body_armor
+[02:41:36] MultiPickup: Managed consumable special registered: wanker_keys
+[02:41:36] MultiPickup: Managed consumable special registered: c4_x3
+[02:41:36] MultiPickup: Managed consumable special registered: pex_loaded_card
+[02:41:36] MultiPickup: Managed consumable special registered: ranc_acid
+[02:41:36] MultiPickup: Managed consumable special registered: extra_start_out_ammo
+[02:41:36] MultiPickup: Managed consumable special registered: pex_cutter
+[02:41:36] MultiPickup: Managed consumable special registered: pex_loaded_card_lvl_2
+[02:41:36] MultiPickup: Managed consumable special registered: pex_unloaded_card
+[02:41:36] MultiPickup: Managed consumable special registered: audio_device
+[02:41:36] MultiPickup: Managed consumable special registered: stock
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: stash_server_pickup_server
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: take_ticket
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: hold_take_medallion
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: cas_take_sleeping_gas
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: hold_take_sample
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: pickup_hotel_room_keycard
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: hold_take_compound_d
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_timer
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: gen_pku_blow_torch
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: hold_take_hand
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_isles_beach
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_brickell
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_edgewater
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: gen_pku_crowbar_stack
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: gen_pku_saw
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: cas_bfd_drill_toolbox
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: sfm_take_usb_key
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: press_printer_paper
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_timer_3sec
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: hold_take_compound_a
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: ranc_take_acid
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: hydrogen_chloride
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: press_take_chimichanga
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_opa_locka
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: caustic_soda
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_paste_z_axis
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: take_jfr_briefcase
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: cas_take_usb_key
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: gen_pku_saw_axis
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: computer_blueprints
+[02:41:36] MultiPickup: Removed special_equipment_block from interaction: ranc_hold_take_barrel
+[02:41:36] MinDetectionRisk hook loaded.
+[02:41:36] MinDetectionRisk: BlackMarketManager overrides applied.
+[02:41:36] UnlimitedFavors hook loaded.
+[02:41:36] UnlimitedFavors: PrePlanningManager overrides applied.
+[02:41:36] MinDetectionRisk hook loaded.
+[02:41:36] MinDetectionRisk: BlackMarketManager overrides applied.
+[02:41:36] UnlimitedFavors hook loaded.
+[02:41:36] UnlimitedFavors: PrePlanningManager overrides applied.
+[02:41:36] UnlimitedFavors: MoneyManager overrides applied.
+[02:41:36] GroupAIStateBase hook loaded.
+[02:41:36] PlayerDamage hook loaded.
+[02:41:36] PlayerMovement hook loaded.
+[02:41:36] CopBrain hook loaded.
+[02:41:36] PlayerDamage hook loaded.
+[02:41:36] InfiniteCameraLoop hook loaded.
+[02:41:36] InfiniteCameraLoop: SecurityCamera overrides applied (clean HUD & multi-loop active).
+[02:41:36] DrillOverhaul hook loaded.
+[02:41:36] DrillOverhaul: TimerGui overrides applied.
+[02:41:36] DrillOverhaul hook loaded.
+[02:41:36] DrillOverhaul: TimerGui overrides applied.
+[02:41:36] DrillOverhaul: Drill overrides applied.
+[02:41:36] PlayerDamage hook loaded.
+[02:41:36] PlayerMovement hook loaded.
+[02:41:54] Silently wiped 14 enemies & disabled cameras.
+[02:42:03] Instantly tied 4 civilians.
+[02:42:07] Instantly tied 4 civilians.
+[02:42:08] Instantly tied 4 civilians.
+[02:42:12] Instantly tied 1 civilians.
+[02:42:36] Unlocked 45 doors.
+[02:42:44] Unlocked 18 doors.
+[02:43:27] Sapphire+: Bagging & gathering 19 loose loot items...
+[02:43:28] Sapphire+: Successfully gathered 19 loot items!
+[02:43:29] Sapphire+: Bagging & gathering 2 loose loot items...
+[02:43:29] Sapphire+: Successfully gathered 2 loot items!
+[02:43:30] Sapphire+: Bagging & gathering 2 loose loot items...
+[02:43:30] Sapphire+: Successfully gathered 2 loot items!
+[02:43:31] Sapphire+: Bagging & gathering 2 loose loot items...
+[02:43:31] Sapphire+: Successfully gathered 2 loot items!
+[02:43:31] Sapphire+: No unbagged loot available.
+[02:43:32] Sapphire+: No unbagged loot available.
+[02:43:33] Sapphire+: No unbagged loot available.
+[02:43:34] Sapphire+: No unbagged loot available.
+[02:43:44] Core initialized.
+[02:43:44] DLCManager hook loaded.
+[02:43:44] DLC Heist Unlocker is enabled.
+[02:43:44] CarryTweakData hook loaded.
+[02:43:44] Carry++ physics modifiers applied.
+[02:43:44] PlayerManager hook loaded.
+[02:43:44] MultiPickup hook loaded.
+[02:43:44] MultiPickup: Managed consumable special registered: c4_x1
+[02:43:44] MultiPickup: Managed consumable special registered: lance_part
+[02:43:44] MultiPickup: Managed consumable special registered: cas_data_usb_key
+[02:43:44] MultiPickup: Managed consumable special registered: compound_c
+[02:43:44] MultiPickup: Managed consumable special registered: corp_achi_blueprint
+[02:43:44] MultiPickup: Managed consumable special registered: receiver
+[02:43:44] MultiPickup: Managed consumable special registered: scythe
+[02:43:44] MultiPickup: Managed consumable special registered: keychain
+[02:43:44] MultiPickup: Managed consumable special registered: gold
+[02:43:44] MultiPickup: Managed consumable special registered: globe
+[02:43:44] MultiPickup: Managed consumable special registered: c4_x10
+[02:43:44] MultiPickup: Managed consumable special registered: concoction
+[02:43:44] MultiPickup: Managed consumable special registered: compound_b
+[02:43:44] MultiPickup: Managed consumable special registered: laxative
+[02:43:44] MultiPickup: Managed consumable special registered: chainsaw
+[02:43:44] MultiPickup: Managed consumable special registered: laptop
+[02:43:44] MultiPickup: Managed consumable special registered: boards
+[02:43:44] MultiPickup: Managed consumable special registered: organs
+[02:43:44] MultiPickup: Managed consumable special registered: ticket
+[02:43:44] MultiPickup: Managed consumable special registered: chimichanga
+[02:43:44] MultiPickup: Managed consumable special registered: c4_stackable
+[02:43:44] MultiPickup: Managed consumable special registered: drill
+[02:43:44] MultiPickup: Managed consumable special registered: chavez_key
+[02:43:44] MultiPickup: Managed consumable special registered: bottle
+[02:43:44] MultiPickup: Managed consumable special registered: gas
+[02:43:44] MultiPickup: Managed consumable special registered: printer_ink
+[02:43:44] MultiPickup: Managed consumable special registered: hydrogen_chloride
+[02:43:44] MultiPickup: Managed consumable special registered: wire
+[02:43:44] MultiPickup: Managed consumable special registered: fingerprint
+[02:43:44] MultiPickup: Managed consumable special registered: hand
+[02:43:44] MultiPickup: Managed consumable special registered: paper_roll
+[02:43:44] MultiPickup: Managed consumable special registered: flammable_liquid
+[02:43:44] MultiPickup: Managed consumable special registered: car_jack
+[02:43:44] MultiPickup: Managed consumable special registered: cas_sleeping_gas
+[02:43:44] MultiPickup: Managed consumable special registered: crowbar_stack
+[02:43:44] MultiPickup: Managed consumable special registered: ranc_hammer
+[02:43:44] MultiPickup: Managed consumable special registered: alarm_clock
+[02:43:44] MultiPickup: Managed consumable special registered: c4
+[02:43:44] MultiPickup: Managed consumable special registered: ranc_mould
+[02:43:44] MultiPickup: Managed consumable special registered: tool
+[02:43:44] MultiPickup: Managed consumable special registered: fertilizer
+[02:43:44] MultiPickup: Managed consumable special registered: thick_skin
+[02:43:44] MultiPickup: Managed consumable special registered: cas_elevator_key
+[02:43:44] MultiPickup: Managed consumable special registered: fire_extinguisher
+[02:43:44] MultiPickup: Managed consumable special registered: barcode_edgewater
+[02:43:44] MultiPickup: Managed consumable special registered: blood_sample
+[02:43:44] MultiPickup: Managed consumable special registered: scubagear_vest
+[02:43:44] MultiPickup: Managed consumable special registered: barcode_isles_beach
+[02:43:44] MultiPickup: Managed consumable special registered: deep_oil_sample
+[02:43:44] MultiPickup: Managed consumable special registered: bridge
+[02:43:44] MultiPickup: Managed consumable special registered: medallion
+[02:43:44] MultiPickup: Managed consumable special registered: liquid_nitrogen
+[02:43:44] MultiPickup: Managed consumable special registered: mayan_gold_bar
+[02:43:44] MultiPickup: Managed consumable special registered: trai_usb_key
+[02:43:44] MultiPickup: Managed consumable special registered: ranc_sheriff_star
+[02:43:44] MultiPickup: Managed consumable special registered: caustic_soda
+[02:43:44] MultiPickup: Managed consumable special registered: lrm_keycard
+[02:43:44] MultiPickup: Managed consumable special registered: president_key
+[02:43:44] MultiPickup: Managed consumable special registered: mus_glas_cutter
+[02:43:44] MultiPickup: Managed consumable special registered: blow_torch
+[02:43:44] MultiPickup: Managed consumable special registered: chas_keychain_forklift
+[02:43:44] MultiPickup: Managed consumable special registered: trai_container_key
+[02:43:44] MultiPickup: Managed consumable special registered: saw
+[02:43:44] MultiPickup: Managed consumable special registered: documents
+[02:43:44] MultiPickup: Managed consumable special registered: corp_key_fob
+[02:43:44] MultiPickup: Managed consumable special registered: barrel
+[02:43:44] MultiPickup: Managed consumable special registered: acid
+[02:43:44] MultiPickup: Managed consumable special registered: lance
+[02:43:44] MultiPickup: Managed consumable special registered: intimidation
+[02:43:44] MultiPickup: Managed consumable special registered: manifest
+[02:43:44] MultiPickup: Managed consumable special registered: harddrive
+[02:43:44] MultiPickup: Managed consumable special registered: cargo_strap
+[02:43:44] MultiPickup: Managed consumable special registered: notepad
+[02:43:44] MultiPickup: Managed consumable special registered: hotel_room_key
+[02:43:44] MultiPickup: Managed consumable special registered: blueprints
+[02:43:44] MultiPickup: Managed consumable special registered: scubagear_tank_and_flippers
+[02:43:44] MultiPickup: Managed consumable special registered: tape
+[02:43:44] MultiPickup: Managed consumable special registered: bleed_out_increase
+[02:43:44] MultiPickup: Managed consumable special registered: compound_a
+[02:43:44] MultiPickup: Managed consumable special registered: briefcase
+[02:43:44] MultiPickup: Managed consumable special registered: defibrillator_paddles
+[02:43:44] MultiPickup: Managed consumable special registered: bank_manager_key
+[02:43:44] MultiPickup: Managed consumable special registered: gas_canister
+[02:43:44] MultiPickup: Managed consumable special registered: barcode_brickell
+[02:43:44] MultiPickup: Managed consumable special registered: business_card
+[02:43:44] MultiPickup: Managed consumable special registered: files
+[02:43:44] MultiPickup: Managed consumable special registered: circle_cutter
+[02:43:44] MultiPickup: Managed consumable special registered: c_keys
+[02:43:44] MultiPickup: Managed consumable special registered: ranc_silver_ingot
+[02:43:44] MultiPickup: Managed consumable special registered: server
+[02:43:44] MultiPickup: Managed consumable special registered: compound_d
+[02:43:44] MultiPickup: Managed consumable special registered: barcode_downtown
+[02:43:44] MultiPickup: Managed consumable special registered: toolset
+[02:43:44] MultiPickup: Managed consumable special registered: police_uniform
+[02:43:44] MultiPickup: Managed consumable special registered: thermite_paste
+[02:43:44] MultiPickup: Managed consumable special registered: extra_cable_tie
+[02:43:44] MultiPickup: Managed consumable special registered: equipment_blueprint
+[02:43:44] MultiPickup: Managed consumable special registered: adrenaline
+[02:43:44] MultiPickup: Managed consumable special registered: thermite
+[02:43:44] MultiPickup: Managed consumable special registered: money_bag
+[02:43:44] MultiPickup: Managed consumable special registered: planks
+[02:43:44] MultiPickup: Managed consumable special registered: blood_sample_verified
+[02:43:44] MultiPickup: Managed consumable special registered: plates
+[02:43:44] MultiPickup: Managed consumable special registered: cas_winch_hook
+[02:43:44] MultiPickup: Managed consumable special registered: chrome_skull
+[02:43:44] MultiPickup: Managed consumable special registered: cas_bfd_tool
+[02:43:44] MultiPickup: Managed consumable special registered: gold_bag_equip
+[02:43:44] MultiPickup: Managed consumable special registered: briefcase_diamond
+[02:43:44] MultiPickup: Managed consumable special registered: soda
+[02:43:44] MultiPickup: Managed consumable special registered: stapler
+[02:43:44] MultiPickup: Managed consumable special registered: help_keycard
+[02:43:44] MultiPickup: Managed consumable special registered: cas_usb_key
+[02:43:44] MultiPickup: Managed consumable special registered: saw_blade
+[02:43:44] MultiPickup: Managed consumable special registered: evidence
+[02:43:44] MultiPickup: Managed consumable special registered: barcode_opa_locka
+[02:43:44] MultiPickup: Managed consumable special registered: diesel
+[02:43:44] MultiPickup: Managed consumable special registered: body_armor
+[02:43:44] MultiPickup: Managed consumable special registered: wanker_keys
+[02:43:44] MultiPickup: Managed consumable special registered: c4_x3
+[02:43:44] MultiPickup: Managed consumable special registered: pex_loaded_card
+[02:43:44] MultiPickup: Managed consumable special registered: ranc_acid
+[02:43:44] MultiPickup: Managed consumable special registered: extra_start_out_ammo
+[02:43:44] MultiPickup: Managed consumable special registered: pex_cutter
+[02:43:44] MultiPickup: Managed consumable special registered: pex_loaded_card_lvl_2
+[02:43:44] MultiPickup: Managed consumable special registered: pex_unloaded_card
+[02:43:44] MultiPickup: Managed consumable special registered: audio_device
+[02:43:44] MultiPickup: Managed consumable special registered: stock
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: stash_server_pickup_server
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: take_ticket
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: hold_take_medallion
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: cas_take_sleeping_gas
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: hold_take_sample
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: pickup_hotel_room_keycard
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: hold_take_compound_d
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_timer
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: gen_pku_blow_torch
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: hold_take_hand
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_isles_beach
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_brickell
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_edgewater
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: gen_pku_crowbar_stack
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: gen_pku_saw
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: cas_bfd_drill_toolbox
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: sfm_take_usb_key
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: press_printer_paper
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_timer_3sec
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: hold_take_compound_a
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: ranc_take_acid
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: hydrogen_chloride
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: press_take_chimichanga
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: pku_barcode_opa_locka
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: caustic_soda
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: gen_pku_thermite_paste_z_axis
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: take_jfr_briefcase
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: cas_take_usb_key
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: gen_pku_saw_axis
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: computer_blueprints
+[02:43:44] MultiPickup: Removed special_equipment_block from interaction: ranc_hold_take_barrel
+[02:43:44] MinDetectionRisk hook loaded.
+[02:43:44] MinDetectionRisk: BlackMarketManager overrides applied.
+[02:43:44] UnlimitedFavors hook loaded.
+[02:43:44] UnlimitedFavors: PrePlanningManager overrides applied.
+[02:43:44] MinDetectionRisk hook loaded.
+[02:43:44] MinDetectionRisk: BlackMarketManager overrides applied.
+[02:43:44] PlayerDamage hook loaded.
+[02:43:44] PlayerMovement hook loaded.
+[02:43:44] UnlimitedFavors hook loaded.
+[02:43:44] UnlimitedFavors: PrePlanningManager overrides applied.
+[02:43:44] UnlimitedFavors: MoneyManager overrides applied.

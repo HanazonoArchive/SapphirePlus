@@ -27,7 +27,8 @@ Sapphire.DefaultSettings = {
     InfiniteCameraLoop = false,
     MinDetectionRisk = false,
     DrillNoJams = false,
-    InstantDrills = false
+    InstantDrills = false,
+    AutoCooker = false
 }
 
 Sapphire.Settings = {}

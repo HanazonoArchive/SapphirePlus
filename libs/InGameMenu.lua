@@ -13,10 +13,72 @@ InGameMenu._items = {
         id = "teleport_loot",
         num = "01",
         text = "Teleport Loot",
+        type = "action",
         desc = "Opens all crates and lockers, packs all unbagged loose loot into carry bags, and ejects them forward in your line of sight.",
         action = function()
             if Sapphire.Loot and Sapphire.Loot.TeleportLoot then
                 Sapphire.Loot:TeleportLoot()
+            end
+        end
+    },
+    {
+        id = "unlock_doors",
+        num = "02",
+        text = "Unlock All Doors",
+        type = "action",
+        desc = "Instantly unlocks and opens all standard doors, security rooms, keycard readers, and iron cage gates across the heist.",
+        action = function()
+            if Sapphire.Doors and Sapphire.Doors.UnlockAll then
+                Sapphire.Doors:UnlockAll()
+            end
+        end
+    },
+    {
+        id = "auto_cooker",
+        num = "03",
+        text = "Auto-Cooker",
+        type = "toggle",
+        desc = "Automatically detects Bain and Locke's chemical instructions on meth heists (Cook Off, Rats) and adds the correct ingredient with zero delay.",
+        get_value = function()
+            return Sapphire.Settings.AutoCooker == true
+        end,
+        toggle = function()
+            Sapphire:SetSetting("AutoCooker", not Sapphire.Settings.AutoCooker)
+        end
+    },
+    {
+        id = "tie_civilians",
+        num = "04",
+        text = "Tie All Civilians",
+        type = "action",
+        desc = "Instantly intimidates and restrains all civilians across the map with cable ties, forcing them to the floor with cable tie limits bypassed.",
+        action = function()
+            if Sapphire.Civilians and Sapphire.Civilians.TieAll then
+                Sapphire.Civilians:TieAll()
+            end
+        end
+    },
+    {
+        id = "revive_team",
+        num = "05",
+        text = "Instant Team Revive",
+        type = "action",
+        desc = "Instantly revives yourself and all downed human teammates and AI bot companions across the map.",
+        action = function()
+            if Sapphire.Revive and Sapphire.Revive.ReviveTeam then
+                Sapphire.Revive:ReviveTeam()
+            end
+        end
+    },
+    {
+        id = "wipe_enemies",
+        num = "06",
+        text = "Wipe All Enemies",
+        type = "action",
+        desc = "Silently despawns all guards, Murkywater security, and cops across the map. Triggers zero pagers and leaves zero bodies.",
+        action = function()
+            if Sapphire.Enemies and Sapphire.Enemies.WipeAll then
+                Sapphire.Enemies:WipeAll()
             end
         end
     }
@@ -60,7 +122,6 @@ function InGameMenu:Open()
     self._ws = Overlay:gui():create_screen_workspace()
     local full_panel = self._ws:panel()
 
-    -- Fullscreen opaque dimming backdrop (blocks game view distraction)
     self._backdrop = full_panel:rect({
         name = "backdrop",
         color = Color(0.01, 0.02, 0.03),
@@ -69,8 +130,8 @@ function InGameMenu:Open()
     })
 
     -- 3. CENTERED PREMIUM MODAL CARD
-    local card_w = 540
-    local card_h = 310
+    local card_w = 560
+    local card_h = 450
     local card_x = (full_panel:w() - card_w) / 2
     local card_y = (full_panel:h() - card_h) / 2
 
@@ -166,9 +227,9 @@ function InGameMenu:Open()
     self._items_container = self._panel:panel({
         name = "items_container",
         x = 22,
-        y = 66,
+        y = 64,
         w = card_w - 44,
-        h = 100,
+        h = 245,
         layer = 4
     })
 
@@ -216,10 +277,21 @@ function InGameMenu:Open()
             name = "label",
             text = item.text,
             font = tweak_data.menu.pd2_medium_font,
-            font_size = 17,
+            font_size = 16,
             color = Color(0.75, 0.75, 0.75),
             x = 55,
-            y = 6,
+            y = 7,
+            layer = 3
+        })
+
+        local state_text = row:text({
+            name = "state",
+            text = item.type == "toggle" and "[ OFF ]" or "[ EXECUTE ]",
+            font = tweak_data.menu.pd2_small_font,
+            font_size = 12,
+            color = Color(0.4, 0.55, 0.7),
+            x = card_w - 145,
+            y = 10,
             layer = 3
         })
 
@@ -228,18 +300,19 @@ function InGameMenu:Open()
             bg = row_bg,
             left_bar = left_bar,
             pill = pill_badge,
-            label = label
+            label = label,
+            state = state_text
         }
-        row_y = row_y + 40
+        row_y = row_y + 39
     end
 
-    -- Description Box Panel (Inset styling)
+    -- Description Box Panel
     local desc_box = self._panel:panel({
         name = "desc_box",
         x = 22,
-        y = 158,
+        y = 312,
         w = card_w - 44,
-        h = 70,
+        h = 75,
         layer = 3
     })
 
@@ -266,7 +339,7 @@ function InGameMenu:Open()
         x = 12,
         y = 10,
         w = card_w - 68,
-        h = 50,
+        h = 55,
         wrap = true,
         word_wrap = true,
         layer = 3
@@ -276,7 +349,7 @@ function InGameMenu:Open()
     self._panel:rect({
         name = "divider_bottom",
         x = 22,
-        y = 240,
+        y = 398,
         w = card_w - 44,
         h = 1,
         color = Color(0.15, 0.3, 0.45),
@@ -287,12 +360,12 @@ function InGameMenu:Open()
     -- Navigation Hotkey Pill Guide
     self._panel:text({
         name = "footer_nav",
-        text = "[▲/▼] NAVIGATE    [◄/►] ADJUST    [SPACE/ENTER] EXECUTE    [ESC] RETURN",
+        text = "[▲/▼] NAVIGATE    [◄/►] TOGGLE    [SPACE/ENTER] EXECUTE    [ESC] RETURN",
         font = tweak_data.menu.pd2_small_font,
         font_size = 11,
         color = Color(0.4, 0.55, 0.7),
         x = 22,
-        y = 252,
+        y = 412,
         layer = 4
     })
 
@@ -329,11 +402,21 @@ end
 
 function InGameMenu:UpdateSelection()
     for i, p in ipairs(self._item_panels) do
+        local item = self._items[i]
         local is_sel = (i == self._selected_index)
         p.bg:set_alpha(is_sel and 0.4 or 0.0)
         p.left_bar:set_alpha(is_sel and 1.0 or 0.0)
         p.label:set_color(is_sel and Color(1.0, 1.0, 1.0) or Color(0.65, 0.65, 0.65))
         p.pill:set_color(is_sel and Color(0.1, 0.85, 1.0) or Color(0.3, 0.5, 0.7))
+
+        if item.type == "toggle" then
+            local val = item.get_value and item.get_value() or false
+            p.state:set_text(val and "[ ON ]" or "[ OFF ]")
+            p.state:set_color(val and Color(0.2, 0.9, 0.4) or Color(0.7, 0.4, 0.2))
+        else
+            p.state:set_text("[ EXECUTE ]")
+            p.state:set_color(is_sel and Color(0.1, 0.85, 1.0) or Color(0.4, 0.55, 0.7))
+        end
     end
 
     if self._desc_text and self._items[self._selected_index] then
@@ -360,30 +443,49 @@ function InGameMenu:SelectNext()
 end
 
 function InGameMenu:AdjustLeft()
-    self:PlaySound("highlight")
+    local item = self._items[self._selected_index]
+    if item and item.type == "toggle" and item.toggle then
+        item.toggle()
+        self:UpdateSelection()
+        self:PlaySound("menu_enter")
+    else
+        self:PlaySound("highlight")
+    end
 end
 
 function InGameMenu:AdjustRight()
-    self:PlaySound("highlight")
+    local item = self._items[self._selected_index]
+    if item and item.type == "toggle" and item.toggle then
+        item.toggle()
+        self:UpdateSelection()
+        self:PlaySound("menu_enter")
+    else
+        self:PlaySound("highlight")
+    end
 end
 
 function InGameMenu:ExecuteSelected()
     local item = self._items[self._selected_index]
-    if item and item.action then
-        self:PlaySound("menu_skill_investment")
-        -- Flash feedback on row
-        local p = self._item_panels[self._selected_index]
-        if p and p.bg then
-            p.bg:set_color(Color(0.1, 0.8, 0.4))
-            p.bg:set_alpha(0.7)
-            DelayedCalls:Add("Sapphire_FlashReset", 0.15, function()
-                if p and p.bg then
-                    p.bg:set_color(Color(0.08, 0.35, 0.7))
-                    p.bg:set_alpha(0.4)
-                end
-            end)
+    if item then
+        if item.type == "toggle" and item.toggle then
+            item.toggle()
+            self:UpdateSelection()
+            self:PlaySound("menu_enter")
+        elseif item.action then
+            self:PlaySound("menu_skill_investment")
+            local p = self._item_panels[self._selected_index]
+            if p and p.bg then
+                p.bg:set_color(Color(0.1, 0.8, 0.4))
+                p.bg:set_alpha(0.7)
+                DelayedCalls:Add("Sapphire_FlashReset", 0.15, function()
+                    if p and p.bg then
+                        p.bg:set_color(Color(0.08, 0.35, 0.7))
+                        p.bg:set_alpha(0.4)
+                    end
+                end)
+            end
+            item.action()
         end
-        item.action()
     end
 end
 
