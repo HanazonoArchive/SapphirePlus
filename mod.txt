@@ -78,6 +78,15 @@
             "run_in_menu": false,
             "run_in_game": true,
             "localized": false
+        },
+        {
+            "keybind_id": "Sapphire_open_in_game_menu",
+            "name": "Open Sapphire+ Menu",
+            "description": "Opens the in-game Sapphire+ modal menu.",
+            "script_path": "keybinds/OpenMenu.lua",
+            "run_in_menu": false,
+            "run_in_game": true,
+            "localized": false
         }
     ]
 }

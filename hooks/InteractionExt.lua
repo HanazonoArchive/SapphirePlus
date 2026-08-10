@@ -56,13 +56,14 @@ if BaseInteractionExt then
         return distance
     end
 
-    -- Instant / no interaction cooldown
+    -- Linear interaction speed reduction (0% = vanilla, 100% = instant)
     local orig_timer = BaseInteractionExt._get_timer
     function BaseInteractionExt:_get_timer(...)
         local timer = orig_timer(self, ...)
         local current_effective = Sapphire:GetEffectiveSettings()
-        if current_effective.Enabled and current_effective.NoInteractionCooldown then
-            return 0
+        if current_effective.Enabled and current_effective.InteractionSpeedReduction and current_effective.InteractionSpeedReduction > 0 then
+            local reduction = math.clamp(current_effective.InteractionSpeedReduction, 0, 100) / 100
+            return timer * (1 - reduction)
         end
         return timer
     end

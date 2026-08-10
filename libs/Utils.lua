@@ -19,7 +19,7 @@ function Sapphire:NormalizeSettings()
     self.Settings.Enabled = self.Settings.Enabled ~= false
     self.Settings.SafeMode = self.Settings.SafeMode ~= false
     self.Settings.ForceSafeModeHost = self.Settings.ForceSafeModeHost == true
-    self.Settings.NoInteractionCooldown = self.Settings.NoInteractionCooldown == true
+    self.Settings.InteractionSpeedReduction = self:ClampNumber(self.Settings.InteractionSpeedReduction, 0, 100, 0)
 
     self.Settings.AlwaysSprint = self.Settings.AlwaysSprint ~= false
     self.Settings.JumpHeight = self:ClampNumber(self.Settings.JumpHeight, 0.1, 5, 1.0)
@@ -84,7 +84,7 @@ end
 function Sapphire:GetEffectiveSettings()
     local effective = {
         Enabled = self.Settings.Enabled,
-        NoInteractionCooldown = self.Settings.NoInteractionCooldown,
+        InteractionSpeedReduction = self.Settings.InteractionSpeedReduction,
         AlwaysSprint = self.Settings.AlwaysSprint,
         JumpHeight = self.Settings.JumpHeight,
         ThrowDistance = self.Settings.ThrowDistance,
@@ -124,7 +124,7 @@ function Sapphire:GetEffectiveSettings()
 
     if safe_mode_active then
         effective.SafeModeActive = true
-        effective.NoInteractionCooldown = false
+        effective.InteractionSpeedReduction = math.min(effective.InteractionSpeedReduction, 25)
         effective.InfiniteStamina = false
         effective.BagDamageReduction = math.min(effective.BagDamageReduction, 50)
         effective.NoFallDamage = false

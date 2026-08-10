@@ -22,7 +22,7 @@ local setting_keys = {
     Sapphire_JumpHeight        = "JumpHeight",
     Sapphire_ThrowDistance     = "ThrowDistance",
     Sapphire_AffectBodyBags    = "AffectBodyBags",
-    Sapphire_NoInteractionCooldown = "NoInteractionCooldown",
+    Sapphire_InteractionSpeedReduction = "InteractionSpeedReduction",
     Sapphire_InfiniteStamina   = "InfiniteStamina",
     Sapphire_BagDamageReduction = "BagDamageReduction",
     Sapphire_NoFallDamage      = "NoFallDamage",
@@ -44,7 +44,7 @@ local setting_keys = {
 
 local function parse_item_value(item, key)
     if key == "Debug" or key == "AlwaysSprint" or key == "Enabled" or key == "SafeMode" or
-       key == "ForceSafeModeHost" or key == "NoInteractionCooldown" or
+       key == "ForceSafeModeHost" or
        key == "RandomPagers" or key == "InfiniteStamina" or
        key == "AutoAnswerPagers" or key == "NoFallDamage" or key == "IgnoreArmorPenalty" or
        key == "AffectBodyBags" or key == "NoWeaponRestrictions" or key == "AICantAlarm" or key == "UnlockDLCHeists" or
@@ -115,8 +115,8 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
         Sapphire_no_weapon_restrictions_desc  = "Allows you to use primary weapons while carrying heavy bags.",
 
         -- Quality of Life
-        Sapphire_no_interaction_cd_title = "No Interaction Timer",
-        Sapphire_no_interaction_cd_desc  = "Removes interaction timer.",
+        Sapphire_interaction_speed_reduction_title = "Interaction Speed Reduction (%)",
+        Sapphire_interaction_speed_reduction_desc  = "Reduces interaction timer duration linearly (0% = vanilla, 50% = twice as fast, 100% = instant).",
 
         Sapphire_infinite_stamina_title = "Infinite Stamina With Carry",
         Sapphire_infinite_stamina_desc  = "Sprint infinitely while carrying a bag.",
@@ -404,12 +404,16 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         priority = 699
     })
 
-    MenuHelper:AddToggle({
-        id = "Sapphire_NoInteractionCooldown",
-        title = "Sapphire_no_interaction_cd_title",
-        desc = "Sapphire_no_interaction_cd_desc",
+    MenuHelper:AddSlider({
+        id = "Sapphire_InteractionSpeedReduction",
+        title = "Sapphire_interaction_speed_reduction_title",
+        desc = "Sapphire_interaction_speed_reduction_desc",
         callback = callback_id,
-        value = Sapphire.Settings.NoInteractionCooldown,
+        value = Sapphire.Settings.InteractionSpeedReduction,
+        min = 0,
+        max = 100,
+        step = 5,
+        show_value = true,
         menu_id = menu_id,
         priority = 698
     })
