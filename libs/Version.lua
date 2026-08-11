@@ -1,1 +1,1 @@
-Sapphire.Version = "0.4.1"
+Sapphire.Version = "0.6.0"

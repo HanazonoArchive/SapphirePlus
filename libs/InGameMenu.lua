@@ -81,6 +81,54 @@ InGameMenu._items = {
                 Sapphire.Enemies:WipeAll()
             end
         end
+    },
+    {
+        id = "collect_gage",
+        num = "07",
+        text = "Collect All Gage Packages",
+        type = "action",
+        desc = "Instantly sweeps the entire map and collects every hidden Gage Courier package (Green Mantis, Yellow Bull, Red Spider, Blue Eagle, Purple Snake).",
+        action = function()
+            if Sapphire.Gage and Sapphire.Gage.CollectAll then
+                Sapphire.Gage:CollectAll()
+            end
+        end
+    },
+    {
+        id = "army_of_jokers",
+        num = "08",
+        text = "Army of Jokers",
+        type = "action",
+        desc = "Instantly converts all active cops on the map into an army of friendly criminal Jokers with minion limits completely bypassed.",
+        action = function()
+            if Sapphire.Jokers and Sapphire.Jokers.ConvertAll then
+                Sapphire.Jokers:ConvertAll()
+            end
+        end
+    },
+    {
+        id = "custody_breakout",
+        num = "09",
+        text = "Instant Custody Breakout",
+        type = "action",
+        desc = "Immediately breaks all teammates and AI companions out of custody without waiting for the police assault break timer.",
+        action = function()
+            if Sapphire.Custody and Sapphire.Custody.Breakout then
+                Sapphire.Custody:Breakout()
+            end
+        end
+    },
+    {
+        id = "clean_corpses",
+        num = "10",
+        text = "Clean All Corpses",
+        type = "action",
+        desc = "Silently despawns and cleans all dead bodies and leftover body bags across the map to prevent detection.",
+        action = function()
+            if Sapphire.Corpses and Sapphire.Corpses.CleanAll then
+                Sapphire.Corpses:CleanAll()
+            end
+        end
     }
 }
 
@@ -130,8 +178,8 @@ function InGameMenu:Open()
     })
 
     -- 3. CENTERED PREMIUM MODAL CARD
-    local card_w = 560
-    local card_h = 450
+    local card_w = 580
+    local card_h = 540
     local card_x = (full_panel:w() - card_w) / 2
     local card_y = (full_panel:h() - card_h) / 2
 
@@ -183,7 +231,7 @@ function InGameMenu:Open()
         font_size = 11,
         color = Color(0.1, 0.75, 1.0),
         x = 22,
-        y = 14,
+        y = 12,
         layer = 4
     })
 
@@ -192,10 +240,10 @@ function InGameMenu:Open()
         name = "title",
         text = "MOD CONTROL INTERFACE",
         font = tweak_data.menu.pd2_large_font,
-        font_size = 20,
+        font_size = 19,
         color = Color(0.95, 0.97, 1.0),
         x = 22,
-        y = 28,
+        y = 25,
         layer = 4
     })
 
@@ -207,7 +255,7 @@ function InGameMenu:Open()
         font_size = 12,
         color = Color(0.2, 0.9, 0.4),
         x = card_w - 95,
-        y = 28,
+        y = 25,
         layer = 4
     })
 
@@ -215,7 +263,7 @@ function InGameMenu:Open()
     self._panel:rect({
         name = "divider_top",
         x = 22,
-        y = 56,
+        y = 50,
         w = card_w - 44,
         h = 1,
         color = Color(0.15, 0.3, 0.45),
@@ -224,12 +272,16 @@ function InGameMenu:Open()
     })
 
     -- Items Container
+    local item_h = 32
+    local item_gap = 2
+    local total_items_h = #self._items * (item_h + item_gap)
+    
     self._items_container = self._panel:panel({
         name = "items_container",
         x = 22,
-        y = 64,
+        y = 56,
         w = card_w - 44,
-        h = 245,
+        h = total_items_h + 5,
         layer = 4
     })
 
@@ -241,7 +293,7 @@ function InGameMenu:Open()
             x = 0,
             y = row_y,
             w = card_w - 44,
-            h = 36
+            h = item_h
         })
 
         local row_bg = row:rect({
@@ -256,7 +308,7 @@ function InGameMenu:Open()
             x = 0,
             y = 0,
             w = 4,
-            h = 36,
+            h = item_h,
             color = Color(0.1, 0.85, 1.0),
             alpha = 0.0,
             layer = 2
@@ -266,10 +318,10 @@ function InGameMenu:Open()
             name = "pill",
             text = "[" .. item.num .. "]",
             font = tweak_data.menu.pd2_medium_font,
-            font_size = 14,
+            font_size = 13,
             color = Color(0.1, 0.75, 1.0),
-            x = 12,
-            y = 8,
+            x = 10,
+            y = 6,
             layer = 3
         })
 
@@ -277,10 +329,10 @@ function InGameMenu:Open()
             name = "label",
             text = item.text,
             font = tweak_data.menu.pd2_medium_font,
-            font_size = 16,
+            font_size = 14,
             color = Color(0.75, 0.75, 0.75),
-            x = 55,
-            y = 7,
+            x = 48,
+            y = 5,
             layer = 3
         })
 
@@ -288,10 +340,10 @@ function InGameMenu:Open()
             name = "state",
             text = item.type == "toggle" and "[ OFF ]" or "[ EXECUTE ]",
             font = tweak_data.menu.pd2_small_font,
-            font_size = 12,
+            font_size = 11,
             color = Color(0.4, 0.55, 0.7),
-            x = card_w - 145,
-            y = 10,
+            x = card_w - 140,
+            y = 8,
             layer = 3
         })
 
@@ -303,16 +355,17 @@ function InGameMenu:Open()
             label = label,
             state = state_text
         }
-        row_y = row_y + 39
+        row_y = row_y + item_h + item_gap
     end
 
     -- Description Box Panel
+    local desc_y = 56 + total_items_h + 8
     local desc_box = self._panel:panel({
         name = "desc_box",
         x = 22,
-        y = 312,
+        y = desc_y,
         w = card_w - 44,
-        h = 75,
+        h = 60,
         layer = 3
     })
 
@@ -334,22 +387,23 @@ function InGameMenu:Open()
         name = "desc_content",
         text = "",
         font = tweak_data.menu.pd2_small_font,
-        font_size = 13,
+        font_size = 12,
         color = Color(0.7, 0.8, 0.9),
-        x = 12,
-        y = 10,
-        w = card_w - 68,
-        h = 55,
+        x = 10,
+        y = 8,
+        w = card_w - 64,
+        h = 44,
         wrap = true,
         word_wrap = true,
         layer = 3
     })
 
     -- Footer Divider
+    local divider_b_y = desc_y + 68
     self._panel:rect({
         name = "divider_bottom",
         x = 22,
-        y = 398,
+        y = divider_b_y,
         w = card_w - 44,
         h = 1,
         color = Color(0.15, 0.3, 0.45),
@@ -365,7 +419,7 @@ function InGameMenu:Open()
         font_size = 11,
         color = Color(0.4, 0.55, 0.7),
         x = 22,
-        y = 412,
+        y = divider_b_y + 10,
         layer = 4
     })
 

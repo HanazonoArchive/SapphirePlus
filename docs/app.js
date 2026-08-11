@@ -8,15 +8,30 @@
 // ==========================================
 const devlogs = [
     {
-        version: "v0.5.0",
+        version: "v0.6.0",
         isLatest: true,
+        tag: "Tactical & Mayhem Expansion",
+        items: [
+            { label: "Army of Jokers", desc: "Instantly converts all active cops across the heist into an army of friendly criminal minions with max minion limits bypassed." },
+            { label: "Gage Package Collector", desc: "Instantly collects all hidden Gage Courier packages on the map with a single in-game menu action." },
+            { label: "Instant Custody Breakout", desc: "Instantly trades and brings all downed/dead teammates and AI companions back from custody." },
+            { label: "Clean All Corpses", desc: "Silently sweeps and cleans all dead bodies and leftover body bags across the map." },
+            { label: "Ragdoll Space Program", desc: "Multiplies ragdoll death impulse physics to launch enemies into orbit upon lethal hits." },
+            { label: "360 Sprinting", desc: "Enables omnidirectional sprinting in all directions (sideways, backwards) without breaking sprint." },
+            { label: "Instant Melee Charge", desc: "Guarantees 100% full charged melee damage, range, and knockdown on instant tap." },
+            { label: "Gas Mask & Anti-Flashbang", desc: "Grants complete immunity against flashbang blinding screens, audio ringing, and tear gas damage." }
+        ]
+    },
+    {
+        version: "v0.5.0",
+        isLatest: false,
         tag: "Stealth & Pre-Planning Update",
         items: [
             { label: "Multi-Pickup", desc: "Pick up multiple keycards, planks, C4, and thermite with accurate HUD quantity badges. Solo Shadow Raid vault is now fully accessible." },
             { label: "Infinite Camera Loop", desc: "Extended tape loop duration to 99,999 seconds with full Extra Heist Info (EHI) timer synchronization." },
             { label: "Minimum Detection Risk", desc: "Forces 3 Detection Risk (minimum suspicion offset) regardless of equipped armor (ICTV) or heavy weapons." },
             { label: "Unlimited Pre-Planning Favors", desc: "Removed favor budget limits and eliminated asset favor and offshore cash costs." },
-            { label: "Single-Page Menu Overhaul", desc: "Reorganized Mod Options into a clean, priority-sorted single page without sub-menus." }
+            { label: "Drills Overhaul & Auto-Cooker", desc: "Added instant drills, zero-jam protection, and automatic meth lab chemical detection." }
         ]
     },
     {
@@ -47,51 +62,100 @@ const devlogs = [
 // 2. COMPLETE FEATURE MODULES DATA
 // ==========================================
 const features = [
-    // --- STEALTH TOOLS ---
+    // --- TACTICAL IN-GAME MENU ACTIONS ---
     {
-        title: "Multi-Pickup (Keycards & Consumables)",
-        category: "stealth",
-        tag: "Stealth",
-        icon: "key-round",
-        desc: "Stack consumable mission items including Keycards, Planks, C4, and Thermite without hitting inventory limits. Essential for solo stealth on maps like Shadow Raid vault."
+        title: "Army of Jokers (Auto-Convert)",
+        category: "qol",
+        tag: "Tactical Action",
+        icon: "users",
+        desc: "Instantly converts all active cops and SWAT units across the heist into friendly criminal Jokers with minion limits bypassed and friendly outlines applied."
     },
     {
-        title: "Infinite Camera Loop",
+        title: "Collect All Gage Packages",
         category: "stealth",
-        tag: "Stealth",
-        icon: "cctv",
-        desc: "Extends tape loop duration to 99,999 seconds. Fully synced with Extra Heist Info (EHI) and HUD timer overlays. Loop a camera once and ignore it for the rest of the heist."
+        tag: "Tactical Action",
+        icon: "package-search",
+        desc: "Instantly sweeps the entire map and collects all hidden Gage Courier packages (Green Mantis, Yellow Bull, Red Spider, Blue Eagle, Purple Snake) with one click."
     },
     {
-        title: "Minimum Detection Risk (Always 3)",
-        category: "stealth",
-        tag: "Stealth",
-        icon: "shield-alert",
-        desc: "Forces detection risk to the engine minimum (3 Detection Risk) regardless of what heavy armor (ICTV) or weapons you wear. Grants maximum Sneaky Bastard & Low Blow bonuses."
+        title: "Instant Custody Breakout",
+        category: "qol",
+        tag: "Tactical Action",
+        icon: "user-check",
+        desc: "Immediately trades and respawns all downed or dead human teammates and AI bot companions from custody without waiting for the assault break."
     },
     {
-        title: "AI Can't Alarm",
+        title: "Clean All Corpses & Bags",
         category: "stealth",
-        tag: "Stealth",
-        icon: "bell-off",
-        desc: "Prevents guards, civilians, and cops from raising the alarm, shooting panic flares, or triggering emergency calls."
+        tag: "Tactical Action",
+        icon: "sparkles",
+        desc: "Silently sweeps and despawns all dead enemy bodies, civilian corpses, and leftover body bags across the map to prevent patrolling guards from raising alarms."
     },
     {
-        title: "Random Pagers / No Pager Chance",
-        category: "stealth",
-        tag: "Stealth",
-        icon: "radio",
-        desc: "Configurable slider (1% - 100%) that gives a random chance for eliminated security guards to drop no pager at all, preserving your 4-pager limit."
+        title: "Teleport Loot & Bag Ejector",
+        category: "carry",
+        tag: "Tactical Action",
+        icon: "box",
+        desc: "Opens all crates and lockers, packs all unbagged loose loot into carry bags, and batches/ejects them forward in your line of sight."
     },
     {
-        title: "Auto-Answer Pagers",
+        title: "Unlock All Doors & Gates",
         category: "stealth",
-        tag: "Stealth",
-        icon: "phone-call",
-        desc: "Automatically answers pagers immediately when a security guard is neutralized, preventing missed pagers while managing stealth objectives."
+        tag: "Tactical Action",
+        icon: "unlock",
+        desc: "Instantly unlocks and opens all standard doors, security rooms, keycard readers, and iron cage gates across the entire heist map."
+    },
+    {
+        title: "Tie All Civilians",
+        category: "stealth",
+        tag: "Tactical Action",
+        icon: "user-minus",
+        desc: "Instantly intimidates and restrains all civilians across the map with cable ties, forcing them to the floor with cable tie limits bypassed."
+    },
+    {
+        title: "Instant Team Revive",
+        category: "qol",
+        tag: "Tactical Action",
+        icon: "heart-pulse",
+        desc: "Instantly revives yourself and all downed human teammates and AI bot companions across the map to full standing health."
+    },
+    {
+        title: "Wipe All Enemies & Cameras",
+        category: "stealth",
+        tag: "Tactical Action",
+        icon: "skull",
+        desc: "Silently despawns all guards, Murkywater security, and cops across the map while shutting down all active security cameras without alarms or pagers."
     },
 
-    // --- CARRY & MOVEMENT ---
+    // --- COMBAT & MOVEMENT OVERHAULS ---
+    {
+        title: "Ragdoll Space Program",
+        category: "carry",
+        tag: "Physics",
+        icon: "rocket",
+        desc: "Multiplies ragdoll death impulse physics by 35x-50x, launching killed cops and SWAT units flying into the sky and out of windows."
+    },
+    {
+        title: "360° Sprinting (Omnidirectional)",
+        category: "carry",
+        tag: "Movement",
+        icon: "compass",
+        desc: "Sprint at full speed in any direction, including backwards and sideways, without breaking into standard walk mode."
+    },
+    {
+        title: "Instant Melee Charge",
+        category: "carry",
+        tag: "Combat",
+        icon: "swords",
+        desc: "Every melee tap strikes with 100% full charged damage, extended attack reach, and guaranteed knockdown instantly without charging."
+    },
+    {
+        title: "Gas Mask & Anti-Flashbang",
+        category: "qol",
+        tag: "Protection",
+        icon: "shield-alert",
+        desc: "Grants complete immunity against flashbang whiteout screens, audio ringing, and tear gas damage ticks."
+    },
     {
         title: "Carry Weight & Sprint Overhaul",
         category: "carry",
@@ -104,7 +168,7 @@ const features = [
         category: "carry",
         tag: "Carry",
         icon: "arrow-up-right",
-        desc: "Customizable slider (1.0x to 5.0x) to fling loot bags over rooftops, across broad courtyards, or directly into escape vehicles from afar."
+        desc: "Customizable slider (0.1x to 20.0x) to fling loot bags over rooftops, across broad courtyards, or directly into escape vehicles from afar."
     },
     {
         title: "Jump Height with Heavy Bags",
@@ -149,7 +213,65 @@ const features = [
         desc: "Sprint indefinitely without your stamina meter depleting or your character running out of breath."
     },
 
+    // --- STEALTH TOOLS ---
+    {
+        title: "Multi-Pickup (Keycards & Consumables)",
+        category: "stealth",
+        tag: "Stealth",
+        icon: "key-round",
+        desc: "Stack consumable mission items including Keycards, Planks, C4, and Thermite without hitting inventory limits. Essential for solo stealth on maps like Shadow Raid vault."
+    },
+    {
+        title: "Infinite Camera Loop",
+        category: "stealth",
+        tag: "Stealth",
+        icon: "cctv",
+        desc: "Extends tape loop duration to 99,999 seconds. Fully synced with Extra Heist Info (EHI) and HUD timer overlays. Loop a camera once and ignore it for the rest of the heist."
+    },
+    {
+        title: "Minimum Detection Risk (Always 3)",
+        category: "stealth",
+        tag: "Stealth",
+        icon: "eye-off",
+        desc: "Forces detection risk to the engine minimum (3 Detection Risk) regardless of what heavy armor (ICTV) or weapons you wear. Grants maximum Sneaky Bastard & Low Blow bonuses."
+    },
+    {
+        title: "AI Can't Alarm",
+        category: "stealth",
+        tag: "Stealth",
+        icon: "bell-off",
+        desc: "Prevents guards, civilians, and cops from raising the alarm, shooting panic flares, or triggering emergency calls."
+    },
+    {
+        title: "Random Pagers / No Pager Chance",
+        category: "stealth",
+        tag: "Stealth",
+        icon: "radio",
+        desc: "Configurable slider (1% - 100%) that gives a random chance for eliminated security guards to drop no pager at all, preserving your 4-pager limit."
+    },
+    {
+        title: "Auto-Answer Pagers",
+        category: "stealth",
+        tag: "Stealth",
+        icon: "phone-call",
+        desc: "Automatically answers pagers immediately when a security guard is neutralized, preventing missed pagers while managing stealth objectives."
+    },
+
     // --- QUALITY OF LIFE & PRE-PLANNING ---
+    {
+        title: "Drills Never Jam & Instant Drills",
+        category: "qol",
+        tag: "Drills",
+        icon: "cpu",
+        desc: "Prevents drills, saws, and hacking devices from jamming, and optionally completes them in 0.01 seconds."
+    },
+    {
+        title: "Auto-Cooker (Cook Off & Rats)",
+        category: "qol",
+        tag: "Chemistry",
+        icon: "flask-conical",
+        desc: "Listens to Bain & Locke voice cues and automatically adds the correct chemical ingredient (Mu / Cs / HCl) without delay."
+    },
     {
         title: "Unlimited Pre-Planning Favors",
         category: "qol",
@@ -162,14 +284,14 @@ const features = [
         category: "qol",
         tag: "QoL",
         icon: "maximize-2",
-        desc: "Increases interaction distance up to 5x, allowing you to pick locks, grab keycards, and interact through grates from safe cover."
+        desc: "Increases interaction distance up to 30x, allowing you to pick locks, grab keycards, and interact through grates from safe cover."
     },
     {
-        title: "Instant Interaction / No Cooldown",
+        title: "Interaction Speed Reduction",
         category: "qol",
         tag: "QoL",
         icon: "timer",
-        desc: "Instantly completes interactions like bag pickups, cable tying, lockpicking, and pager responses without waiting on progress bars."
+        desc: "Reduces interaction timer duration linearly (0% = vanilla, 50% = twice as fast, 100% = instant) on all mission objectives."
     },
     {
         title: "Unlock All DLC Heists for Hosting",
@@ -184,13 +306,6 @@ const features = [
         tag: "Core",
         icon: "shield-check",
         desc: "Automatically neutralizes cheat-tier features when joining other hosts' multiplayer lobbies to protect against anti-cheat kicks and desyncs."
-    },
-    {
-        title: "Single-Page In-Game Menu & Hotkeys",
-        category: "qol",
-        tag: "Core",
-        icon: "sliders",
-        desc: "Clean priority-sorted menu under Mod Options with category headers and no sub-menus. Includes an in-game hotkey keybind to toggle the mod on the fly."
     }
 ];
 
@@ -237,61 +352,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Render Features Grid
+    // Render Feature Cards
     function renderFeatures(filter = 'all') {
         if (!featuresGrid) return;
         featuresGrid.innerHTML = '';
 
-        const filtered = filter === 'all' 
-            ? features 
+        const filtered = filter === 'all'
+            ? features
             : features.filter(f => f.category === filter);
 
-        filtered.forEach(item => {
+        filtered.forEach(feature => {
             const card = document.createElement('div');
             card.className = 'feature-card';
+            card.setAttribute('data-category', feature.category);
+
             card.innerHTML = `
-                <div class="card-top">
-                    <div class="card-icon-box">
-                        <i data-lucide="${item.icon}"></i>
+                <div class="card-header">
+                    <div class="card-icon-wrap">
+                        <i data-lucide="${feature.icon}"></i>
                     </div>
-                    <span class="card-tag">${item.tag}</span>
+                    <span class="card-tag">${feature.tag}</span>
                 </div>
-                <h3 class="card-title">${item.title}</h3>
-                <p class="card-desc">${item.desc}</p>
+                <h3 class="card-title">${feature.title}</h3>
+                <p class="card-desc">${feature.desc}</p>
             `;
             featuresGrid.appendChild(card);
         });
 
-        if (window.lucide) {
+        // Initialize Lucide Icons for dynamic content
+        if (typeof lucide !== 'undefined' && lucide.createIcons) {
             lucide.createIcons();
         }
     }
 
-    // Filter Buttons Click
+    // Filter Buttons Click Handling
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             filterButtons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            const filter = btn.getAttribute('data-filter');
-            renderFeatures(filter);
+            const category = btn.getAttribute('data-filter');
+            renderFeatures(category);
         });
     });
-
-    // Copy Path Button
-    const copyBtn = document.getElementById('copyBtn');
-    const installPath = document.getElementById('installPath');
-    if (copyBtn && installPath) {
-        copyBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText(installPath.textContent.trim()).then(() => {
-                copyBtn.innerHTML = '<i data-lucide="check" class="btn-icon"></i>';
-                if (window.lucide) lucide.createIcons();
-                setTimeout(() => {
-                    copyBtn.innerHTML = '<i data-lucide="copy" class="btn-icon"></i>';
-                    if (window.lucide) lucide.createIcons();
-                }, 2000);
-            });
-        });
-    }
 
     // Initial Renders
     renderDevlogs();

@@ -41,6 +41,10 @@ local setting_keys = {
     Sapphire_DrillNoJams         = "DrillNoJams",
     Sapphire_InstantDrills       = "InstantDrills",
     Sapphire_AutoCooker          = "AutoCooker",
+    Sapphire_RagdollSpaceProgram = "RagdollSpaceProgram",
+    Sapphire_OmnidirectionalSprint = "OmnidirectionalSprint",
+    Sapphire_InstantMeleeCharge  = "InstantMeleeCharge",
+    Sapphire_FlashbangGasImmunity= "FlashbangGasImmunity",
 }
 
 local function parse_item_value(item, key)
@@ -55,7 +59,11 @@ local function parse_item_value(item, key)
        key == "MinDetectionRisk" or
        key == "DrillNoJams" or
        key == "InstantDrills" or
-       key == "AutoCooker" then
+       key == "AutoCooker" or
+       key == "RagdollSpaceProgram" or
+       key == "OmnidirectionalSprint" or
+       key == "InstantMeleeCharge" or
+       key == "FlashbangGasImmunity" then
         return item:value() == "on"
     end
 
@@ -116,6 +124,9 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
         Sapphire_no_weapon_restrictions_title = "No Weapon Restrictions",
         Sapphire_no_weapon_restrictions_desc  = "Allows you to use primary weapons while carrying heavy bags.",
 
+        Sapphire_omnidirectional_sprint_title = "360 Sprinting (Omnidirectional)",
+        Sapphire_omnidirectional_sprint_desc  = "Allows sprinting at full speed in any direction, including backwards and sideways.",
+
         -- Quality of Life
         Sapphire_interaction_speed_reduction_title = "Interaction Speed Reduction (%)",
         Sapphire_interaction_speed_reduction_desc  = "Reduces interaction timer duration linearly (0% = vanilla, 50% = twice as fast, 100% = instant).",
@@ -140,6 +151,12 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
 
         Sapphire_auto_cooker_title = "Auto-Cooker (Cook Off & Rats)",
         Sapphire_auto_cooker_desc  = "Automatically adds the correct chemical ingredient (Mu / Cs / HCl) to the meth lab table without delay. (Disabled in Safe Mode)",
+
+        Sapphire_instant_melee_charge_title = "Instant Melee Charge",
+        Sapphire_instant_melee_charge_desc  = "Every melee tap strikes with 100% full charged damage and maximum knockdown.",
+
+        Sapphire_flashbang_gas_immunity_title = "Gas Mask & Anti-Flashbang",
+        Sapphire_flashbang_gas_immunity_desc  = "Grants complete immunity to flashbang blinding/stunning and tear gas damage.",
 
         -- Stealth Tools
         Sapphire_ai_cant_alarm_title = "AI Can't Alarm",
@@ -169,6 +186,9 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
 
         Sapphire_unlimited_favors_title = "Unlimited Favors",
         Sapphire_unlimited_favors_desc  = "Removes the pre-planning favor budget. Select as many assets as you want at zero cost.",
+
+        Sapphire_ragdoll_space_program_title = "Ragdoll Space Program",
+        Sapphire_ragdoll_space_program_desc  = "Multiplies ragdoll death impulse force to launch killed enemies into orbit.",
     })
 end)
 
@@ -390,6 +410,16 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         priority = 893
     })
 
+    MenuHelper:AddToggle({
+        id = "Sapphire_OmnidirectionalSprint",
+        title = "Sapphire_omnidirectional_sprint_title",
+        desc = "Sapphire_omnidirectional_sprint_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.OmnidirectionalSprint,
+        menu_id = menu_id,
+        priority = 892
+    })
+
     MenuHelper:AddDivider({
         id = "Sapphire_div_carry",
         size = 16,
@@ -499,6 +529,26 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         value = Sapphire.Settings.AutoCooker,
         menu_id = menu_id,
         priority = 691
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_InstantMeleeCharge",
+        title = "Sapphire_instant_melee_charge_title",
+        desc = "Sapphire_instant_melee_charge_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.InstantMeleeCharge,
+        menu_id = menu_id,
+        priority = 690
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_FlashbangGasImmunity",
+        title = "Sapphire_flashbang_gas_immunity_title",
+        desc = "Sapphire_flashbang_gas_immunity_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.FlashbangGasImmunity,
+        menu_id = menu_id,
+        priority = 689
     })
 
     MenuHelper:AddDivider({
@@ -631,6 +681,16 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         value = Sapphire.Settings.UnlimitedFavors,
         menu_id = menu_id,
         priority = 297
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_RagdollSpaceProgram",
+        title = "Sapphire_ragdoll_space_program_title",
+        desc = "Sapphire_ragdoll_space_program_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.RagdollSpaceProgram,
+        menu_id = menu_id,
+        priority = 296
     })
 end)
 
