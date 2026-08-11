@@ -41,7 +41,7 @@ This document is the ultimate, definitive technical manual and memory bank for *
 33. [Achievements & Trophy Progress Systems (`AchievementManager`)](#33-achievements--trophy-progress-systems)
 34. [Delayed Macro Sequences & Timer Architecture (`DelayedCalls`)](#34-delayed-macro-sequences--timer-architecture)
 35. [Sound Engine & Character Audio Routing (`SoundDevice`, `DialogManager`)](#35-sound-engine--character-audio-routing)
-36: [Level Environment, Lighting & Fog (`CoreEnvironmentManager`)](#36-level-environment-lighting--fog)
+36. [Level Environment, Lighting & Fog (`CoreEnvironmentManager`)](#36-level-environment-lighting--fog)
 37. [Cable Ties & Hostage Management Engine (`PlayerManager`, `TradeManager`)](#37-cable-ties--hostage-management-engine)
 38. [Custody, Down Counters & Instant Trade (`PlayerDamage`, `TradeManager`)](#38-custody-down-counters--instant-trade)
 39. [Inventory & Mask / Weapon Customization (`BlackMarketManager`)](#39-inventory--mask--weapon-customization)
