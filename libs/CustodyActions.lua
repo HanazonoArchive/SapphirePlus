@@ -10,6 +10,37 @@ function Sapphire.Custody:Breakout()
     end
 
     local respawned_count = 0
+    local processed_names = {}
+
+    local function respawn_name(name)
+        if not name or processed_names[name] then return end
+        processed_names[name] = true
+
+        if managers.trade then
+            pcall(function()
+                -- Ensure candidate exists in respawn queue to prevent nil table errors
+                managers.trade._criminals_to_respawn = managers.trade._criminals_to_respawn or {}
+                local found = false
+                for _, crim in pairs(managers.trade._criminals_to_respawn) do
+                    if crim and crim.id == name then
+                        found = true
+                        break
+                    end
+                end
+                if not found then
+                    table.insert(managers.trade._criminals_to_respawn, { id = name })
+                end
+
+                if managers.trade.clbk_respawn_criminal then
+                    managers.trade:clbk_respawn_criminal(name)
+                    respawned_count = respawned_count + 1
+                elseif managers.trade.respawn_criminal then
+                    managers.trade:respawn_criminal(name)
+                    respawned_count = respawned_count + 1
+                end
+            end)
+        end
+    end
 
     if managers.trade then
         -- 1. Respawn all queued trade candidates immediately
@@ -17,10 +48,7 @@ function Sapphire.Custody:Breakout()
             for i = #managers.trade._criminals_to_respawn, 1, -1 do
                 local crim = managers.trade._criminals_to_respawn[i]
                 if crim and crim.id then
-                    pcall(function()
-                        managers.trade:clbk_respawn_criminal(crim.id)
-                        respawned_count = respawned_count + 1
-                    end)
+                    respawn_name(crim.id)
                 end
             end
         end
@@ -29,25 +57,28 @@ function Sapphire.Custody:Breakout()
         if managers.group_ai and managers.group_ai:state() then
             for name, crim_data in pairs(managers.group_ai:state():all_player_criminals() or {}) do
                 if crim_data and managers.trade:is_criminal_in_custody(name) then
-                    pcall(function()
-                        managers.trade:clbk_respawn_criminal(name)
-                        respawned_count = respawned_count + 1
-                    end)
+                    respawn_name(name)
                 end
             end
 
             -- 3. Check AI companions for custody status
             for name, crim_data in pairs(managers.group_ai:state():all_AI_criminals() or {}) do
                 if crim_data and managers.trade:is_criminal_in_custody(name) then
-                    pcall(function()
-                        managers.trade:clbk_respawn_criminal(name)
-                        respawned_count = respawned_count + 1
-                    end)
+                    respawn_name(name)
                 end
             end
         end
 
-        -- 4. Also trigger immediate hostage trade cycle if trade was pending
+        -- 4. Also check internal trade criminals list
+        if managers.trade._criminals then
+            for _, c in pairs(managers.trade._criminals) do
+                if c and c.id and c.in_custody then
+                    respawn_name(c.id)
+                end
+            end
+        end
+
+        -- 5. Trigger immediate hostage trade cycle if trade was pending
         pcall(function()
             if managers.trade:get_best_hostage() then
                 managers.trade:begin_hostage_trade()

@@ -226,7 +226,7 @@ function InGameMenu:Open()
     -- System Subtitle Tag
     self._panel:text({
         name = "sub_tag",
-        text = "SAPPHIRE+ TACTICAL SYSTEM // V0.5.0",
+        text = "SAPPHIRE+ TACTICAL SYSTEM",
         font = tweak_data.menu.pd2_small_font,
         font_size = 11,
         color = Color(0.1, 0.75, 1.0),
@@ -414,7 +414,7 @@ function InGameMenu:Open()
     -- Navigation Hotkey Pill Guide
     self._panel:text({
         name = "footer_nav",
-        text = "[▲/▼] NAVIGATE    [◄/►] TOGGLE    [SPACE/ENTER] EXECUTE    [ESC] RETURN",
+        text = "[UP/DOWN] NAVIGATE    [LEFT/RIGHT] TOGGLE    [SPACE/ENTER] EXECUTE    [ESC] RETURN",
         font = tweak_data.menu.pd2_small_font,
         font_size = 11,
         color = Color(0.4, 0.55, 0.7),

@@ -75,20 +75,24 @@ function Sapphire.Loot:TeleportLoot()
             local tweak = unit:interaction().tweak_data
             if is_loot_container(tweak) then
                 pcall(function()
-                    local t_data = unit:interaction()._tweak_data
+                    local interaction = unit:interaction()
+                    local orig_can_interact = interaction.can_interact
+                    local t_data = interaction._tweak_data
                     local orig_equip = t_data and t_data.special_equipment
                     local orig_block = t_data and t_data.special_equipment_block
                     if t_data then
                         t_data.special_equipment = nil
                         t_data.special_equipment_block = nil
                     end
+                    interaction.can_interact = function() return true end
 
-                    unit:interaction():interact(player)
+                    interaction:interact(player)
 
                     if t_data then
                         t_data.special_equipment = orig_equip
                         t_data.special_equipment_block = orig_block
                     end
+                    interaction.can_interact = orig_can_interact
                     opened_containers = opened_containers + 1
                 end)
             end
@@ -160,7 +164,13 @@ function Sapphire.Loot:TeleportLoot()
             -- Interact and bag current item
             if alive(unit) and unit.interaction and unit:interaction() and unit:interaction():active() then
                 pcall(function()
-                    unit:interaction():interact(player)
+                    local interaction = unit:interaction()
+                    local orig_can_interact = interaction.can_interact
+                    interaction.can_interact = function() return true end
+
+                    interaction:interact(player)
+
+                    interaction.can_interact = orig_can_interact
                 end)
                 total_bagged = total_bagged + 1
 

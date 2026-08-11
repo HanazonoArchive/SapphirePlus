@@ -87,6 +87,10 @@
         {
             "hook_id": "lib/units/beings/player/playerdamage",
             "script_path": "hooks/FlashbangGasImmunity.lua"
+        },
+        {
+            "hook_id": "lib/units/vehicles/animatedvehiclebase",
+            "script_path": "hooks/CrashFixes.lua"
         }
     ],
     "keybinds": [

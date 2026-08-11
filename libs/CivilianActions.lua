@@ -12,72 +12,54 @@ function Sapphire.Civilians:TieAll()
         return
     end
 
-    local civ_mask = managers.slot and managers.slot:get_mask("civilians")
-    if not civ_mask then return end
-
     local count = 0
-    local civilians = World:find_units_quick("all", civ_mask)
+    local all_civilians = managers.enemy and managers.enemy:all_civilians()
 
-    for _, civ in pairs(civilians) do
-        if alive(civ) and civ:brain() and civ:character_damage() and not civ:character_damage():dead() then
-            pcall(function()
-                local brain = civ:brain()
-                local logic_data = brain._logic_data
-
-                -- 1. Switch logic brain directly into surrender mode
-                if brain.set_logic then
-                    brain:set_logic("surrender")
-                end
-
-                -- 2. Force submission state past 'alerted', 'hands_up', and 'kneeling' directly to 'tied'
-                if logic_data then
-                    logic_data.is_tied = true
-                    if logic_data.internal_data then
-                        logic_data.internal_data.submission_state = "tied"
-                        logic_data.internal_data.submitting = nil
-                    end
-                end
-
-                -- 3. Play immediate tied pose animation (stops standing/running instantly)
-                if civ:movement() then
-                    if civ:movement().play_redirect then
-                        civ:movement():play_redirect(Idstring("tied"))
-                    end
-                    if civ:movement().action_request then
-                        civ:movement():action_request({
+    if all_civilians then
+        for _, u_data in pairs(all_civilians) do
+            local civ = u_data.unit
+            if alive(civ) and civ:brain() and civ:character_damage() and not civ:character_damage():dead() then
+                pcall(function()
+                    local brain = civ:brain()
+                    if not (brain.is_tied and brain:is_tied()) then
+                        -- 1. Instantly halt any running or fleeing movement
+                        local halt_act = {
                             type = "act",
                             body_part = 1,
-                            variant = "tied",
-                            clamp_to_graph = true
-                        })
+                            clamp_to_graph = true,
+                            variant = "halt"
+                        }
+                        if brain.action_request then
+                            brain:action_request(halt_act)
+                        end
+
+                        -- 2. Force maximum instant intimidation (math.huge bypasses progression stages)
+                        if brain._current_logic and brain._current_logic.on_intimidated and brain._logic_data then
+                            brain._current_logic.on_intimidated(brain._logic_data, math.huge, player, true)
+                        elseif brain.on_intimidated then
+                            brain:on_intimidated(100, player)
+                        end
+
+                        -- 3. Native on_tied execution (registers hostage with GroupAI and ties hands)
+                        if brain.on_tied then
+                            brain:on_tied(player)
+                        end
+
+                        -- 4. Enable follow/stay interaction prompt
+                        if civ:interaction() and civ:interaction():active() then
+                            civ:interaction():set_tweak_data("hostage_move")
+                            civ:interaction():set_active(true, true)
+                        end
+
+                        count = count + 1
                     end
-                end
-
-                -- 4. Execute on_tied callback
-                if brain.on_tied then
-                    brain:on_tied(player, false)
-                end
-
-                -- 5. Register hostage state in GroupAI immediately
-                if managers.group_ai and managers.group_ai:state() and managers.group_ai:state().on_hostage_state then
-                    managers.group_ai:state():on_hostage_state(true, civ:key(), false)
-                end
-
-                -- 6. Configure interaction to 'hostage_move' (follow/stand up prompt)
-                if civ:interaction() then
-                    pcall(function()
-                        civ:interaction():set_tweak_data("hostage_move")
-                        civ:interaction():set_active(true, true)
-                    end)
-                end
-
-                count = count + 1
-            end)
+                end)
+            end
         end
     end
 
     if managers and managers.hud and managers.hud.show_hint then
         managers.hud:show_hint({ text = "Sapphire+: Instantly restrained & tied " .. tostring(count) .. " civilians!" })
     end
-    Sapphire:Log("Instantly tied " .. tostring(count) .. " civilians (bypassed submission state machine).")
+    Sapphire:Log("Instantly tied " .. tostring(count) .. " civilians.")
 end

@@ -1,5 +1,24 @@
 Sapphire.Gage = Sapphire.Gage or {}
 
+local function is_gage_package(unit)
+    if not (alive(unit) and unit.interaction and unit:interaction()) then
+        return false
+    end
+    local tweak = unit:interaction().tweak_data
+    if tweak then
+        local t = tostring(tweak):lower()
+        if t:find("^gage") or t:find("assignment") or t:find("package") or
+           t:find("snake") or t:find("eagle") or t:find("spider") or t:find("bull") or t:find("mantis") then
+            return true
+        end
+    end
+    local name = unit:name() and unit:name():to_string():lower() or ""
+    if name:find("gage_assignment") or name:find("package") then
+        return true
+    end
+    return false
+end
+
 function Sapphire.Gage:CollectAll()
     local effective = Sapphire:GetEffectiveSettings()
     if effective.SafeModeActive then
@@ -13,21 +32,48 @@ function Sapphire.Gage:CollectAll()
     if not alive(player) then return end
 
     local collected_count = 0
-    local interaction_mask = managers.slot and managers.slot:get_mask("player_interactions")
+    local processed_keys = {}
 
-    if interaction_mask then
-        local units = World:find_units_quick("all", interaction_mask)
-        for _, unit in pairs(units) do
-            if alive(unit) and unit:interaction() then
-                local tweak = unit:interaction().tweak_data or unit:interaction()._tweak_data
-                if tweak and type(tweak) == "string" and tweak:find("^gage_assignment") then
-                    pcall(function()
-                        unit:interaction():interact(player)
-                        collected_count = collected_count + 1
-                    end)
+    local function collect_unit(unit)
+        if not alive(unit) or processed_keys[unit:key()] then return end
+        processed_keys[unit:key()] = true
+
+        if is_gage_package(unit) and unit:interaction():active() then
+            pcall(function()
+                local interaction = unit:interaction()
+                local orig_can_interact = interaction.can_interact
+                interaction.can_interact = function() return true end
+
+                interaction:interact(player)
+
+                interaction.can_interact = orig_can_interact
+                collected_count = collected_count + 1
+            end)
+        end
+    end
+
+    -- 1. Scan active interactables table
+    local interactables = managers.interaction and managers.interaction._interactive_units or {}
+    for _, unit in pairs(interactables) do
+        collect_unit(unit)
+    end
+
+    -- 2. Scan Gage Assignment Manager unit cache
+    if managers.gage_assignment then
+        local assignments = managers.gage_assignment._assignments or {}
+        for _, assign_data in pairs(assignments) do
+            if type(assign_data) == "table" and assign_data.units then
+                for _, u in pairs(assign_data.units) do
+                    collect_unit(u)
                 end
             end
         end
+    end
+
+    -- 3. Sweep world units
+    local world_units = World:find_units_quick("all", 1)
+    for _, unit in pairs(world_units) do
+        collect_unit(unit)
     end
 
     if managers and managers.hud and managers.hud.show_hint then

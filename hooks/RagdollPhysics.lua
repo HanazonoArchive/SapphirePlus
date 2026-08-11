@@ -25,7 +25,11 @@ if CopDamage then
                             ):normalized()
                             
                             local impulse = (rand_dir + upward_bias):normalized() * launch_force
-                            body:push_at(body:mass() * 40, body:position(), impulse)
+                            if body.push then
+                                body:push(body:mass() * 40, impulse)
+                            elseif body.push_at then
+                                body:push_at(body:mass() * 40, impulse, body:position())
+                            end
                         end
                     end
                 end)

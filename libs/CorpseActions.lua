@@ -10,16 +10,25 @@ function Sapphire.Corpses:CleanAll()
     end
 
     local cleaned_count = 0
+    local processed_keys = {}
+
+    local function remove_corpse_unit(unit)
+        if not alive(unit) or processed_keys[unit:key()] then return end
+        processed_keys[unit:key()] = true
+
+        pcall(function()
+            if unit:slot() ~= 0 then
+                unit:set_slot(0)
+                cleaned_count = cleaned_count + 1
+            end
+        end)
+    end
 
     -- 1. Remove tracked corpses from EnemyManager
     if managers.enemy and managers.enemy.all_corpses then
         for _, data in pairs(managers.enemy:all_corpses()) do
-            local unit = data.unit
-            if alive(unit) and unit:slot() ~= 0 then
-                pcall(function()
-                    unit:set_slot(0)
-                    cleaned_count = cleaned_count + 1
-                end)
+            if data and alive(data.unit) then
+                remove_corpse_unit(data.unit)
             end
         end
     end
@@ -29,12 +38,7 @@ function Sapphire.Corpses:CleanAll()
     if corpse_mask then
         local units = World:find_units_quick("all", corpse_mask)
         for _, unit in pairs(units) do
-            if alive(unit) and unit:slot() ~= 0 then
-                pcall(function()
-                    unit:set_slot(0)
-                    cleaned_count = cleaned_count + 1
-                end)
-            end
+            remove_corpse_unit(unit)
         end
     end
 
@@ -43,14 +47,22 @@ function Sapphire.Corpses:CleanAll()
     if interaction_mask then
         local units = World:find_units_quick("all", interaction_mask)
         for _, unit in pairs(units) do
-            if alive(unit) and unit:interaction() then
+            if alive(unit) and unit.interaction and unit:interaction() then
                 local tweak = unit:interaction().tweak_data or unit:interaction()._tweak_data
                 if tweak and type(tweak) == "string" and tweak == "corpse_dispose" then
-                    pcall(function()
-                        unit:set_slot(0)
-                        cleaned_count = cleaned_count + 1
-                    end)
+                    remove_corpse_unit(unit)
                 end
+            end
+        end
+    end
+
+    -- 4. Sweep all interactables for bagged corpses
+    local all_interactables = managers.interaction and managers.interaction._interactive_units or {}
+    for _, unit in pairs(all_interactables) do
+        if alive(unit) and unit.interaction and unit:interaction() then
+            local tweak = unit:interaction().tweak_data
+            if tweak == "corpse_dispose" then
+                remove_corpse_unit(unit)
             end
         end
     end
