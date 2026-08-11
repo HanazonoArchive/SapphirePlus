@@ -40,7 +40,6 @@ local setting_keys = {
     Sapphire_MinDetectionRisk    = "MinDetectionRisk",
     Sapphire_DrillNoJams         = "DrillNoJams",
     Sapphire_InstantDrills       = "InstantDrills",
-    Sapphire_AutoCooker          = "AutoCooker",
     Sapphire_OmnidirectionalSprint = "OmnidirectionalSprint",
 }
 
@@ -56,7 +55,6 @@ local function parse_item_value(item, key)
        key == "MinDetectionRisk" or
        key == "DrillNoJams" or
        key == "InstantDrills" or
-       key == "AutoCooker" or
        key == "OmnidirectionalSprint" then
         return item:value() == "on"
     end
@@ -142,9 +140,6 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
 
         Sapphire_instant_drills_title = "Instant Drills (Zero Timer)",
         Sapphire_instant_drills_desc  = "Forces all drills, saws, and hacking devices to finish in 0.01 seconds. (Disabled in Safe Mode)",
-
-        Sapphire_auto_cooker_title = "Auto-Cooker (Cook Off & Rats)",
-        Sapphire_auto_cooker_desc  = "Automatically adds the correct chemical ingredient (Mu / Cs / HCl) to the meth lab table without delay. (Disabled in Safe Mode)",
 
         -- Stealth Tools
         Sapphire_ai_cant_alarm_title = "AI Can't Alarm",
@@ -504,16 +499,6 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         value = Sapphire.Settings.InstantDrills,
         menu_id = menu_id,
         priority = 692
-    })
-
-    MenuHelper:AddToggle({
-        id = "Sapphire_AutoCooker",
-        title = "Sapphire_auto_cooker_title",
-        desc = "Sapphire_auto_cooker_desc",
-        callback = callback_id,
-        value = Sapphire.Settings.AutoCooker,
-        menu_id = menu_id,
-        priority = 691
     })
 
     MenuHelper:AddDivider({
