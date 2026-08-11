@@ -73,20 +73,12 @@
             "script_path": "hooks/AutoCooker.lua"
         },
         {
-            "hook_id": "lib/units/enemies/cop/copdamage",
-            "script_path": "hooks/RagdollPhysics.lua"
+            "hook_id": "lib/managers/objectinteractionmanager",
+            "script_path": "hooks/AutoCooker.lua"
         },
         {
             "hook_id": "lib/units/beings/player/states/playerstandard",
             "script_path": "hooks/OmnidirectionalSprint.lua"
-        },
-        {
-            "hook_id": "lib/units/beings/player/states/playerstandard",
-            "script_path": "hooks/InstantMelee.lua"
-        },
-        {
-            "hook_id": "lib/units/beings/player/playerdamage",
-            "script_path": "hooks/FlashbangGasImmunity.lua"
         },
         {
             "hook_id": "lib/units/vehicles/animatedvehiclebase",

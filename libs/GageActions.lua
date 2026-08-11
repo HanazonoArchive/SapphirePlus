@@ -12,9 +12,12 @@ local function is_gage_package(unit)
             return true
         end
     end
-    local name = unit:name() and unit:name():to_string():lower() or ""
-    if name:find("gage_assignment") or name:find("package") then
-        return true
+    local unit_name = unit:name()
+    if unit_name then
+        local name_str = tostring(unit_name):lower()
+        if name_str:find("gage") or name_str:find("assignment") then
+            return true
+        end
     end
     return false
 end

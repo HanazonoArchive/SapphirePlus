@@ -22,8 +22,20 @@ InGameMenu._items = {
         end
     },
     {
-        id = "unlock_doors",
+        id = "secure_bagged_loot",
         num = "02",
+        text = "Secure All Bagged Loot",
+        type = "action",
+        desc = "Instantly secures all packaged loot bags (Gold, Money, Meth, Coke, Weapons) on the ground directly into the escape zone.",
+        action = function()
+            if Sapphire.Loot and Sapphire.Loot.SecureAllBags then
+                Sapphire.Loot:SecureAllBags()
+            end
+        end
+    },
+    {
+        id = "unlock_doors",
+        num = "03",
         text = "Unlock All Doors",
         type = "action",
         desc = "Instantly unlocks and opens all standard doors, security rooms, keycard readers, and iron cage gates across the heist.",
@@ -35,10 +47,10 @@ InGameMenu._items = {
     },
     {
         id = "auto_cooker",
-        num = "03",
+        num = "04",
         text = "Auto-Cooker",
         type = "toggle",
-        desc = "Automatically detects Bain and Locke's chemical instructions on meth heists (Cook Off, Rats) and adds the correct ingredient with zero delay.",
+        desc = "Automatically detects Bain and Locke's chemical instructions on meth heists (Cook Off, Rats), cooks, bags, and drops meth bags hands-free.",
         get_value = function()
             return Sapphire.Settings.AutoCooker == true
         end,
@@ -48,7 +60,7 @@ InGameMenu._items = {
     },
     {
         id = "tie_civilians",
-        num = "04",
+        num = "05",
         text = "Tie All Civilians",
         type = "action",
         desc = "Instantly intimidates and restrains all civilians across the map with cable ties, forcing them to the floor with cable tie limits bypassed.",
@@ -60,7 +72,7 @@ InGameMenu._items = {
     },
     {
         id = "revive_team",
-        num = "05",
+        num = "06",
         text = "Instant Team Revive",
         type = "action",
         desc = "Instantly revives yourself and all downed human teammates and AI bot companions across the map.",
@@ -72,7 +84,7 @@ InGameMenu._items = {
     },
     {
         id = "wipe_enemies",
-        num = "06",
+        num = "07",
         text = "Wipe All Enemies",
         type = "action",
         desc = "Silently despawns all guards, Murkywater security, and cops across the map. Triggers zero pagers and leaves zero bodies.",
@@ -84,7 +96,7 @@ InGameMenu._items = {
     },
     {
         id = "collect_gage",
-        num = "07",
+        num = "08",
         text = "Collect All Gage Packages",
         type = "action",
         desc = "Instantly sweeps the entire map and collects every hidden Gage Courier package (Green Mantis, Yellow Bull, Red Spider, Blue Eagle, Purple Snake).",
@@ -96,7 +108,7 @@ InGameMenu._items = {
     },
     {
         id = "army_of_jokers",
-        num = "08",
+        num = "09",
         text = "Army of Jokers",
         type = "action",
         desc = "Instantly converts all active cops on the map into an army of friendly criminal Jokers with minion limits completely bypassed.",
@@ -108,7 +120,7 @@ InGameMenu._items = {
     },
     {
         id = "custody_breakout",
-        num = "09",
+        num = "10",
         text = "Instant Custody Breakout",
         type = "action",
         desc = "Immediately breaks all teammates and AI companions out of custody without waiting for the police assault break timer.",
@@ -120,7 +132,7 @@ InGameMenu._items = {
     },
     {
         id = "clean_corpses",
-        num = "10",
+        num = "11",
         text = "Clean All Corpses",
         type = "action",
         desc = "Silently despawns and cleans all dead bodies and leftover body bags across the map to prevent detection.",
@@ -179,7 +191,7 @@ function InGameMenu:Open()
 
     -- 3. CENTERED PREMIUM MODAL CARD
     local card_w = 580
-    local card_h = 540
+    local card_h = 560
     local card_x = (full_panel:w() - card_w) / 2
     local card_y = (full_panel:h() - card_h) / 2
 

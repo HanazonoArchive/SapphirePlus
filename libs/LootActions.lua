@@ -188,3 +188,74 @@ function Sapphire.Loot:TeleportLoot()
         process_loose_item()
     end)
 end
+
+-- ============================================================
+-- SECURE ALL BAGGED LOOT (Direct Engine Secure)
+-- ============================================================
+function Sapphire.Loot:SecureAllBags()
+    local player = managers.player and managers.player:player_unit()
+    if not alive(player) then
+        self:Notify("Sapphire+: Player unit not available.")
+        return
+    end
+
+    local effective = Sapphire:GetEffectiveSettings()
+    if effective.SafeModeActive then
+        self:Notify("Sapphire+: Secure Loot is disabled in Safe Mode.")
+        return
+    end
+
+    local secured_count = 0
+    local processed_keys = {}
+
+    -- 1. Secure bag held by player
+    local my_carry = managers.player:get_my_carry_data()
+    if my_carry and my_carry.carry_id and my_carry.carry_id ~= "person" and my_carry.carry_id ~= "corpse" then
+        pcall(function()
+            local carry_id = my_carry.carry_id
+            local val = (managers.money and managers.money:get_bag_value(carry_id)) or (my_carry.multiplier or 1)
+            managers.loot:secure(carry_id, val)
+            managers.player:clear_carry()
+            secured_count = secured_count + 1
+        end)
+    end
+
+    -- 2. Secure all ground carry bags
+    local function secure_unit(unit)
+        if not alive(unit) or processed_keys[unit:key()] then return end
+        if unit:slot() == 0 then return end
+
+        local carry = unit:carry_data()
+        if carry and carry:carry_id() and carry:carry_id() ~= "person" and carry:carry_id() ~= "corpse" then
+            processed_keys[unit:key()] = true
+            pcall(function()
+                local carry_id = carry:carry_id()
+                local val = (managers.money and managers.money:get_bag_value(carry_id)) or (carry:multiplier() or 1)
+                managers.loot:secure(carry_id, val)
+                unit:set_slot(0)
+                secured_count = secured_count + 1
+            end)
+        end
+    end
+
+    -- Scan interactive units table
+    local interactables = managers.interaction and managers.interaction._interactive_units or {}
+    for _, unit in pairs(interactables) do
+        secure_unit(unit)
+    end
+
+    -- Sweep world units
+    local world_units = World:find_units_quick("all", 1)
+    for _, unit in pairs(world_units) do
+        secure_unit(unit)
+    end
+
+    if secured_count > 0 then
+        self:Notify("Sapphire+: Secured " .. tostring(secured_count) .. " loot bags directly into the secure zone!")
+    else
+        self:Notify("Sapphire+: No bagged loot found on the ground.")
+    end
+
+    Sapphire:Log("SecureAllBags secured: " .. tostring(secured_count))
+end
+

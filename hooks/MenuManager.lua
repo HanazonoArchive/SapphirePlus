@@ -41,10 +41,7 @@ local setting_keys = {
     Sapphire_DrillNoJams         = "DrillNoJams",
     Sapphire_InstantDrills       = "InstantDrills",
     Sapphire_AutoCooker          = "AutoCooker",
-    Sapphire_RagdollSpaceProgram = "RagdollSpaceProgram",
     Sapphire_OmnidirectionalSprint = "OmnidirectionalSprint",
-    Sapphire_InstantMeleeCharge  = "InstantMeleeCharge",
-    Sapphire_FlashbangGasImmunity= "FlashbangGasImmunity",
 }
 
 local function parse_item_value(item, key)
@@ -60,10 +57,7 @@ local function parse_item_value(item, key)
        key == "DrillNoJams" or
        key == "InstantDrills" or
        key == "AutoCooker" or
-       key == "RagdollSpaceProgram" or
-       key == "OmnidirectionalSprint" or
-       key == "InstantMeleeCharge" or
-       key == "FlashbangGasImmunity" then
+       key == "OmnidirectionalSprint" then
         return item:value() == "on"
     end
 
@@ -152,12 +146,6 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
         Sapphire_auto_cooker_title = "Auto-Cooker (Cook Off & Rats)",
         Sapphire_auto_cooker_desc  = "Automatically adds the correct chemical ingredient (Mu / Cs / HCl) to the meth lab table without delay. (Disabled in Safe Mode)",
 
-        Sapphire_instant_melee_charge_title = "Instant Melee Charge",
-        Sapphire_instant_melee_charge_desc  = "Every melee tap strikes with 100% full charged damage and maximum knockdown.",
-
-        Sapphire_flashbang_gas_immunity_title = "Gas Mask & Anti-Flashbang",
-        Sapphire_flashbang_gas_immunity_desc  = "Grants complete immunity to flashbang blinding/stunning and tear gas damage.",
-
         -- Stealth Tools
         Sapphire_ai_cant_alarm_title = "AI Can't Alarm",
         Sapphire_ai_cant_alarm_desc  = "Enemies can detect you and fight, but they cannot call the police to trigger a loud heist.",
@@ -185,10 +173,7 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
         Sapphire_unlock_dlc_heists_desc  = "Unlocks specific DLC heists listed in dlcs-to-unlock.txt (Requires a game restart to take effect).",
 
         Sapphire_unlimited_favors_title = "Unlimited Favors",
-        Sapphire_unlimited_favors_desc  = "Removes the pre-planning favor budget. Select as many assets as you want at zero cost.",
-
-        Sapphire_ragdoll_space_program_title = "Ragdoll Space Program",
-        Sapphire_ragdoll_space_program_desc  = "Multiplies ragdoll death impulse force to launch killed enemies into orbit.",
+        Sapphire_unlimited_favors_desc  = "Removes the pre-planning favor budget. Select as many assets as you want at zero cost."
     })
 end)
 
@@ -531,26 +516,6 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         priority = 691
     })
 
-    MenuHelper:AddToggle({
-        id = "Sapphire_InstantMeleeCharge",
-        title = "Sapphire_instant_melee_charge_title",
-        desc = "Sapphire_instant_melee_charge_desc",
-        callback = callback_id,
-        value = Sapphire.Settings.InstantMeleeCharge,
-        menu_id = menu_id,
-        priority = 690
-    })
-
-    MenuHelper:AddToggle({
-        id = "Sapphire_FlashbangGasImmunity",
-        title = "Sapphire_flashbang_gas_immunity_title",
-        desc = "Sapphire_flashbang_gas_immunity_desc",
-        callback = callback_id,
-        value = Sapphire.Settings.FlashbangGasImmunity,
-        menu_id = menu_id,
-        priority = 689
-    })
-
     MenuHelper:AddDivider({
         id = "Sapphire_div_qol",
         size = 16,
@@ -681,16 +646,6 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         value = Sapphire.Settings.UnlimitedFavors,
         menu_id = menu_id,
         priority = 297
-    })
-
-    MenuHelper:AddToggle({
-        id = "Sapphire_RagdollSpaceProgram",
-        title = "Sapphire_ragdoll_space_program_title",
-        desc = "Sapphire_ragdoll_space_program_desc",
-        callback = callback_id,
-        value = Sapphire.Settings.RagdollSpaceProgram,
-        menu_id = menu_id,
-        priority = 296
     })
 end)
 

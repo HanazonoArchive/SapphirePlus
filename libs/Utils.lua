@@ -47,10 +47,7 @@ function Sapphire:NormalizeSettings()
     self.Settings.DrillNoJams = self.Settings.DrillNoJams == true
     self.Settings.InstantDrills = self.Settings.InstantDrills == true
     self.Settings.AutoCooker = self.Settings.AutoCooker == true
-    self.Settings.RagdollSpaceProgram = self.Settings.RagdollSpaceProgram == true
     self.Settings.OmnidirectionalSprint = self.Settings.OmnidirectionalSprint == true
-    self.Settings.InstantMeleeCharge = self.Settings.InstantMeleeCharge == true
-    self.Settings.FlashbangGasImmunity = self.Settings.FlashbangGasImmunity == true
 end
 
 function Sapphire:IsMultiplayerSessionActive()
@@ -112,10 +109,7 @@ function Sapphire:GetEffectiveSettings()
         DrillNoJams = self.Settings.DrillNoJams,
         InstantDrills = self.Settings.InstantDrills,
         AutoCooker = self.Settings.AutoCooker,
-        RagdollSpaceProgram = self.Settings.RagdollSpaceProgram,
         OmnidirectionalSprint = self.Settings.OmnidirectionalSprint,
-        InstantMeleeCharge = self.Settings.InstantMeleeCharge,
-        FlashbangGasImmunity = self.Settings.FlashbangGasImmunity,
         SafeModeActive = false,
         ForceSafeModeHost = self.Settings.ForceSafeModeHost
     }
@@ -153,10 +147,7 @@ function Sapphire:GetEffectiveSettings()
         effective.DrillNoJams = false
         effective.InstantDrills = false
         effective.AutoCooker = false
-        effective.RagdollSpaceProgram = false
         effective.OmnidirectionalSprint = false
-        effective.InstantMeleeCharge = false
-        effective.FlashbangGasImmunity = false
     end
 
     return effective

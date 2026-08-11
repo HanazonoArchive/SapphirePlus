@@ -54,15 +54,16 @@ function Sapphire.Custody:Breakout()
         end
 
         -- 2. Check all player criminals for custody status
-        if managers.group_ai and managers.group_ai:state() then
-            for name, crim_data in pairs(managers.group_ai:state():all_player_criminals() or {}) do
+        local group_ai = (managers.groupai or managers.group_ai) and (managers.groupai or managers.group_ai):state()
+        if group_ai then
+            for name, crim_data in pairs(group_ai:all_player_criminals() or {}) do
                 if crim_data and managers.trade:is_criminal_in_custody(name) then
                     respawn_name(name)
                 end
             end
 
             -- 3. Check AI companions for custody status
-            for name, crim_data in pairs(managers.group_ai:state():all_AI_criminals() or {}) do
+            for name, crim_data in pairs(group_ai:all_AI_criminals() or {}) do
                 if crim_data and managers.trade:is_criminal_in_custody(name) then
                     respawn_name(name)
                 end

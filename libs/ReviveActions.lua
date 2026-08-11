@@ -36,12 +36,13 @@ function Sapphire.Revive:ReviveTeam()
     end
 
     -- 2. Revive all player teammates and AI bots
-    if managers.group_ai and managers.group_ai:state() then
+    local group_ai = (managers.groupai or managers.group_ai) and (managers.groupai or managers.group_ai):state()
+    if group_ai then
         local all_criminals = {}
-        for _, c in pairs(managers.group_ai:state():all_player_criminals() or {}) do
+        for _, c in pairs(group_ai:all_player_criminals() or {}) do
             if c and alive(c.unit) then table.insert(all_criminals, c.unit) end
         end
-        for _, c in pairs(managers.group_ai:state():all_AI_criminals() or {}) do
+        for _, c in pairs(group_ai:all_AI_criminals() or {}) do
             if c and alive(c.unit) then table.insert(all_criminals, c.unit) end
         end
 

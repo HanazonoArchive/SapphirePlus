@@ -22,7 +22,8 @@ function Sapphire.Jokers:ConvertAll()
     if not alive(player) then return end
 
     -- Restrict to loud gameplay only (prevents stealth AI desyncs)
-    if managers.group_ai and managers.group_ai:state() and managers.group_ai:state():whisper_mode() then
+    local group_ai_state = (managers.groupai or managers.group_ai) and (managers.groupai or managers.group_ai):state()
+    if group_ai_state and group_ai_state:whisper_mode() then
         if managers.hud and managers.hud.show_hint then
             managers.hud:show_hint({ text = "Sapphire+: Army of Jokers is only available when the heist is loud." })
         end
@@ -147,8 +148,8 @@ function Sapphire.Jokers:ConvertAll()
                     end
 
                     -- 2. Convert to player's criminal team
-                    if managers.group_ai and managers.group_ai:state() then
-                        managers.group_ai:state():convert_hostage_to_criminal(unit, player)
+                    if group_ai_state then
+                        group_ai_state:convert_hostage_to_criminal(unit, player)
                     end
 
                     -- 3. Apply friendly contour outline once converted

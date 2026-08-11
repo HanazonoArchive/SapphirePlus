@@ -29,10 +29,7 @@ Sapphire.DefaultSettings = {
     DrillNoJams = false,
     InstantDrills = false,
     AutoCooker = false,
-    RagdollSpaceProgram = false,
-    OmnidirectionalSprint = false,
-    InstantMeleeCharge = false,
-    FlashbangGasImmunity = false
+    OmnidirectionalSprint = false
 }
 
 Sapphire.Settings = {}
