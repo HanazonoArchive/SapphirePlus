@@ -58,17 +58,6 @@ function Sapphire.Enemies:WipeAll()
         end
     end
 
-    -- 4. Also sweep world for camera units
-    local all_world_cams = World:find_units_quick("all", 1)
-    for _, unit in pairs(all_world_cams) do
-        if alive(unit) and unit:base() and unit:base().set_detection_enabled and unit:base().set_update_enabled then
-            pcall(function()
-                unit:base():set_detection_enabled(false)
-                unit:base():set_update_enabled(false)
-            end)
-        end
-    end
-
     if managers and managers.hud and managers.hud.show_hint then
         managers.hud:show_hint({
             text = "Sapphire+: Despawned " .. tostring(enemy_count) .. " enemies and disabled all security cameras!"

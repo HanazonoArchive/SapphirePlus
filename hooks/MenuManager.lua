@@ -24,6 +24,7 @@ local setting_keys = {
     Sapphire_AffectBodyBags    = "AffectBodyBags",
     Sapphire_InteractionSpeedReduction = "InteractionSpeedReduction",
     Sapphire_InfiniteStamina   = "InfiniteStamina",
+    Sapphire_GodMode           = "GodMode",
     Sapphire_BagDamageReduction = "BagDamageReduction",
     Sapphire_NoFallDamage      = "NoFallDamage",
     Sapphire_ExtendedInteract  = "ExtendedInteract",
@@ -50,6 +51,7 @@ local function parse_item_value(item, key)
        key == "AutoAnswerPagers" or key == "NoFallDamage" or key == "IgnoreArmorPenalty" or
        key == "AffectBodyBags" or key == "NoWeaponRestrictions" or key == "AICantAlarm" or key == "UnlockDLCHeists" or
        key == "MultiPickup" or
+       key == "GodMode" or
        key == "UnlimitedFavors" or
        key == "InfiniteCameraLoop" or
        key == "MinDetectionRisk" or
@@ -113,8 +115,8 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
         Sapphire_ignore_armor_penalty_title = "Ignore Armor Speed Penalty",
         Sapphire_ignore_armor_penalty_desc  = "Wearing heavy armor no longer slows you down.",
 
-        Sapphire_no_weapon_restrictions_title = "No Weapon Restrictions",
-        Sapphire_no_weapon_restrictions_desc  = "Allows you to use primary weapons while carrying heavy bags.",
+        Sapphire_no_weapon_restrictions_title = "Keep Body Bags When Loud",
+        Sapphire_no_weapon_restrictions_desc  = "Carried and dropped body bags are no longer auto-removed when enemies go loud (weapons hot). PAYDAY 2 has no 'cannot fire while carrying' rule, so this replaces the misnamed weapon lock. (Disabled in Safe Mode)",
 
         Sapphire_omnidirectional_sprint_title = "360 Sprinting (Omnidirectional)",
         Sapphire_omnidirectional_sprint_desc  = "Allows sprinting at full speed in any direction, including backwards and sideways.",
@@ -127,7 +129,10 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
         Sapphire_infinite_stamina_desc  = "Sprint infinitely while carrying a bag.",
 
         Sapphire_bag_damage_reduction_title = "Bag Shield (%)",
-        Sapphire_bag_damage_reduction_desc  = "Percentage of damage to ignore while carrying a bag (0 = none, 100 = invincible).",
+        Sapphire_bag_damage_reduction_desc  = "Percentage of damage to ignore while carrying a bag (0 = none, 100 = invincible while carrying).",
+
+        Sapphire_god_mode_title = "God Mode (Invincible)",
+        Sapphire_god_mode_desc  = "Ignore all incoming bullet and melee damage at all times. Cheat-tier: automatically disabled in Safe Mode. (Independent of AI Can't Alarm.)",
 
         Sapphire_no_fall_damage_title = "No Fall Damage",
         Sapphire_no_fall_damage_desc  = "You will not take any fall damage.",
@@ -217,36 +222,12 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         if option_key ~= nil then
             local option_value = parse_item_value(item, option_key)
             Sapphire:SetSetting(option_key, option_value)
-            
-            -- LIVE UPDATE: Apply changes to CarryTweakData immediately so sliders work mid-heist
-            if tweak_data and tweak_data.carry and tweak_data.carry.types then
-                local effective = Sapphire:GetEffectiveSettings()
-                for id, data in pairs(tweak_data.carry.types) do
-                    if not effective.Enabled or (id == "person" and not effective.AffectBodyBags) then
-                        if Sapphire.VanillaCarryTypes and Sapphire.VanillaCarryTypes[id] then
-                            local vanilla = Sapphire.VanillaCarryTypes[id]
-                            data.move_speed_modifier = vanilla.move_speed_modifier
-                            data.sprint_speed_modifier = vanilla.sprint_speed_modifier
-                            data.jump_modifier = vanilla.jump_modifier
-                            data.throw_distance_multiplier = vanilla.throw_distance_multiplier
-                            data.can_run = vanilla.can_run
-                        end
-                    else
-                        data.move_speed_modifier = 1.0
-                        data.sprint_speed_modifier = 1.0
-                        data.jump_modifier = effective.JumpHeight
-                        data.throw_distance_multiplier = effective.ThrowDistance
-                        
-                        if effective.AlwaysSprint then
-                            data.can_run = true
-                        else
-                            if Sapphire.VanillaCarryTypes and Sapphire.VanillaCarryTypes[id] then
-                                data.can_run = Sapphire.VanillaCarryTypes[id].can_run
-                            end
-                        end
-                    end
-                end
-            end
+
+            -- LIVE UPDATE: re-apply carry modifiers AND all registered tweak_data
+            -- syncs (MultiPickup, InfiniteCameraLoop, ...) so sliders/toggles take
+            -- effect immediately, even mid-heist, and toggling a feature off
+            -- restores vanilla values rather than leaving them buffed.
+            Sapphire:ApplyLiveTweaks()
             return
         end
     end
@@ -458,6 +439,16 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
     })
 
     MenuHelper:AddToggle({
+        id = "Sapphire_GodMode",
+        title = "Sapphire_god_mode_title",
+        desc = "Sapphire_god_mode_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.GodMode,
+        menu_id = menu_id,
+        priority = 695.5
+    })
+
+    MenuHelper:AddToggle({
         id = "Sapphire_NoFallDamage",
         title = "Sapphire_no_fall_damage_title",
         desc = "Sapphire_no_fall_damage_desc",
@@ -474,7 +465,7 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         callback = callback_id,
         value = Sapphire.Settings.ExtendedInteract,
         min = 1.0,
-        max = 30.0,
+        max = 5.0,
         step = 0.5,
         show_value = true,
         menu_id = menu_id,

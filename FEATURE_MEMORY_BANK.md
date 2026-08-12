@@ -77,7 +77,7 @@ This document is the ultimate, definitive technical manual and memory bank for *
 ## 1. Player State Machine & Movement
 
 ```lua
-PlayerStandard:_can_run() -- Returns boolean if sprinting is allowed
+PlayerStandard:_can_run_directional() -- Real method: returns boolean if directional sprint is allowed. NOTE: _can_run() does NOT exist on PlayerStandard.
 PlayerStandard:_start_action_running(t) -- Initiates sprint animation, FOV shift, stamina drain
 PlayerStandard:_end_action_running(t) -- Halts sprint state
 PlayerStandard:_can_jump() -- Returns boolean if jump is permitted
@@ -90,14 +90,16 @@ PlayerMovement:warp_to(pos, rot) -- Teleports player unit directly in 3D world s
 ## 2. Carry Weight, Sprint, Jump & Bag Physics
 
 ```lua
-tweak_data.carry.types[carry_id] = {
+tweak_data.carry.types[weight_class] = {   -- keyed by WEIGHT-CLASS, not item id
     move_speed_modifier = 1.0,         -- Walk speed multiplier (0.25 to 1.0)
-    sprint_speed_modifier = 1.0,       -- Sprint speed multiplier (0.25 to 1.0)
     jump_modifier = 1.0,               -- Jump vertical velocity multiplier
     throw_distance_multiplier = 1.0,   -- Throw impulse velocity multiplier
-    can_run = true,                    -- Boolean allowing sprint while holding
-    weapon_category_fallback = nil     -- Forces secondary weapon if set to "secondaries"
+    can_run = true                     -- Boolean allowing sprint while holding
 }
+-- NOTE: there is NO sprint_speed_modifier and NO weapon_category_fallback field on
+-- carry types (verified against lib/tweak_data/carrytweakdata.lua -- only the four
+-- fields above exist). Body bags/corpses use the "being" weight-class, shared by
+-- exactly `person` + `special_person`.
 ```
 
 ---
@@ -144,9 +146,17 @@ RaycastWeaponBase:set_ammo_total(ammo) -- Sets total ammo pool directly
 * **`1.0 suspicion offset`** = **Detection Risk 75** (Spotted instantly).
 
 ```lua
-BlackMarketManager:get_suspicion_offset_of_local() -> return 0.0
-BlackMarketManager:get_real_armor_concealment(...) -> return 30 (Suit equivalent)
-BlackMarketManager:get_armor_concealment(...) -> return 30
+-- These public getters return a 3-tuple: (value, max_reached, min_reached), where
+--   max_reached = (index == 1)                -- lowest concealment  / MAX detection
+--   min_reached = (index == #concealment - 1) -- highest concealment / MIN detection
+-- (verified against lib/managers/blackmarketmanager.lua:3150-3164). At full
+-- concealment (0 suspicion) the correct flags are max_reached=false, min_reached=true;
+-- returning them inverted paints the "0" readout in the max-detection warning color.
+BlackMarketManager:get_suspicion_offset_of_local(...) -> return 0, false, true
+BlackMarketManager:get_suspicion_offset_from_custom_data(...) -> return 0, false, true
+BlackMarketManager:_calculate_suspicion_offset(...) -> return 0
+-- NOTE: get_real_armor_concealment / get_armor_concealment do NOT exist in the engine.
+--       Concealment feeds suspicion through the index math above, which is already zeroed.
 ```
 
 ---
@@ -154,10 +164,21 @@ BlackMarketManager:get_armor_concealment(...) -> return 30
 ## 7. AI State Machine, Alarms & Group AI
 
 ```lua
+-- AI Can't Alarm suppresses ONLY organic detections during stealth. Mission-scripted
+-- loud transitions flow through the same on_police_called via ElementAiGlobalEvent:on_executed
+-- and MUST always pass, or the heist soft-locks. The engine never passes a "script" reason
+-- string, so scripted calls are tagged (not keyed off called_reason).
+function ElementAiGlobalEvent:on_executed(...)
+    Sapphire._scripted_police_call = true   -- real code saves/restores prev + wraps in pcall
+    -- ... call original ...
+end
+
 function GroupAIStateBase:on_police_called(called_reason, ...)
     local effective = Sapphire:GetEffectiveSettings()
     if effective.Enabled and effective.AICantAlarm then
-        return -- Dispatches zero global alarm events
+        if self:whisper_mode() and not Sapphire._scripted_police_call then
+            return -- suppress the organic alarm only
+        end
     end
     return orig_on_police_called(self, called_reason, ...)
 end
@@ -173,7 +194,7 @@ if ud then
     ud.has_alarm_pager = false
 end
 ```
-* Hooked in `CopBrain:post_init`, `update`, and `set_data`.
+* Hooked in `CopBrain:post_init` and `update`. (`set_data` does NOT exist on `CopBrain` and is not hooked; `update` finalizes the pending-pager state.)
 
 ---
 
@@ -207,10 +228,11 @@ BaseInteractionExt:_get_timer(...) -> return timer * (1 - Reduction / 100)
 ## 12. Drills, Saws, Timers & Anti-Jam Mechanics
 
 ```lua
+TimerGui:_start(timer, current_timer) -> timer = 0.01 (Instant Drills). NOTE: set_timer does NOT exist; force the timer here instead.
 TimerGui:_set_jamming_values() -> self._jamming_values = {}
 TimerGui:set_jammed(jammed) -> Blocked if jammed == true
+TimerGui:_set_jammed(jammed) -> Blocked if jammed == true
 Drill:set_jammed(jammed) -> Blocked if jammed == true
-TimerGui:set_timer(timer) -> timer = 0.01 (Instant Drills)
 ```
 
 ---

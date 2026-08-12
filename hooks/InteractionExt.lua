@@ -4,40 +4,18 @@ dofile(ModPath .. "core.lua")
 -- EHI SPOOF
 -- ============================================================
 if tweak_data and tweak_data.carry and tweak_data.carry.types and Sapphire.VanillaCarryTypes then
+    -- Immediately expose vanilla move speed so EHI/timer trackers sample vanilla
+    -- values on the frame they read carry data.
     for id, data in pairs(tweak_data.carry.types) do
         local vanilla = Sapphire.VanillaCarryTypes[id]
         if vanilla then
             data.move_speed_modifier = vanilla.move_speed_modifier
         end
     end
-    
+
+    -- Next frame, re-apply the real Sapphire carry modifiers.
     DelayedCalls:Add("Sapphire_SpoofEHI_Reapply", 0.0, function()
-        local effective = Sapphire:GetEffectiveSettings()
-        for id, data in pairs(tweak_data.carry.types) do
-            if not effective.Enabled or (id == "person" and not effective.AffectBodyBags) then
-                if Sapphire.VanillaCarryTypes and Sapphire.VanillaCarryTypes[id] then
-                    local vanilla = Sapphire.VanillaCarryTypes[id]
-                    data.move_speed_modifier = vanilla.move_speed_modifier
-                    data.sprint_speed_modifier = vanilla.sprint_speed_modifier
-                    data.jump_modifier = vanilla.jump_modifier
-                    data.throw_distance_multiplier = vanilla.throw_distance_multiplier
-                    data.can_run = vanilla.can_run
-                end
-            else
-                data.move_speed_modifier = 1.0
-                data.sprint_speed_modifier = 1.0
-                data.jump_modifier = effective.JumpHeight
-                data.throw_distance_multiplier = effective.ThrowDistance
-                
-                if effective.AlwaysSprint then
-                    data.can_run = true
-                else
-                    if Sapphire.VanillaCarryTypes and Sapphire.VanillaCarryTypes[id] then
-                        data.can_run = Sapphire.VanillaCarryTypes[id].can_run
-                    end
-                end
-            end
-        end
+        Sapphire:ApplyCarryModifiers()
     end)
 end
 

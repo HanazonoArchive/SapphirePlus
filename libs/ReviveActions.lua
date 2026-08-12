@@ -1,5 +1,15 @@
 Sapphire.Revive = Sapphire.Revive or {}
 
+-- Team Revive.
+--
+-- Scope verified against decompiled source: revive()/need_revive() exist ONLY on
+--   * PlayerDamage  (the LOCAL player)      -- playerdamage.lua:2514/2574
+--   * TeamAIDamage  (AI teammate bots)      -- teamaidamage.lua:1094/1072
+-- Remote human teammates use HuskPlayerDamage, which defines NEITHER method
+-- (huskplayerdamage.lua). A downed remote player can only be brought back through
+-- the network by their own client; forcing it host-side would desync. So this
+-- action revives YOURSELF and AI teammates, and intentionally skips downed remote
+-- human players rather than faking a result.
 function Sapphire.Revive:ReviveTeam()
     local player = managers.player and managers.player:player_unit()
     if not alive(player) then return end
@@ -14,8 +24,9 @@ function Sapphire.Revive:ReviveTeam()
 
     local revived_count = 0
 
-    -- 1. Revive local player from all down states (Bleedout, Fatal, Tased, Incapacitated, Arrested)
-    if alive(player) then
+    -- 1. Revive the local player from any down state
+    --    (Bleedout, Fatal, Tased, Incapacitated, Arrested).
+    do
         local char_dmg = player:character_damage()
         local current_state = managers.player and managers.player:current_state()
 
@@ -35,29 +46,19 @@ function Sapphire.Revive:ReviveTeam()
         end
     end
 
-    -- 2. Revive all player teammates and AI bots
+    -- 2. Revive downed AI teammate bots (TeamAIDamage supports host-side revive).
     local group_ai = (managers.groupai or managers.group_ai) and (managers.groupai or managers.group_ai):state()
     if group_ai then
-        local all_criminals = {}
-        for _, c in pairs(group_ai:all_player_criminals() or {}) do
-            if c and alive(c.unit) then table.insert(all_criminals, c.unit) end
-        end
         for _, c in pairs(group_ai:all_AI_criminals() or {}) do
-            if c and alive(c.unit) then table.insert(all_criminals, c.unit) end
-        end
-
-        for _, unit in pairs(all_criminals) do
+            local unit = c and c.unit
             if alive(unit) and unit ~= player then
                 local u_dmg = unit:character_damage()
-                if u_dmg then
+                -- Only act when the damage ext actually implements revive/need_revive
+                -- (TeamAIDamage does; a husk would not, and is skipped).
+                if u_dmg and u_dmg.revive and u_dmg.need_revive then
                     pcall(function()
-                        if u_dmg.need_revive and u_dmg:need_revive() then
+                        if u_dmg:need_revive() then
                             u_dmg:revive(player)
-                            revived_count = revived_count + 1
-                        elseif u_dmg._incapacitated or u_dmg._tased or (u_dmg.is_arrested and u_dmg:is_arrested()) then
-                            if u_dmg.revive then u_dmg:revive(player) end
-                            u_dmg._incapacitated = nil
-                            u_dmg._tased = nil
                             revived_count = revived_count + 1
                         end
                     end)
@@ -68,9 +69,9 @@ function Sapphire.Revive:ReviveTeam()
 
     if managers and managers.hud and managers.hud.show_hint then
         if revived_count > 0 then
-            managers.hud:show_hint({ text = "Sapphire+: Revived & restored " .. tostring(revived_count) .. " downed teammates!" })
+            managers.hud:show_hint({ text = "Sapphire+: Revived " .. tostring(revived_count) .. " (you + AI teammates)!" })
         else
-            managers.hud:show_hint({ text = "Sapphire+: All team members are already standing & healthy." })
+            managers.hud:show_hint({ text = "Sapphire+: You and your AI teammates are already up." })
         end
     end
 

@@ -75,7 +75,7 @@ InGameMenu._items = {
         num = "06",
         text = "Instant Team Revive",
         type = "action",
-        desc = "Instantly revives yourself and all downed human teammates and AI bot companions across the map.",
+        desc = "Instantly revives yourself and all downed AI bot companions across the map. Downed remote human players must be revived by their own client, so they are intentionally skipped.",
         action = function()
             if Sapphire.Revive and Sapphire.Revive.ReviveTeam then
                 Sapphire.Revive:ReviveTeam()

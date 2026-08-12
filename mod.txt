@@ -37,7 +37,15 @@
             "script_path": "hooks/CarryTweakData.lua"
         },
         {
+            "hook_id": "lib/units/props/carrydata",
+            "script_path": "hooks/CarryRestrictions.lua"
+        },
+        {
             "hook_id": "lib/managers/group_ai_states/groupaistatebase",
+            "script_path": "hooks/GroupAIStateBase.lua"
+        },
+        {
+            "hook_id": "lib/managers/mission/elementaiglobalevent",
             "script_path": "hooks/GroupAIStateBase.lua"
         },
         {

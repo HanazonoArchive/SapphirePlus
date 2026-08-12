@@ -11,10 +11,10 @@
 
 This report documents the design, architecture, decompiled engine research, and implementation methodology behind the **Sapphire+ v0.6.0 Expansion**. 
 
-Sapphire+ has evolved from a carry and stealth utility into a modular **tactical engine overhaul** for PAYDAY 2. The v0.6.0 update introduces **8 new major systems**:
+Sapphire+ has evolved from a carry and stealth utility into a modular **tactical engine overhaul** for PAYDAY 2. The v0.6.0 update introduces:
 * **4 Mid-Game Tactical In-Game Menu Actions** (Gage Package Collector, Army of Jokers, Custody Breakout, Corpse Cleaner).
-* **4 Persistent Mod Options & Gameplay Overhauls** (Ragdoll Space Program, 360 Omnidirectional Sprinting, Instant Melee Charge, Gas Mask & Anti-Flashbang).
-* **Updated Showcase Engine Data**: Refreshed showcase application data across all 28 feature modules in `docs/app.js`.
+* **360 Omnidirectional Sprinting** — a persistent gameplay overhaul that removes the vanilla sprint-direction angle limit.
+* A dedicated **God Mode** toggle (zeroes incoming bullet/melee damage), decoupled from "AI Can't Alarm" so invincibility is opt-in rather than a side effect of the alarm setting.
 
 ---
 
@@ -30,10 +30,7 @@ SapphirePlus/
 │   ├── CustodyActions.lua        [NEW] Bypasses assault break timers to instantly respawn teammates from custody
 │   └── CorpseActions.lua         [NEW] Silently sweeps and cleans all dead bodies and leftover body bags
 └── hooks/
-    ├── RagdollPhysics.lua        [NEW] Extreme upward/directional impulse physics on lethal enemy hits
-    ├── OmnidirectionalSprint.lua [NEW] Unlocks 360-degree sprinting at full speed in any direction
-    ├── InstantMelee.lua          [NEW] Instant 100% charged melee damage and knockdown on tap
-    └── FlashbangGasImmunity.lua  [NEW] Immunity against flashbang blinding screens and tear gas damage ticks
+    └── OmnidirectionalSprint.lua [NEW] Unlocks 360-degree sprinting at full speed in any direction
 ```
 
 ---
@@ -46,10 +43,10 @@ To seamlessly integrate the new modules without modifying vanilla game packages:
 |---|---|---|
 | [`core.lua`](file:///c:/Users/Hanazono/Desktop/CodingProjects/SapphirePlus/core.lua) | Bootstrap loader | Registered `dofile` calls for `GageActions.lua`, `JokerActions.lua`, `CustodyActions.lua`, and `CorpseActions.lua` before the in-game menu initialization. |
 | [`libs/InGameMenu.lua`](file:///c:/Users/Hanazono/Desktop/CodingProjects/SapphirePlus/libs/InGameMenu.lua) | GUI Modal | Expanded the menu items registry to 10 entries, dynamically adjusted modal card height to `540px`, refined typography and spacing, and wired execution triggers. |
-| [`libs/Config.lua`](file:///c:/Users/Hanazono/Desktop/CodingProjects/SapphirePlus/libs/Config.lua) | Configuration Defaults | Added default JSON configuration flags for `RagdollSpaceProgram`, `OmnidirectionalSprint`, `InstantMeleeCharge`, and `FlashbangGasImmunity`. |
-| [`libs/Utils.lua`](file:///c:/Users/Hanazono/Desktop/CodingProjects/SapphirePlus/libs/Utils.lua) | Normalization & Safe Mode | Added boolean normalization in `NormalizeSettings()`, mapping in `GetEffectiveSettings()`, and Safe Mode neutralizations. |
+| [`libs/Config.lua`](file:///c:/Users/Hanazono/Desktop/CodingProjects/SapphirePlus/libs/Config.lua) | Configuration Defaults | Added default JSON flags for `OmnidirectionalSprint` and `GodMode`; set `BagDamageReduction = 50` (numeric) and `Debug = false`; removed dead keys (`WalkSpeed`, `SprintSpeed`, `CrouchWithCarry`). |
+| [`libs/Utils.lua`](file:///c:/Users/Hanazono/Desktop/CodingProjects/SapphirePlus/libs/Utils.lua) | Normalization & Safe Mode | Added boolean normalization in `NormalizeSettings()`, mapping in `GetEffectiveSettings()`, and Safe Mode neutralizations. Centralized carry-modifier application into `Sapphire:ApplyCarryModifiers()` (single source of truth for `CarryTweakData`, `InteractionExt`, and the settings menu). |
 | [`hooks/MenuManager.lua`](file:///c:/Users/Hanazono/Desktop/CodingProjects/SapphirePlus/hooks/MenuManager.lua) | Single-Page Options UI | Added setting keys, `parse_item_value` handlers, localized titles and descriptions, and UI toggle widgets under precise priority bands. |
-| [`mod.txt`](file:///c:/Users/Hanazono/Desktop/CodingProjects/SapphirePlus/mod.txt) | SuperBLT Manifest | Registered the 4 new SuperBLT hook targets and bumped the project version string to `0.6.0`. |
+| [`mod.txt`](file:///c:/Users/Hanazono/Desktop/CodingProjects/SapphirePlus/mod.txt) | SuperBLT Manifest | Registered the `playerstandard` hook target for OmnidirectionalSprint (plus a second `elementaiglobalevent` registration for GroupAIStateBase load-order safety) and bumped the project version string to `0.6.0`. |
 | [`libs/Version.lua`](file:///c:/Users/Hanazono/Desktop/CodingProjects/SapphirePlus/libs/Version.lua) | Version Constant | Updated global version constant to `"0.6.0"`. |
 | [`docs/app.js`](file:///c:/Users/Hanazono/Desktop/CodingProjects/SapphirePlus/docs/app.js) | Showcase Website Logic | Added the `v0.6.0` Devlog entry and updated the `features` array with all 28 feature modules. |
 
@@ -89,32 +86,21 @@ To seamlessly integrate the new modules without modifying vanilla game packages:
   2. Executes `unit:set_slot(0)` on all corpse units, instantly freeing memory and removing the physical meshes.
   3. Scans `player_interactions` for loose `"corpse_dispose"` body bags and removes them as well.
 
-### 5. Ragdoll Space Program (`hooks/RagdollPhysics.lua`)
-* **The Problem:** Vanilla ragdoll physics have low impulse caps, making high-powered shotgun blasts and explosions feel underwhelming.
-* **The Implementation:**
-  1. Hooks `CopDamage:die(variant, ...)`.
-  2. On death, iterates across all physical rigid bodies (`self._unit:num_bodies()`).
-  3. Applies a massive launch vector combining randomized horizontal spread with a strong upward bias: `Vector3(rand_x, rand_y, 1.2):normalized() * 45000`.
-  4. Calls `body:push_at(body:mass() * 40, body:position(), impulse)` to launch enemies flying through windows, ceilings, and open air.
-
-### 6. 360 Sprinting (Omnidirectional) (`hooks/OmnidirectionalSprint.lua`)
+### 5. 360 Sprinting (Omnidirectional) (`hooks/OmnidirectionalSprint.lua`)
 * **The Problem:** Vanilla PAYDAY 2 checks the angle between your camera look vector and your movement direction; moving sideways or backwards immediately forces the player to walk.
 * **The Implementation:**
-  1. Hooks `PlayerStandard:_can_run()`.
-  2. When `effective.OmnidirectionalSprint` is enabled, checks if `self._move_dir` exists and verifies that the player is not currently aiming down sights (`in_steelsight`) or crouching (`ducking`).
-  3. Returns `true`, allowing seamless sprint momentum regardless of directional angle.
+  1. Hooks `PlayerStandard:_can_run_directional()` — verified in `logs/FunctionsDump.txt`. (`_can_run` does **not** exist on `PlayerStandard`; hooking it would silently do nothing and is intentionally avoided.)
+  2. When `effective.Enabled and effective.OmnidirectionalSprint`, returns `true`, removing only the movement-direction angle limit.
+  3. Ducking and steelsight are enforced by separate engine checks and continue to interrupt sprint independently, so this override never lets you sprint while crouched or aiming.
+  4. Guarded with a `PlayerStandard._sapphire_omnisprint_hooked` idempotency flag plus a presence check on the original method.
 
-### 7. Instant Melee Charge (`hooks/InstantMelee.lua`)
-* **The Problem:** Maximum melee damage and knockdown requires holding down the melee key for 1.5–2.5 seconds.
+### 6. God Mode (`hooks/PlayerDamage.lua`)
+* **The Problem:** Invincibility was previously an undocumented side effect of the "AI Can't Alarm" toggle, so players could not enable one without the other.
 * **The Implementation:**
-  1. Hooks `PlayerStandard:_get_melee_charge_lerp_value(t, offset, ...)`.
-  2. Returns `1.0` immediately, guaranteeing maximum charged damage multiplier, reach, and guaranteed knockdown on a simple tap.
-
-### 8. Gas Mask & Anti-Flashbang (`hooks/FlashbangGasImmunity.lua`)
-* **The Problem:** Flashbang grenades cause persistent whiteout screens and disruptive ear-ringing sounds, while Captain Winters and SWAT tear gas forces continuous damage ticks.
-* **The Implementation:**
-  1. Hooks `PlayerDamage:on_flashbanged(sound_eff_mul, duration, ...)` and returns immediately with zero side-effects.
-  2. Hooks `PlayerDamage:damage_tear_gas(attack_data, ...)` and returns `false`, nullifying all choke damage and screen distortion.
+  1. God Mode sets the engine's **native `_god_mode` invincibility flag**, honored at the top of *every* damage entry point (`damage_bullet`, `damage_melee`, `damage_explosion`, `damage_fire`, `damage_tase`, `damage_fall`, `damage_killzone`, `damage_simple`) — full invincibility instead of the previous bullet+melee-only coverage.
+  2. The flag is re-enforced every frame from a `PlayerDamage:update` PostHook as `_god_mode = Global.god_mode or (Enabled and GodMode)`, so it survives respawns and live toggling and never clobbers the game's own console/scripted god mode when our toggle is off (`_god_mode`'s only vanilla writers are `init`, which seeds from `Global.god_mode`, and `set_god_mode`, which sets both).
+  3. `BagDamageReduction` is applied separately by an `apply_bag_damage_reduction(attack_data)` helper on the `damage_bullet` / `damage_melee` detours (mutation lands before the vanilla damage math); a re-entrancy guard stops it double-applying when `damage_melee` re-enters through `damage_bullet`. `damage_fall` returns `false` for No Fall Damage.
+  4. God Mode is a dedicated cheat-tier toggle, fully decoupled from `AICantAlarm`, and is neutralized by Safe Mode when joining as a multiplayer client.
 
 ---
 
@@ -123,12 +109,13 @@ To seamlessly integrate the new modules without modifying vanilla game packages:
 To ensure **zero guesswork** and eliminate runtime crashes:
 
 1. **`Payday-2-LuaJIT-Complete` GitHub Archive**:
-   - `lib/units/enemies/cop/copdamage.lua` — Verified `CopDamage:die()` signature, body indexing, and `body:push_at()`.
-   - `lib/units/beings/player/states/playerstandard.lua` — Verified `_can_run()`, `_move_dir`, and `_get_melee_charge_lerp_value()`.
-   - `lib/units/beings/player/playerdamage.lua` — Verified `on_flashbanged()` and `damage_tear_gas()` return contracts.
-   - `lib/managers/group_ai_states/groupaistatebase.lua` — Verified `convert_hostage_to_criminal()` parameters.
+   - `lib/units/beings/player/states/playerstandard.lua` — Verified `_can_run_directional()` exists and `_can_run()` does **not**.
+   - `lib/units/beings/player/playerdamage.lua` — Verified the native `_god_mode` flag is honored at every damage entry point (only vanilla writers: `init` seeds from `Global.god_mode`, `set_god_mode` sets both), and the `damage_bullet()` / `damage_melee()` `attack_data.damage` contract used by Bag Shield (`damage_melee` re-enters through `damage_bullet` at :1189).
+   - `lib/managers/group_ai_states/groupaistatebase.lua` — Verified `convert_hostage_to_criminal()` parameters and the `on_police_called` / `ElementAiGlobalEvent:on_executed` scripted-alarm flow.
    - `lib/managers/trademanager.lua` — Verified `clbk_respawn_criminal()` and custody candidate tables.
    - `lib/managers/gageassignmentmanager.lua` — Verified `gage_assignment*` tweak IDs and interaction hooks.
+   - `lib/managers/blackmarketmanager.lua` — Verified the suspicion-offset getters return a 3-tuple `(value, max_reached, min_reached)` = `(val, index == 1, index == #concealment - 1)`, and that `get_real_armor_concealment` / `get_armor_concealment` do not exist.
+   - `lib/units/props/timergui.lua` — Verified `_start` / `_set_jamming_values` / `set_jammed` exist and `set_timer` does **not**.
 2. **Local Class Dumps (`logs/FunctionsDump.txt` & `logs/playermanager.lua`)**:
    - Cross-referenced live in-engine method existence and table structures.
 3. **SuperBLT Core Documentation (`superblt.znix.xyz`)**:
@@ -139,7 +126,7 @@ To ensure **zero guesswork** and eliminate runtime crashes:
 ## 6. Architectural Thought & Design Decisions
 
 ### 1. The UNIX Philosophy (Modularity & Single Responsibility)
-Instead of creating large monolithic scripts that combine multiple features, each feature resides in its own isolated file (`GageActions.lua`, `JokerActions.lua`, `RagdollPhysics.lua`). If one file encounters an unexpected edge case, it cannot crash or corrupt other modules.
+Instead of creating large monolithic scripts that combine multiple features, each feature resides in its own isolated file (`GageActions.lua`, `JokerActions.lua`, `CorpseActions.lua`). If one file encounters an unexpected edge case, it cannot crash or corrupt other modules.
 
 ### 2. The Effective Settings Pattern (`Sapphire:GetEffectiveSettings()`)
 No hook reads `Sapphire.Settings` directly. Instead, all features query `Sapphire:GetEffectiveSettings()`:
@@ -148,7 +135,7 @@ No hook reads `Sapphire.Settings` directly. Instead, all features query `Sapphir
 
 ### 3. Multiplayer Safe Mode Protection
 To protect users against anti-cheat bans, kicks, or game-breaking desyncs when joining public lobbies hosted by other players:
-* When Safe Mode is active as a client, all 4 tactical actions and the 4 cheat-tier toggles are automatically neutralized.
+* When Safe Mode is active as a client, every in-game tactical-menu action (each guards on `effective.SafeModeActive`) and all cheat-tier toggles are automatically neutralized.
 * Speed and interaction multipliers are capped to safe, vanilla-like desync thresholds (`InteractionSpeedReduction <= 25%`, `ExtendedInteract <= 1.25x`, `JumpHeight <= 1.1x`).
 
 ### 4. Non-Destructive Hooking with Fallbacks
@@ -163,9 +150,10 @@ Rather than burying settings inside multi-level submenus, `hooks/MenuManager.lua
 
 | Checkpoint | Status | Details |
 |---|---|---|
-| **Syntax & Table Validation** | **PASSED** | All 14 modified/created Lua files passed static integrity checks. |
-| **SuperBLT Manifest Check** | **PASSED** | All 18 hooks registered with correct internal class paths in `mod.txt`. |
-| **Safe Mode Neutralization** | **PASSED** | Tactical actions and combat cheats neutralized when client in multiplayer. |
-| **Website & Devlog Sync** | **PASSED** | `docs/app.js` updated with v0.6.0 devlog and all 28 feature modules rendered. |
+| **Syntax & Table Validation** | **PASSED** | All Lua hook and library files parse and passed static integrity checks. |
+| **SuperBLT Manifest Check** | **PASSED** | 22 hook registrations (18 unique hook scripts) with correct internal class paths in `mod.txt`. |
+| **Signature Verification** | **PASSED** | Every hooked engine method verified against decompiled source; dead hooks (`_can_run`, `TimerGui:set_timer`, `CopBrain:set_data`, `get_*_armor_concealment`, `clbk_jam` / `clbk_power_cut`, `tape_loop_duration_2`) removed. |
+| **Idempotency Hardening** | **PASSED** | Dual-registered raw-detour files (GroupAIStateBase, DrillOverhaul, AutoCooker, UnlimitedFavors) and class-scoped detours (DLCManager, MinDetectionRisk, OmnidirectionalSprint) guarded against double-wrapping. |
+| **Safe Mode Neutralization** | **PASSED** | Tactical actions and cheat-tier toggles (including the now-independent God Mode) neutralized when a client in multiplayer. |
 
-**Sapphire+ v0.6.0 is complete, stable, and ready for deployment.**
+**Sapphire+ v0.6.0 is audited, hardened, and stable.**

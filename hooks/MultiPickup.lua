@@ -26,10 +26,43 @@ local function is_managed_special(name)
     return true
 end
 
-local function apply_multi_pickup_tweaks()
-    local effective = Sapphire:GetEffectiveSettings()
-    if not effective.Enabled or not effective.MultiPickup then return end
+local function restore_multi_pickup_tweaks()
     if not tweak_data then return end
+
+    -- Put back the vanilla stacking caps / equipment blocks we overwrote. Without
+    -- this, max_quantity = 999 and the stripped special_equipment_block leak into
+    -- the vanilla pickup path after the feature is toggled off, so consumables stay
+    -- infinitely stackable even with MultiPickup disabled.
+    if Sapphire.VanillaSpecialQuantities and tweak_data.equipments and tweak_data.equipments.specials then
+        for name, saved in pairs(Sapphire.VanillaSpecialQuantities) do
+            local data = tweak_data.equipments.specials[name]
+            if data then
+                data.max_quantity = saved.max_quantity
+                data.quantity = saved.quantity
+            end
+        end
+    end
+
+    if Sapphire.VanillaInteractionBlocks and tweak_data.interaction then
+        for int_name, saved_block in pairs(Sapphire.VanillaInteractionBlocks) do
+            local int_data = tweak_data.interaction[int_name]
+            if int_data then
+                int_data.special_equipment_block = saved_block
+            end
+        end
+    end
+end
+
+local function apply_multi_pickup_tweaks()
+    if not tweak_data then return end
+
+    local effective = Sapphire:GetEffectiveSettings()
+    -- When the feature is off (master disabled, per-feature off, or clamped by Safe
+    -- Mode) undo our edits instead of leaving the buffed values behind.
+    if not effective.Enabled or not effective.MultiPickup then
+        restore_multi_pickup_tweaks()
+        return
+    end
 
     -- 1. Patch tweak_data.equipments.specials
     if tweak_data.equipments and tweak_data.equipments.specials then
@@ -40,16 +73,18 @@ local function apply_multi_pickup_tweaks()
                 if not Sapphire.VanillaSpecialQuantities[name] then
                     Sapphire.VanillaSpecialQuantities[name] = {
                         max_quantity = data.max_quantity,
-                        quantity = data.quantity,
-                        amount = data.amount
+                        quantity = data.quantity
                     }
                     Sapphire:Log("MultiPickup: Managed consumable special registered: " .. tostring(name))
                 end
 
-                -- Ensure quantity and max_quantity exist for counting & HUD badges
+                -- Ensure quantity and max_quantity exist for counting & HUD badges.
+                -- max_quantity is the real hold-cap lever the engine reads in
+                -- _can_pickup_special_equipment; tweak_data.amount is never read by
+                -- the engine, so we do not touch it (the live per-player amount is
+                -- tracked on self._equipment.specials[name].amount instead).
                 data.quantity = data.quantity or 1
                 data.max_quantity = 999
-                data.amount = 999
             end
         end
     end
@@ -90,6 +125,12 @@ end
 
 -- Apply tweaks on load and when PlayerManager initializes
 apply_multi_pickup_tweaks()
+
+-- Re-sync on any live settings change (menu toggle) so switching MultiPickup off
+-- mid-heist restores the vanilla caps instead of leaving them buffed.
+if Sapphire.RegisterLiveApply then
+    Sapphire:RegisterLiveApply(apply_multi_pickup_tweaks)
+end
 
 Hooks:PostHook(PlayerManager, "_setup", "Sapphire_MultiPickup_PlayerManagerSetup", function(self)
     apply_multi_pickup_tweaks()
@@ -150,7 +191,6 @@ Hooks:PreHook(PlayerManager, "add_special", "Sapphire_MultiPickup_AddSpecialPre"
         local eq = tweak_data.equipments.specials[name]
         eq.quantity = eq.quantity or 1
         eq.max_quantity = 999
-        eq.amount = 999
     end
 
     -- If the player already holds this item but amount was nil (uncounted), initialize it to 1

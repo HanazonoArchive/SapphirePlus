@@ -128,11 +128,18 @@ local function restore_power(unit)
     end)
 end
 
--- Hook ObjectInteractionManager to protect circuit breaker / fuse box power
-if ObjectInteractionManager then
+-- Hook ObjectInteractionManager to protect circuit breaker / fuse box power.
+-- This file is registered on both the dialogmanager and objectinteractionmanager
+-- hook_ids, so it runs twice. Each class block is guarded for idempotency to
+-- avoid double-wrapping the raw detours.
+if ObjectInteractionManager and not ObjectInteractionManager._sapphire_autocook_hooked then
+    ObjectInteractionManager._sapphire_autocook_hooked = true
+
     local orig_add_unit = ObjectInteractionManager.add_unit
     function ObjectInteractionManager:add_unit(unit, ...)
-        orig_add_unit(self, unit, ...)
+        if orig_add_unit then
+            orig_add_unit(self, unit, ...)
+        end
 
         local current_effective = Sapphire:GetEffectiveSettings()
         if current_effective.Enabled and current_effective.AutoCooker then
@@ -151,7 +158,9 @@ if ObjectInteractionManager then
 end
 
 -- Hook DialogManager to intercept cooking cues instantly
-if DialogManager then
+if DialogManager and not DialogManager._sapphire_autocook_hooked then
+    DialogManager._sapphire_autocook_hooked = true
+
     local orig_queue_dialog = DialogManager.queue_dialog
     function DialogManager:queue_dialog(id, ...)
         local current_effective = Sapphire:GetEffectiveSettings()
@@ -163,6 +172,8 @@ if DialogManager then
                 end)
             end
         end
-        return orig_queue_dialog(self, id, ...)
+        if orig_queue_dialog then
+            return orig_queue_dialog(self, id, ...)
+        end
     end
 end

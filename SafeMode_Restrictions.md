@@ -28,6 +28,7 @@ When you join another player's hosted lobby as a client (assuming Safe Mode is e
 
 ### 1. No Go (Disabled Completely)
 These features are considered unfair advantages in a standard lobby and are entirely disabled when joining:
+- **God Mode** (Full invincibility — always neutralized as a client)
 - **Instant Interaction Timer** (No Interaction Cooldown)
 - **Infinite Stamina**
 - **No Fall Damage**
@@ -35,7 +36,7 @@ These features are considered unfair advantages in a standard lobby and are enti
 - **No Weapon Restrictions** (Heavy bags will restrict weapons as normal)
 - **Auto-Answer Pagers**
 - **Affect Body Bags**
-- **AI Can't Alarm** (Includes God Mode)
+- **AI Can't Alarm**
 
 ### 2. Acceptable but Regulated (Capped)
 These features are allowed but heavily throttled to look like normal network desync or minor latency rather than blatant cheating:

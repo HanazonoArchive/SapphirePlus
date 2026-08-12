@@ -147,9 +147,17 @@ function Sapphire.Jokers:ConvertAll()
                         brain:set_logic("intimidated")
                     end
 
-                    -- 2. Convert to player's criminal team
+                    -- 2. Convert to player's criminal team.
+                    -- IMPORTANT: call WITHOUT peer_unit. convert_hostage_to_criminal
+                    -- reads the minion cap two different ways
+                    -- (groupaistatebase.lua:5081): with a peer_unit it reads
+                    -- peer_unit:base():upgrade_value(...), which our hook does NOT
+                    -- cover, so the real cap (0 without the skill) applies and the
+                    -- conversion silently fails. With no peer_unit it reads
+                    -- managers.player:upgrade_value(...), which our hook forces to
+                    -- 999, so the conversion always succeeds.
                     if group_ai_state then
-                        group_ai_state:convert_hostage_to_criminal(unit, player)
+                        group_ai_state:convert_hostage_to_criminal(unit)
                     end
 
                     -- 3. Apply friendly contour outline once converted

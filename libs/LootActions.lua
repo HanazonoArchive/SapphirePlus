@@ -244,12 +244,6 @@ function Sapphire.Loot:SecureAllBags()
         secure_unit(unit)
     end
 
-    -- Sweep world units
-    local world_units = World:find_units_quick("all", 1)
-    for _, unit in pairs(world_units) do
-        secure_unit(unit)
-    end
-
     if secured_count > 0 then
         self:Notify("Sapphire+: Secured " .. tostring(secured_count) .. " loot bags directly into the secure zone!")
     else

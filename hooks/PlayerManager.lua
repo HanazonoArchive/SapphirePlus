@@ -2,24 +2,14 @@ dofile(ModPath .. "core.lua")
 
 Sapphire:Log("PlayerManager hook loaded.")
 
--- ============================================================
--- Weapon restriction bypass
--- ============================================================
-local orig_set_carry = PlayerManager.set_carry
-function PlayerManager:set_carry(carry_id, ...)
-    local effective = Sapphire:GetEffectiveSettings()
-    if effective.Enabled and effective.NoWeaponRestrictions and carry_id then
-        local ct = tweak_data and tweak_data.carry and tweak_data.carry.types and tweak_data.carry.types[carry_id]
-        if ct then
-            local was = ct.weapon_category_fallback
-            ct.weapon_category_fallback = nil
-            local result = orig_set_carry and orig_set_carry(self, carry_id, ...)
-            ct.weapon_category_fallback = was
-            return result
-        end
-    end
-    return orig_set_carry and orig_set_carry(self, carry_id, ...)
-end
+-- NOTE: NoWeaponRestrictions is NOT implemented here. PAYDAY 2 has no
+-- "can't fire while carrying" restriction on the carry tweak (`carry.types`
+-- carries only move/jump/run/throw modifiers -- there is no
+-- `weapon_category_fallback` field anywhere in the engine), so a set_carry
+-- override was a pure no-op. The real, verifiable behavior the setting maps to --
+-- carried body bags being auto-disposed the moment enemies go weapons-hot -- is
+-- handled by hooks/CarryRestrictions.lua, which detours
+-- CarryData._register_remove_on_weapons_hot.
 
 -- ============================================================
 -- Armor movement penalty bypass
