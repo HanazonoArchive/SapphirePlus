@@ -3,26 +3,43 @@ dofile(ModPath .. "core.lua")
 Sapphire:Log("MinDetectionRisk hook loaded.")
 
 -- ============================================================
--- MINIMUM DETECTION RISK (Always 3 Detection)
+-- MINIMUM DETECTION RISK (Always Detection Risk 3 / 0 offset)
 -- ============================================================
--- Forces the player's detection risk and suspicion offset to
--- the absolute engine minimum (0.0 offset = Detection Risk 3).
+-- Forces the player's suspicion offset to the engine minimum
+-- (0.0 = Detection Risk 3).
 --
--- Overrides:
---   1. BlackMarketManager:get_suspicion_offset_of_local -> returns 0
---   2. BlackMarketManager:get_suspicion_offset_from_custom_data -> returns 0
---   3. BlackMarketManager:_calculate_suspicion_offset -> returns 0
---   4. BlackMarketManager:get_real_armor_concealment -> returns 30 (suit)
---   5. BlackMarketManager:get_armor_concealment -> returns 30 (suit)
+-- Signatures verified against decompiled source
+-- (lib/managers/blackmarketmanager.lua):
+--   get_suspicion_offset_of_local(lerp, ignore_armor_kit)
+--       -> returns (val:number, max_reached:bool, min_reached:bool)
+--       where max_reached = (index == 1)                       [lowest concealment / MAX suspicion]
+--       and   min_reached = (index == #concealment - 1)        [near-highest concealment / MIN suspicion]
+--   get_suspicion_offset_from_custom_data(data, lerp)
+--       -> returns the same (val, max_reached, min_reached) tuple
+--   _calculate_suspicion_offset(index, lerp) -> returns (val:number)
+--
+-- The two public getters MUST return the full 3-tuple; the concealment
+-- UI reads the 2nd/3rd values to color/flag the readout. At full
+-- concealment (0 suspicion) the correct flags are max_reached=false,
+-- min_reached=true -- returning them inverted paints the "0" readout in
+-- the max-detection warning color.
+--
+-- NOTE: get_real_armor_concealment / get_armor_concealment do NOT
+-- exist in the engine (verified: zero hits tree-wide) and are not
+-- needed -- concealment feeds suspicion through the index math
+-- above, which we already zero out.
 -- ============================================================
 
-if BlackMarketManager then
+if BlackMarketManager and not BlackMarketManager._sapphire_mindetect_hooked then
+    BlackMarketManager._sapphire_mindetect_hooked = true
+
     local orig_get_suspicion_offset_of_local = BlackMarketManager.get_suspicion_offset_of_local
     if orig_get_suspicion_offset_of_local then
         function BlackMarketManager:get_suspicion_offset_of_local(...)
             local effective = Sapphire:GetEffectiveSettings()
             if effective.Enabled and effective.MinDetectionRisk then
-                return 0
+                -- 0 suspicion; max_reached=false, min_reached=true (fully concealed)
+                return 0, false, true
             end
             return orig_get_suspicion_offset_of_local(self, ...)
         end
@@ -30,12 +47,12 @@ if BlackMarketManager then
 
     local orig_get_suspicion_offset_from_custom_data = BlackMarketManager.get_suspicion_offset_from_custom_data
     if orig_get_suspicion_offset_from_custom_data then
-        function BlackMarketManager:get_suspicion_offset_from_custom_data(custom_data, ...)
+        function BlackMarketManager:get_suspicion_offset_from_custom_data(...)
             local effective = Sapphire:GetEffectiveSettings()
             if effective.Enabled and effective.MinDetectionRisk then
-                return 0
+                return 0, false, true
             end
-            return orig_get_suspicion_offset_from_custom_data(self, custom_data, ...)
+            return orig_get_suspicion_offset_from_custom_data(self, ...)
         end
     end
 
@@ -47,28 +64,6 @@ if BlackMarketManager then
                 return 0
             end
             return orig_calculate_suspicion_offset(self, ...)
-        end
-    end
-
-    local orig_get_real_armor_concealment = BlackMarketManager.get_real_armor_concealment
-    if orig_get_real_armor_concealment then
-        function BlackMarketManager:get_real_armor_concealment(...)
-            local effective = Sapphire:GetEffectiveSettings()
-            if effective.Enabled and effective.MinDetectionRisk then
-                return 30
-            end
-            return orig_get_real_armor_concealment(self, ...)
-        end
-    end
-
-    local orig_get_armor_concealment = BlackMarketManager.get_armor_concealment
-    if orig_get_armor_concealment then
-        function BlackMarketManager:get_armor_concealment(...)
-            local effective = Sapphire:GetEffectiveSettings()
-            if effective.Enabled and effective.MinDetectionRisk then
-                return 30
-            end
-            return orig_get_armor_concealment(self, ...)
         end
     end
 

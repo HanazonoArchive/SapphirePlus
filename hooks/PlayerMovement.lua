@@ -7,7 +7,7 @@ function PlayerMovement:_change_stamina(value)
     local effective = Sapphire:GetEffectiveSettings()
     if effective.Enabled and effective.InfiniteStamina then
         -- If value is negative (stamina drain) and player is carrying a bag, cancel the drain
-        if value < 0 and managers.player and managers.player:is_carrying() then
+        if value and value < 0 and managers.player and managers.player:is_carrying() then
             return
         end
     end

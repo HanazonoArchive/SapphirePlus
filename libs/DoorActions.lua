@@ -65,20 +65,11 @@ function Sapphire.Doors:UnlockAll()
         interact_unit(unit)
     end
 
-    local world_units = World:find_units_quick("all", 1)
-    for _, unit in pairs(world_units) do
-        interact_unit(unit)
-    end
-
     -- PASS 2: 0.12s later, open any door handles or second leaves that unlocked from Pass 1
     DelayedCalls:Add("Sapphire_DoorPass2", 0.12, function()
         if not alive(player) then return end
         local current_interactables = managers.interaction and managers.interaction._interactive_units or {}
         for _, unit in pairs(current_interactables) do
-            interact_unit(unit)
-        end
-        local current_world = World:find_units_quick("all", 1)
-        for _, unit in pairs(current_world) do
             interact_unit(unit)
         end
     end)

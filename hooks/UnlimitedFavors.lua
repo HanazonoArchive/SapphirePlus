@@ -16,7 +16,12 @@ Sapphire:Log("UnlimitedFavors hook loaded.")
 --   3. MoneyManager:get_preplanning_type_cost → return 0 (free $)
 -- ============================================================
 
-if PrePlanningManager then
+-- This file is registered on both the preplanningmanager and moneymanager
+-- hook_ids, so it runs twice. Each class block is guarded for idempotency to
+-- avoid double-wrapping the raw detours.
+if PrePlanningManager and not PrePlanningManager._sapphire_favors_hooked then
+    PrePlanningManager._sapphire_favors_hooked = true
+
     local orig_get_type_budget_cost = PrePlanningManager.get_type_budget_cost
     function PrePlanningManager:get_type_budget_cost(type, ...)
         local effective = Sapphire:GetEffectiveSettings()
@@ -44,7 +49,9 @@ if PrePlanningManager then
     Sapphire:Log("UnlimitedFavors: PrePlanningManager overrides applied.")
 end
 
-if MoneyManager then
+if MoneyManager and not MoneyManager._sapphire_favors_hooked then
+    MoneyManager._sapphire_favors_hooked = true
+
     local orig_preplanning_cost = MoneyManager.get_preplanning_type_cost
     function MoneyManager:get_preplanning_type_cost(type, ...)
         local effective = Sapphire:GetEffectiveSettings()

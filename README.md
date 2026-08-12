@@ -25,8 +25,9 @@ All features are fully configurable in-game and protected by an intelligent mult
 * **Affect Body Bags:** Optionally applies all carry sprint, jump, and movement multipliers directly to civilian and guard body bags.
 * **Ignore Armor Movement Penalties:** Removes agility, stamina drain, and movement speed penalties when wearing heavy ballistic vests and the Improved Combined Tactical Vest (ICTV).
 * **No Fall Damage:** Eliminates fall damage when jumping from roofs, balconies, or crane platforms while carrying loot.
-* **Bag Damage Absorption:** Configurable damage reduction (0% to 100%) while actively carrying a loot bag.
-* **Infinite Stamina:** Sprints indefinitely without depleting your character's stamina pool.
+* **Bag Damage Absorption (Bag Shield):** Configurable damage reduction (0% to 100%) applied while actively carrying a loot bag.
+* **God Mode (Invincible):** Zeroes all incoming bullet and melee damage. A dedicated cheat-tier toggle, independent of "AI Can't Alarm"; automatically disabled by Safe Mode when joining as a multiplayer client.
+* **Infinite Stamina:** Prevents stamina drain **while carrying a loot bag**, so you never slow to a walk mid-carry. (It does not remove stamina drain when you are not carrying.)
 
 ### Quality of Life & Pre-Planning
 * **Unlimited Pre-Planning Favors:** Removes pre-planning favor budget limits and sets asset favor and offshore cash costs to $0. Purchase every asset and escape route without restriction.
@@ -45,7 +46,7 @@ Sapphire+ includes an automated **Safe Mode** system designed to prevent anti-ch
 |---|---|---|
 | **Singleplayer / Offline** | Inactive | All features and maximum multipliers are fully unlocked. |
 | **Lobby Host** | Inactive | The host has full control over all modules and multipliers. |
-| **Multiplayer Client** | **ACTIVE** | Cheat-tier features (AI Can't Alarm, Instant Interactions, Infinite Stamina, Unlimited Favors) are automatically neutralized. Interaction distance and bag throw multipliers are capped to safe, desync-tolerant thresholds. |
+| **Multiplayer Client** | **ACTIVE** | Cheat-tier features (God Mode, AI Can't Alarm, Instant Interactions, Infinite Stamina, Unlimited Favors) are automatically neutralized. Interaction distance and bag throw multipliers are capped to safe, desync-tolerant thresholds. |
 
 *You can also force Safe Mode permanently for host sessions via the in-game settings menu.*
 

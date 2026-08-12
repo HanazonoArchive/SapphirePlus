@@ -6,35 +6,25 @@ Sapphire:Log("DrillOverhaul hook loaded.")
 -- DRILL OVERHAUL: No Breakdowns & Instant Drills
 -- ============================================================
 -- 1. Drills Never Jam (DrillNoJams):
---    - Blocks TimerGui:_set_jamming_values from scheduling breakdown checkpoints.
---    - Blocks TimerGui:set_jammed, TimerGui:_set_jammed, and Drill:set_jammed
---      from entering the broken state.
+--    - Empties TimerGui._jamming_values so no breakdown checkpoints are scheduled.
+--    - Blocks TimerGui:set_jammed / TimerGui:_set_jammed / Drill:set_jammed
+--      from entering the jammed state.
 --    - Failsafe in TimerGui:update to instantly clear any forced script jams.
 -- 2. Instant Drills (InstantDrills):
---    - Automatically implies Drills Never Jam.
---    - Sets timer to 0.01s in TimerGui:set_timer, TimerGui:_start, and TimerGui:start.
---    - Ensures zero jamming values so the drill finishes in a split second cleanly.
+--    - Implies Drills Never Jam.
+--    - Forces the timer to 0.01s in TimerGui:_start and TimerGui:start
+--      (verified: TimerGui:_start does `self._timer = timer or 5`, so a small
+--      timer value takes effect). TimerGui:set_timer does NOT exist in the
+--      engine and is intentionally not hooked.
+--
+-- This file is registered on both the timergui and drill hook_ids, so it runs
+-- twice. Each class block is guarded for idempotency to avoid double-wrapping
+-- the raw detours.
 -- ============================================================
 
 -- Hook TimerGui (lib/units/props/timergui)
-if TimerGui then
-    local orig_timergui_set_timer = TimerGui.set_timer
-    if orig_timergui_set_timer then
-        function TimerGui:set_timer(timer, ...)
-            local effective = Sapphire:GetEffectiveSettings()
-            if effective.Enabled and effective.InstantDrills then
-                timer = 0.01
-            end
-
-            local res = orig_timergui_set_timer(self, timer, ...)
-
-            if effective.Enabled and (effective.DrillNoJams or effective.InstantDrills) then
-                self._jamming_values = {}
-            end
-
-            return res
-        end
-    end
+if TimerGui and not TimerGui._sapphire_drill_hooked then
+    TimerGui._sapphire_drill_hooked = true
 
     local orig_timergui_start = TimerGui._start
     if orig_timergui_start then
@@ -129,7 +119,11 @@ if TimerGui then
 end
 
 -- Hook Drill (lib/units/props/drill)
-if Drill then
+-- Only Drill:set_jammed exists on the Drill class; clbk_jam / clbk_power_cut
+-- do NOT exist in the engine (verified) and are not hooked.
+if Drill and not Drill._sapphire_drill_hooked then
+    Drill._sapphire_drill_hooked = true
+
     local orig_drill_set_jammed = Drill.set_jammed
     if orig_drill_set_jammed then
         function Drill:set_jammed(jammed, ...)
@@ -138,28 +132,6 @@ if Drill then
                 return
             end
             return orig_drill_set_jammed(self, jammed, ...)
-        end
-    end
-
-    local orig_drill_clbk_jam = Drill.clbk_jam
-    if orig_drill_clbk_jam then
-        function Drill:clbk_jam(...)
-            local effective = Sapphire:GetEffectiveSettings()
-            if effective.Enabled and (effective.DrillNoJams or effective.InstantDrills) then
-                return
-            end
-            return orig_drill_clbk_jam(self, ...)
-        end
-    end
-
-    local orig_drill_clbk_power_cut = Drill.clbk_power_cut
-    if orig_drill_clbk_power_cut then
-        function Drill:clbk_power_cut(...)
-            local effective = Sapphire:GetEffectiveSettings()
-            if effective.Enabled and (effective.DrillNoJams or effective.InstantDrills) then
-                return
-            end
-            return orig_drill_clbk_power_cut(self, ...)
         end
     end
 

@@ -16,21 +16,45 @@ Sapphire:Log("InfiniteCameraLoop hook loaded.")
 
 local INFINITE_DURATION = 99999
 
-local function apply_camera_tweak_data()
-    local effective = Sapphire:GetEffectiveSettings()
-    if not effective.Enabled or not effective.InfiniteCameraLoop then return end
-
+local function player_upgrades()
     if tweak_data and tweak_data.upgrades and tweak_data.upgrades.values and tweak_data.upgrades.values.player then
-        if tweak_data.upgrades.values.player.tape_loop_duration then
-            tweak_data.upgrades.values.player.tape_loop_duration = { INFINITE_DURATION, INFINITE_DURATION }
-        end
-        if tweak_data.upgrades.values.player.tape_loop_duration_2 then
-            tweak_data.upgrades.values.player.tape_loop_duration_2 = { INFINITE_DURATION, INFINITE_DURATION }
-        end
+        return tweak_data.upgrades.values.player
+    end
+    return nil
+end
+
+-- Apply or restore the tape-loop duration tweak. Restoring matters because the
+-- vanilla SecurityCamera:_start_tape_loop_by_upgrade_level path reads this value
+-- directly -- leaving it at 99999 after the feature is toggled off would keep
+-- camera loops effectively permanent even with the mod's detour disabled.
+local function apply_camera_tweak_data()
+    local player_upg = player_upgrades()
+    if not player_upg or player_upg.tape_loop_duration == nil then return end
+
+    -- Capture the true vanilla duration once, before we ever overwrite it.
+    if Sapphire.VanillaTapeLoopDuration == nil and type(player_upg.tape_loop_duration) == "table" then
+        local copy = {}
+        for i, n in ipairs(player_upg.tape_loop_duration) do copy[i] = n end
+        Sapphire.VanillaTapeLoopDuration = copy
+    end
+
+    local effective = Sapphire:GetEffectiveSettings()
+    if effective.Enabled and effective.InfiniteCameraLoop then
+        player_upg.tape_loop_duration = { INFINITE_DURATION, INFINITE_DURATION }
+    elseif Sapphire.VanillaTapeLoopDuration then
+        local restored = {}
+        for i, n in ipairs(Sapphire.VanillaTapeLoopDuration) do restored[i] = n end
+        player_upg.tape_loop_duration = restored
     end
 end
 
 apply_camera_tweak_data()
+
+-- Re-sync on any live settings change so toggling InfiniteCameraLoop off mid-heist
+-- restores the vanilla loop duration.
+if Sapphire.RegisterLiveApply then
+    Sapphire:RegisterLiveApply(apply_camera_tweak_data)
+end
 
 local function suppress_hud_clutter(unit)
     if not alive(unit) then return end

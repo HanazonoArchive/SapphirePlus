@@ -15,7 +15,7 @@ end
 Hooks:PostHook(CopBrain, "post_init", "Sapphire_RandomPagers", function(self)
     local effective = Sapphire:GetEffectiveSettings()
 
-    if not effective.RandomPagers then
+    if not effective.Enabled or (not effective.RandomPagers and not effective.AutoAnswerPagers) then
         return
     end
     if not self._unit or not alive(self._unit) then
@@ -53,15 +53,9 @@ Hooks:PostHook(CopBrain, "post_init", "Sapphire_RandomPagers", function(self)
     self._Sapphire_pager_pending = true
 end)
 
+-- Applied on the next brain update tick. CopBrain:set_data does not exist in the
+-- engine (verified against decompiled source), so update is the sole finalizer.
 Hooks:PostHook(CopBrain, "update", "Sapphire_RandomPagersApply", function(self, unit, t, dt)
-    if not self._Sapphire_pager_pending then
-        return
-    end
-    disable_pager(self._unit)
-    self._Sapphire_pager_pending = nil
-end)
-
-Hooks:PostHook(CopBrain, "set_data", "Sapphire_RandomPagersFinalize", function(self, data)
     if not self._Sapphire_pager_pending then
         return
     end

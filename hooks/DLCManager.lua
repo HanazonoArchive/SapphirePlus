@@ -67,18 +67,23 @@ local function unlock_dlcs(dlc_data)
     return unlocked_dlcs_cache and unlocked_dlcs_cache[dlc_data] or false
 end
 
-old_steam_check = old_steam_check or WinSteamDLCManager._check_dlc_data
-old_epic_check = old_epic_check or WinEpicDLCManager._check_dlc_data
-old_win_check = old_win_check or WINDLCManager._check_dlc_data
+-- Detour _check_dlc_data on each platform DLC manager that actually exists on
+-- this install. A Steam client has no WinEpicDLCManager (and vice versa), so we
+-- must guard every class -- indexing a nil manager would crash the mod. Origins
+-- are captured per-class and the detour is idempotent (safe if this file is ever
+-- evaluated more than once), and nothing leaks into the global namespace.
+local function install_check(manager)
+    if not manager or not manager._check_dlc_data then return end
+    if manager._sapphire_dlc_hooked then return end
+    manager._sapphire_dlc_hooked = true
 
-function WinSteamDLCManager:_check_dlc_data(dlc_data)
-    return unlock_dlcs(dlc_data) or old_steam_check(self, dlc_data)
+    local orig_check = manager._check_dlc_data
+    function manager:_check_dlc_data(dlc_data)
+        return unlock_dlcs(dlc_data) or orig_check(self, dlc_data)
+    end
 end
 
-function WinEpicDLCManager:_check_dlc_data(dlc_data)
-    return unlock_dlcs(dlc_data) or old_epic_check(self, dlc_data)
-end
+install_check(rawget(_G, "WinSteamDLCManager"))
+install_check(rawget(_G, "WinEpicDLCManager"))
+install_check(rawget(_G, "WINDLCManager"))
 
-function WINDLCManager:_check_dlc_data(dlc_data)
-    return unlock_dlcs(dlc_data) or old_win_check(self, dlc_data)
-end

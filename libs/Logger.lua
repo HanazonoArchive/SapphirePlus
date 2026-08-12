@@ -1,9 +1,9 @@
 function Sapphire:Log(message)
     local settings = self.Settings or {}
-    if settings.Debug == false then
-        return
-    end
 
+    -- Always persist to the log file: this mod's main failure mode is a SuperBLT
+    -- hook silently not loading, and the on-disk log is the only way to confirm
+    -- which hooks ran. The Debug flag gates only the (noisy) console echo.
     local path = self.ModPath .. "logs/Sapphire+.log"
 
     local file = io.open(path, "a")

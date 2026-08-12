@@ -40,20 +40,20 @@ SapphirePlus
     ├── MenuManager.lua         # Single-page Mod Options UI, localization, widgets
     ├── PlayerManager.lua       # Carry stats, bag throwing, interaction hooks
     ├── CarryTweakData.lua      # Carry weights, speeds, jump multipliers
-    ├── CopBrain.lua            # AI alert, pager removal & detection overrides
-    ├── PlayerMovement.lua      # Movement speed & stamina drain hooks
-    ├── PlayerDamage.lua        # Fall damage, health, god mode hooks
+    ├── CopBrain.lua            # Random pager removal (post_init + update ticks)
+    ├── PlayerMovement.lua      # Stamina drain suppression while carrying
+    ├── PlayerDamage.lua        # God mode, bag damage reduction, fall damage
     ├── InteractionExt.lua      # Range multipliers, interaction speed reduction
     ├── UnlimitedFavors.lua     # Pre-planning budget & cost overrides
     ├── MultiPickup.lua         # Consumable specials stacking (keycards, planks, C4)
     ├── InfiniteCameraLoop.lua  # Camera loop duration override (99,999s) & EHI sync
-    ├── MinDetectionRisk.lua    # Concealment & suspicion offset override (Risk 3)
+    ├── MinDetectionRisk.lua    # Suspicion offset override (Risk 3 / 0.0 offset)
     ├── DrillOverhaul.lua       # Anti-jamming logic & instant 0.01s timers
     ├── AutoCooker.lua          # Automated Bain & Locke meth lab chemical detection
-    ├── RagdollPhysics.lua      # Amplified ragdoll death impulse physics
+    ├── GroupAIStateBase.lua    # AI Can't Alarm (whisper-mode alarm suppression)
+    ├── DLCManager.lua          # DLC heist host-unlock ownership overrides
     ├── OmnidirectionalSprint.lua # 360-degree sprinting in any direction
-    ├── InstantMelee.lua        # 100% charged melee damage and knockdown on tap
-    └── FlashbangGasImmunity.lua# Flashbang blinding and tear gas damage immunity
+    └── CrashFixes.lua          # Diesel vehicle animation callback crash guard
 ```
 
 ---
@@ -309,20 +309,22 @@ dofile(ModPath .. "libs/MyNewActionActions.lua")
 | Game System | Internal Class | SuperBLT `hook_id` | Notes & Key Methods |
 |---|---|---|---|
 | **Player Equipment & Carry** | `PlayerManager` | `lib/managers/playermanager` | `add_special`, `can_pickup_equipment`, `current_carry_id` |
-| **Black Market / Concealment** | `BlackMarketManager` | `lib/managers/blackmarketmanager` | `get_suspicion_offset_of_local`, `get_real_armor_concealment` |
+| **Black Market / Detection** | `BlackMarketManager` | `lib/managers/blackmarketmanager` | `get_suspicion_offset_of_local`, `get_suspicion_offset_from_custom_data`, `_calculate_suspicion_offset` *(offset getters return a 3-tuple `value, max_reached, min_reached` = `val, index == 1, index == #concealment - 1`; `get_real_armor_concealment` / `get_armor_concealment` do **NOT** exist)* |
 | **Pre-planning & Favors** | `PrePlanningManager` | `lib/managers/preplanningmanager` | `get_type_budget_cost`, `can_reserve_mission_element` |
 | **Money & Purchases** | `MoneyManager` | `lib/managers/moneymanager` | `get_preplanning_type_cost`, `can_afford_preplanning_type` |
-| **Security Cameras** | `SecurityCamera` | `lib/units/props/securitycamera` | `_start_tape_loop` *(In props, NOT cameras)* |
+| **Security Cameras** | `SecurityCamera` | `lib/units/props/securitycamera` | `_start_tape_loop`, `_start_tape_loop_by_upgrade_level`, `start_tape_loop` *(in props, NOT cameras; EHI reads `tweak_data.upgrades.values.player.tape_loop_duration`)* |
 | **World Interactions** | `BaseInteractionExt` | `lib/units/interactions/interactionext` | `can_select`, `can_interact`, `_get_timer`, `interact_distance` |
-| **Enemy AI & Detection** | `CopBrain` / `GroupAI` | `lib/units/enemies/cop/copbrain`<br>`lib/managers/group_ai_states/groupaistatebase` | `clbk_death`, `on_alarm_pager_interaction`, `convert_hostage_to_criminal` |
-| **Enemy Damage & Ragdolls** | `CopDamage` | `lib/units/enemies/cop/copdamage` | `die`, `damage_bullet`, `damage_explosion`, `_dismember` |
-| **Player Movement & Stances** | `PlayerMovement`<br>`PlayerStandard` | `lib/units/beings/player/playermovement`<br>`lib/units/beings/player/states/playerstandard` | `_can_run`, `_get_melee_charge_lerp_value`, `warp_to` |
-| **Player Damage & Health** | `PlayerDamage` | `lib/units/beings/player/playerdamage` | `damage_bullet`, `damage_fall`, `on_flashbanged`, `damage_tear_gas` |
+| **Meth Lab Cook Cues** | `ObjectInteractionManager` | `lib/managers/objectinteractionmanager` | `add_unit` (AutoCooker chemical-unit detection) |
+| **Enemy AI & Pagers** | `CopBrain` | `lib/units/enemies/cop/copbrain` | `post_init`, `update` (random pager removal) *(`CopBrain:set_data` does **NOT** exist — the pending flag is finalized on the next `update` tick)* |
+| **Enemy AI & Alarm** | `GroupAIStateBase`<br>`ElementAiGlobalEvent` | `lib/managers/group_ai_states/groupaistatebase`<br>`lib/managers/mission/elementaiglobalevent` | `on_police_called`, `convert_hostage_to_criminal`; `ElementAiGlobalEvent:on_executed` (tags scripted loud transitions) |
+| **Player Movement & Stances** | `PlayerMovement`<br>`PlayerStandard` | `lib/units/beings/player/playermovement`<br>`lib/units/beings/player/states/playerstandard` | `PlayerMovement:_change_stamina`; `PlayerStandard:_can_run_directional` *(`_can_run` does **NOT** exist)* |
+| **Player Damage & Health** | `PlayerDamage` | `lib/units/beings/player/playerdamage` | `damage_bullet`, `damage_melee`, `damage_fall` (God Mode, bag shield, no-fall) |
 | **DLC Ownership** | `DLCManager` | `lib/managers/dlcmanager` | `_check_dlc_data` |
-| **Drills & Saws** | `TimerGui` / `Drill` | `lib/units/props/timergui`<br>`lib/units/props/drill` | `_set_jamming_values`, `set_jammed`, `set_timer` |
+| **Drills & Saws** | `TimerGui` / `Drill` | `lib/units/props/timergui`<br>`lib/units/props/drill` | `_start`, `_set_jamming_values`, `_set_jammed` *(`set_timer` does **NOT** exist)* |
 | **Meth Lab Dialog** | `DialogManager` | `lib/managers/dialogmanager` | `queue_dialog` (Bain & Locke chemical cue routing) |
-| **Custody & Trades** | `TradeManager` | `lib/managers/trademanager` | `clbk_respawn_criminal`, `begin_hostage_trade` |
-| **Gage Packages** | `GageAssignmentManager`| `lib/managers/gageassignmentmanager`| `on_unit_interacted` |
+| **Engine Crash Guards** | `AnimatedVehicleBase` | `lib/units/vehicles/animatedvehiclebase` | `anim_clbk_recall_pose` (guards nil `_saved_poses`) |
+| **Custody & Trades** | `TradeManager` | `lib/managers/trademanager` | `clbk_respawn_criminal`, `begin_hostage_trade` *(used by `CustodyActions`, not a SuperBLT hook)* |
+| **Gage Packages** | `GageAssignmentManager`| `lib/managers/gageassignmentmanager`| `on_unit_interacted` *(referenced by `GageActions`, not a SuperBLT hook)* |
 
 ---
 
@@ -334,9 +336,11 @@ The single-page menu in `hooks/MenuManager.lua` uses explicit `priority` bands (
 |---|---|---|---|
 | **Core Settings** | `900 - 999` | `Sapphire_header_core` (`999`) | `Enabled` (998), `SafeMode` (997), `ForceSafeModeHost` (996), `Debug` (995) |
 | **Carry & Movement** | `700 - 899` | `Sapphire_header_carry` (`899`) | `AlwaysSprint` (898), `JumpHeight` (897), `ThrowDistance` (896), `AffectBodyBags` (895), `IgnoreArmorPenalty` (894), `NoWeaponRestrictions` (893), `OmnidirectionalSprint` (892) |
-| **Quality of Life** | `500 - 699` | `Sapphire_header_qol` (`699`) | `InteractionSpeedReduction` (698), `InfiniteStamina` (697), `BagDamageReduction` (696), `NoFallDamage` (695), `ExtendedInteract` (694), `DrillNoJams` (693), `InstantDrills` (692), `AutoCooker` (691), `InstantMeleeCharge` (690), `FlashbangGasImmunity` (689) |
+| **Quality of Life** | `500 - 699` | `Sapphire_header_qol` (`699`) | `InteractionSpeedReduction` (698), `InfiniteStamina` (697), `BagDamageReduction` (696), `GodMode` (695.5), `NoFallDamage` (695), `ExtendedInteract` (694), `DrillNoJams` (693), `InstantDrills` (692) |
 | **Stealth Tools** | `300 - 499` | `Sapphire_header_stealth` (`499`) | `AICantAlarm` (498), `MultiPickup` (497), `InfiniteCameraLoop` (496), `MinDetectionRisk` (495), `RandomPagers` (494), `RandomPagerChance` (493), `AutoAnswerPagers` (492) |
-| **Extras** | `100 - 299` | `Sapphire_header_extras` (`299`) | `UnlockDLCHeists` (298), `UnlimitedFavors` (297), `RagdollSpaceProgram` (296) |
+| **Extras** | `100 - 299` | `Sapphire_header_extras` (`299`) | `UnlockDLCHeists` (298), `UnlimitedFavors` (297) |
+
+> **Note:** `AutoCooker` has **no widget on this BLT options page** — its toggle lives in the **in-game tactical menu** (`libs/InGameMenu.lua`, item `04 Auto-Cooker`), alongside the tactical actions. It is deliberately force-reset to `false` on every mission `init` (`hooks/AutoCooker.lua`) so it never auto-persists across heists; the player re-arms it per-heist from the tactical menu.
 
 ---
 

@@ -73,12 +73,6 @@ function Sapphire.Gage:CollectAll()
         end
     end
 
-    -- 3. Sweep world units
-    local world_units = World:find_units_quick("all", 1)
-    for _, unit in pairs(world_units) do
-        collect_unit(unit)
-    end
-
     if managers and managers.hud and managers.hud.show_hint then
         if collected_count > 0 then
             managers.hud:show_hint({ text = "Sapphire+: Collected " .. tostring(collected_count) .. " Gage Courier packages!" })
