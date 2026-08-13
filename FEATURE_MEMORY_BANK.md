@@ -111,6 +111,7 @@ PlayerDamage:damage_bullet(attack_data) -- Handles bullet damage from enemies
 PlayerDamage:damage_melee(attack_data) -- Handles melee attacks (cloakers, cops)
 PlayerDamage:damage_fall(data) -- Handles gravity impact calculations
 PlayerDamage:damage_explosion(attack_data) -- Handles grenades and explosive barrels
+PlayerDamage:on_flashbanged(sound_eff_mul) -- Triggers flashbang whiteout blindness and ear ringing
 PlayerDamage:need_revive() -- Returns true if in bleedout, fatal, or incapacitated state
 PlayerDamage:revive(revive_unit) -- Restores player to standing health
 PlayerDamage:set_god_mode(enabled) -- Engine invulnerability toggle
@@ -124,9 +125,14 @@ PlayerDamage:set_god_mode(enabled) -- Engine invulnerability toggle
 NewRaycastWeaponBase:recoil_multiplier() -- Recoil kick multiplier (0 = zero recoil)
 NewRaycastWeaponBase:spread_multiplier() -- Bullet deviation spread (0 = laser beam)
 NewRaycastWeaponBase:fire_rate_multiplier() -- Rate of fire multiplier
+NewRaycastWeaponBase:reload_speed_multiplier() -- Reload animation speed multiplier
+RaycastWeaponBase:reload_speed_multiplier() -- Base weapon reload speed multiplier
 RaycastWeaponBase:get_ammo_max() -- Max ammo capacity (digested)
 RaycastWeaponBase:get_ammo_total() -- Total ammo remaining
 RaycastWeaponBase:set_ammo_total(ammo) -- Sets total ammo pool directly
+RaycastWeaponBase:clip_empty() -- Returns false & keeps clip full when InfiniteAmmo is active
+RaycastWeaponBase:replenish() -- Instantly refills clip and total ammo capacity
+tweak_data.weapon[id].CAN_TOGGLE_FIREMODE -- Unlocks full auto toggles on pistols/shotguns/DMRs
 ```
 
 ---
@@ -356,6 +362,7 @@ PlayerDriving:_check_action_exit_vehicle(t, input) -- Vehicle exit state
 3. **Tie All Civilians**: Injects `surrender` brain logic and `tied` state directly, bypassing intimidation delays.
 4. **Instant Team Revive**: Revives self via `player:character_damage():revive(true)` and squad via `unit:character_damage():revive(player)`.
 5. **Wipe All Enemies**: Sets `unit:brain():set_active(false)`, despawns via `unit:set_slot(0)`, and shuts down cameras.
+6. **Restock All Supplies**: Restores player health, armor, all weapon ammo via `replenish()`, grenades, cable ties, and body bags to 100% capacity.
 
 ---
 
@@ -398,6 +405,13 @@ SentryGunBase:on_death() -- Triggered when sentry unit runs out of health
 ```lua
 ProjectileBase.throw_projectile(projectile_type, pos, dir) -- Spawns thrown projectile with velocity vector
 ProjectileBase:clbk_impact(...) -- Collision and detonation trigger
+PlayerManager:has_grenades() -- Checks if player has grenades/throwables
+PlayerManager:on_throw_grenade() -- Decrements grenade count upon throwing
+PlayerManager:has_cable_ties() -- Checks if player has cable ties
+PlayerManager:remove_cable_ties(amount) -- Decrements cable tie count
+PlayerManager:has_total_body_bags() -- Checks if player has body bags
+PlayerManager:remove_body_bags_amount(amount) -- Decrements body bag count
+PlayerStandard:_get_swap_speed_multiplier() -- Calculates weapon switching animation multiplier
 ```
 
 ---

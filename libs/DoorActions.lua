@@ -1,81 +1,67 @@
 Sapphire.Doors = Sapphire.Doors or {}
 
-local function is_unlockable_door(tweak)
-    if not tweak then return false end
-    local t = tostring(tweak):lower()
-    return t:find("^pick_lock") or t:find("^keycard") or t:find("^security_station") or
-           t:find("^suburbia_iron_gate") or t:find("^cage_door") or t:find("^open_door") or
-           t:find("^open_train_door") or t:find("^timelock_panel") or t:find("^cut_fence") or
-           t:find("^lockpick") or t:find("^hack_suburbia") or t:find("^hold_open_vent") or
-           t:find("^open_slash_close_act") or t:find("^door_double") or t:find("^press_open")
+function Sapphire.Doors:Notify(text)
+    if managers and managers.hud and managers.hud.show_hint then
+        managers.hud:show_hint({ text = text })
+    end
+    if managers and managers.chat and managers.chat.feed_system_message and ChatManager then
+        pcall(function()
+            managers.chat:feed_system_message(ChatManager.GAME, text)
+        end)
+    end
+    Sapphire:Log(text)
 end
 
-function Sapphire.Doors:UnlockAll()
-    local player = managers.player and managers.player:player_unit()
-    if not alive(player) then return end
-
+-- ============================================================
+-- UNLOCK ALL DOORS & GATES (Tactical Action 15)
+-- ============================================================
+-- Sweeps all interactive door units, keycard readers, security
+-- stations, and barred gates across the map and unlocks them instantly.
+--
+-- Neutralized in Safe Mode when joining as a client.
+-- ============================================================
+function Sapphire.Doors:UnlockAllDoors()
     local effective = Sapphire:GetEffectiveSettings()
     if effective.SafeModeActive then
-        if managers and managers.hud and managers.hud.show_hint then
-            managers.hud:show_hint({ text = "Sapphire+: Unlock All Doors is disabled in Safe Mode." })
-        end
+        self:Notify("Sapphire+: Unlock All Doors is disabled in Safe Mode.")
         return
     end
 
-    local count = 0
-    local processed_keys = {}
+    local player = managers.player and managers.player:player_unit()
+    if not alive(player) then
+        self:Notify("Sapphire+: Player unit not available.")
+        return
+    end
 
-    local function interact_unit(unit)
-        if not alive(unit) or not unit.interaction or not unit:interaction() or not unit:interaction():active() then
-            return
-        end
-        local tweak = unit:interaction().tweak_data
-        if is_unlockable_door(tweak) then
-            pcall(function()
+    local unlocked_count = 0
+    pcall(function()
+        local interactables = managers.interaction and managers.interaction._interactive_units or {}
+        for _, unit in pairs(interactables) do
+            if alive(unit) and unit:interaction() then
                 local interaction = unit:interaction()
-                local orig_can_interact = interaction.can_interact
-                local t_data = interaction._tweak_data
-                local orig_equip = t_data and t_data.special_equipment
-                local orig_block = t_data and t_data.special_equipment_block
-                if t_data then
-                    t_data.special_equipment = nil
-                    t_data.special_equipment_block = nil
+                local is_active = (not interaction.active or interaction:active()) and not interaction._disabled
+                if is_active then
+                    local tweak = tostring(interaction.tweak_data or ""):lower()
+                    if tweak:find("^pick_lock") or tweak:find("^door_") or tweak == "open_door" or
+                       tweak:find("^keycard") or tweak == "numpad_keycard" or
+                       tweak:find("^security_station") or tweak:find("^c4") or
+                       tweak == "hold_open_door" or tweak == "hold_open_vault" or
+                       tweak == "open_slash_close_act" or tweak == "open_slash_close_sec_box" then
+                        pcall(function()
+                            interaction:interact(player)
+                            unlocked_count = unlocked_count + 1
+                        end)
+                    end
                 end
-                interaction.can_interact = function() return true end
-
-                interaction:interact(player)
-
-                if t_data then
-                    t_data.special_equipment = orig_equip
-                    t_data.special_equipment_block = orig_block
-                end
-                interaction.can_interact = orig_can_interact
-
-                if not processed_keys[unit:key()] then
-                    processed_keys[unit:key()] = true
-                    count = count + 1
-                end
-            end)
-        end
-    end
-
-    -- PASS 1: Unlock all security keypads, lockpicks, cut fences, and primary latches
-    local all_interactables = managers.interaction and managers.interaction._interactive_units or {}
-    for _, unit in pairs(all_interactables) do
-        interact_unit(unit)
-    end
-
-    -- PASS 2: 0.12s later, open any door handles or second leaves that unlocked from Pass 1
-    DelayedCalls:Add("Sapphire_DoorPass2", 0.12, function()
-        if not alive(player) then return end
-        local current_interactables = managers.interaction and managers.interaction._interactive_units or {}
-        for _, unit in pairs(current_interactables) do
-            interact_unit(unit)
+            end
         end
     end)
 
-    if managers and managers.hud and managers.hud.show_hint then
-        managers.hud:show_hint({ text = "Sapphire+: Unlocked & opened " .. tostring(count) .. " doors, keycard readers & security gates!" })
+    if unlocked_count > 0 then
+        self:Notify("Sapphire+: Unlocked " .. tostring(unlocked_count) .. " doors, gates, and security readers!")
+    else
+        self:Notify("Sapphire+: No locked doors or security gates found.")
     end
-    Sapphire:Log("Unlocked " .. tostring(count) .. " doors (2-pass execution).")
+
+    Sapphire:Log("UnlockAllDoors unlocked: " .. tostring(unlocked_count))
 end

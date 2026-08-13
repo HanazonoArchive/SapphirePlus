@@ -28,6 +28,9 @@ SapphirePlus
 │   ├── JokerActions.lua        # Minion limit bypass & instant cop conversion into Jokers
 │   ├── CustodyActions.lua      # Teammate custody breakout & instant hostage trade
 │   ├── CorpseActions.lua       # Silent corpse despawn & body bag cleanup
+│   ├── SupplyActions.lua       # Full replenish of health, armor, ammo, grenades, ties, bags
+│   ├── DrillActions.lua        # Fix and finish all active drills, saws & hacking devices
+│   ├── DoorActions.lua         # Map-wide door, gate, keycard reader & security cage unlocker
 │   └── InGameMenu.lua          # Fullscreen overlay modal GUI & keyboard navigation
 ├── logs/
 │   ├── FunctionsDump.txt       # Local dump of live in-game class functions
@@ -40,9 +43,10 @@ SapphirePlus
     ├── MenuManager.lua         # Single-page Mod Options UI, localization, widgets
     ├── PlayerManager.lua       # Carry stats, bag throwing, interaction hooks
     ├── CarryTweakData.lua      # Carry weights, speeds, jump multipliers
+    ├── CarryRestrictions.lua  # Prevents body bag auto-removal on weapons hot
     ├── CopBrain.lua            # Random pager removal (post_init + update ticks)
     ├── PlayerMovement.lua      # Stamina drain suppression while carrying
-    ├── PlayerDamage.lua        # God mode, bag damage reduction, fall damage
+    ├── PlayerDamage.lua        # God mode, bag shield, no fall damage, anti-flashbang, fast regen
     ├── InteractionExt.lua      # Range multipliers, interaction speed reduction
     ├── UnlimitedFavors.lua     # Pre-planning budget & cost overrides
     ├── MultiPickup.lua         # Consumable specials stacking (keycards, planks, C4)
@@ -53,6 +57,16 @@ SapphirePlus
     ├── GroupAIStateBase.lua    # AI Can't Alarm (whisper-mode alarm suppression)
     ├── DLCManager.lua          # DLC heist host-unlock ownership overrides
     ├── OmnidirectionalSprint.lua # 360-degree sprinting in any direction
+    ├── MeleeOverhaul.lua       # 100% full-charge damage on quick melee tap
+    ├── WeaponSway.lua          # Stance breathing amplitude zeroing (no sway)
+    ├── FastReload.lua          # 2.5x weapon magazine and shotgun reload speed
+    ├── MaskUpOverhaul.lua      # Instant mask-up in casing mode (0.05s)
+    ├── SentryOverhaul.lua      # Invulnerable player-placed sentry guns
+    ├── WeaponCombat.lua        # Infinite ammo, zero recoil, zero spread
+    ├── FireModeOverhaul.lua    # Full-auto firemode toggle on all weapons
+    ├── PlayerInventoryHooks.lua # Infinite cable ties, infinite body bags, infinite throwables
+    ├── WeaponSwapOverhaul.lua  # 3x fast weapon switching animation speed
+    ├── LifecycleManager.lua    # Async task cleanup on heist restart
     └── CrashFixes.lua          # Diesel vehicle animation callback crash guard
 ```
 

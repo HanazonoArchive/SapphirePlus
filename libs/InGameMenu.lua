@@ -141,6 +141,54 @@ InGameMenu._items = {
                 Sapphire.Corpses:CleanAll()
             end
         end
+    },
+    {
+        id = "restock_supplies",
+        num = "12",
+        text = "Restock All Supplies",
+        type = "action",
+        desc = "Instantly replenishes player health, armor, weapon ammunition, throwables/grenades, cable ties, and body bags to 100% maximum capacity.",
+        action = function()
+            if Sapphire.Supplies and Sapphire.Supplies.Restock then
+                Sapphire.Supplies:Restock()
+            end
+        end
+    },
+    {
+        id = "fix_speed_drills",
+        num = "13",
+        text = "Fix & Finish All Drills",
+        type = "action",
+        desc = "Instantly unjams and fast-forwards all active drills, thermal saws, timelocks, and hacking panels across the entire map.",
+        action = function()
+            if Sapphire.Drills and Sapphire.Drills.FixAndSpeedAll then
+                Sapphire.Drills:FixAndSpeedAll()
+            end
+        end
+    },
+    {
+        id = "open_deposit_boxes",
+        num = "14",
+        text = "Open All Deposit Boxes & ATMs",
+        type = "action",
+        desc = "Instantly unlocks and pops open all safe deposit boxes, ATMs, lockers, and security cages across the entire heist map.",
+        action = function()
+            if Sapphire.Loot and Sapphire.Loot.OpenAllDepositBoxes then
+                Sapphire.Loot:OpenAllDepositBoxes()
+            end
+        end
+    },
+    {
+        id = "disable_alarm_lasers",
+        num = "15",
+        text = "Disable All Alarm Lasers",
+        type = "action",
+        desc = "Instantly deactivates all mission laser triggers, tripwires, and security sensor grids across the heist map.",
+        action = function()
+            if Sapphire.Lasers and Sapphire.Lasers.DisableAllLasers then
+                Sapphire.Lasers:DisableAllLasers()
+            end
+        end
     }
 }
 
@@ -190,8 +238,8 @@ function InGameMenu:Open()
     })
 
     -- 3. CENTERED PREMIUM MODAL CARD
-    local card_w = 580
-    local card_h = 560
+    local card_w = 600
+    local card_h = 700
     local card_x = (full_panel:w() - card_w) / 2
     local card_y = (full_panel:h() - card_h) / 2
 

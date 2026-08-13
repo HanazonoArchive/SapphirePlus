@@ -1,7 +1,7 @@
-# Sapphire+ Comprehensive Technical & Architecture Report (v0.6.0)
+# Sapphire+ Comprehensive Technical & Architecture Report (v1.0.0 Milestone)
 
 **Project:** Sapphire+ (PAYDAY 2 SuperBLT Overhaul)  
-**Version:** `v0.6.0` (Tactical & Mayhem Expansion)  
+**Version:** `v1.0.0` (20 New Verified Features Milestone)  
 **Author:** YRH / Antigravity AI  
 **Date:** August 2026  
 
@@ -9,28 +9,64 @@
 
 ## 1. Executive Summary
 
-This report documents the design, architecture, decompiled engine research, and implementation methodology behind the **Sapphire+ v0.6.0 Expansion**. 
+This report documents the completed implementation of the **20 New Verified Features Roadmap** across 4 systematic batches, elevating Sapphire+ to a comprehensive tactical engine overhaul for PAYDAY 2:
 
-Sapphire+ has evolved from a carry and stealth utility into a modular **tactical engine overhaul** for PAYDAY 2. The v0.6.0 update introduces:
-* **4 Mid-Game Tactical In-Game Menu Actions** (Gage Package Collector, Army of Jokers, Custody Breakout, Corpse Cleaner).
-* **360 Omnidirectional Sprinting** — a persistent gameplay overhaul that removes the vanilla sprint-direction angle limit.
-* A dedicated **God Mode** toggle (zeroes incoming bullet/melee damage), decoupled from "AI Can't Alarm" so invincibility is opt-in rather than a side effect of the alarm setting.
+### Batch 1 (Features 1 to 5):
+* **Anti-Flashbang Shield** (`hooks/PlayerDamage.lua`) — Complete suppression of whiteout flashes, screen shake, and tinnitus audio ringing.
+* **Instant Full-Charge Melee** (`hooks/MeleeOverhaul.lua`) — Instant maximum melee damage and knockdown on quick tap.
+* **No Weapon Sway & Bobbing** (`hooks/WeaponSway.lua`) — Laser-steady crosshairs by zeroing stance breathing amplitudes.
+* **Tactical Action 12: Restock All Supplies** (`libs/SupplyActions.lua`) — Refills 100% health, armor, all ammo, grenades, ties, and bags.
+* **Async Lifecycle Safety Manager** (`hooks/LifecycleManager.lua`) — Clean async task garbage collection on heist restarts.
+
+### Batch 2 (Features 6 to 10):
+* **Fast Weapon Reload (2.5x)** (`hooks/FastReload.lua`) — 2.5x reload animation speed multiplier across all firearms.
+* **Instant Mask On** (`hooks/MaskUpOverhaul.lua`) — Equips mask instantly in casing mode without the 2-second hold.
+* **Instant Armor Recovery** (`hooks/PlayerDamage.lua`) — Zeroes armor regeneration delay the instant combat stops.
+* **Sentry Gun Invulnerability** (`hooks/SentryOverhaul.lua`) — Invulnerable player-placed sentries against bullets, fire, and explosions.
+* **Tactical Action 13: Fix & Finish All Drills** (`libs/DrillActions.lua`) — Unjams and fast-forwards all active drills and timelocks map-wide.
+
+### Batch 3 (Features 11 to 15):
+* **Infinite Weapon Ammo** (`hooks/WeaponCombat.lua`) — Keeps weapon magazine 100% full upon firing with zero reload downtime.
+* **No Weapon Recoil** (`hooks/WeaponCombat.lua`) — Removes 100% of vertical and horizontal camera recoil kick.
+* **No Bullet Spread (Laser Beam)** (`hooks/WeaponCombat.lua`) — Eliminates all bullet cone deviation for pinpoint accuracy.
+* **All Weapons Full Auto** (`hooks/FireModeOverhaul.lua`) — Unlocks full-automatic firemode toggles on pistols, DMRs, and shotguns.
+* **Tactical Action 14: Open All Deposit Boxes & ATMs** (`libs/LootActions.lua`) — Instantly pops open all bank deposit boxes, ATMs, and lockers map-wide.
+
+### Batch 4 (Features 16 to 20):
+* **Infinite Cable Ties** (`hooks/PlayerInventoryHooks.lua`) — Unlimited civilian hostage ties in stealth and loud.
+* **Infinite Body Bags** (`hooks/PlayerInventoryHooks.lua`) — Unlimited guard body packaging in stealth operations.
+* **Infinite Throwables & Grenades** (`hooks/PlayerInventoryHooks.lua`) — Unlimited grenades, molotovs, and throwables.
+* **Fast Weapon Swap (3x Speed)** (`hooks/WeaponSwapOverhaul.lua`) — Triples weapon switching animation speed.
+* **Tactical Action 15: Disable All Alarm Lasers & Sensors** (`libs/LaserActions.lua`) — Instantly deactivates all mission laser triggers, tripwires, and sensor grids map-wide.
 
 ---
 
-## 2. What We Added (New Files & Modules)
-
-Following the **UNIX Philosophy** (every file does one specific task and does it exceptionally well), all new mechanics were written into dedicated, single-responsibility files:
+## 2. Full Architecture & Modules Overview
 
 ```
 SapphirePlus/
 ├── libs/
-│   ├── GageActions.lua           [NEW] Instantly sweeps and collects all hidden Gage Courier packages
-│   ├── JokerActions.lua          [NEW] Bypasses minion limits & auto-converts all active cops into Jokers
-│   ├── CustodyActions.lua        [NEW] Bypasses assault break timers to instantly respawn teammates from custody
-│   └── CorpseActions.lua         [NEW] Silently sweeps and cleans all dead bodies and leftover body bags
+│   ├── LaserActions.lua          [NEW] Map-wide alarm laser, tripwire & security sensor deactivator
+│   ├── DoorActions.lua           [NEW] Map-wide door, gate, keycard reader & security cage unlocker
+│   ├── DrillActions.lua          [NEW] Unjams and fast-forwards all active drills, saws & hacking panels
+│   ├── SupplyActions.lua         [NEW] Instantly refills health, armor, weapon ammo, grenades, ties & bags
+│   ├── LootActions.lua           [EXPANDED] Added OpenAllDepositBoxes for map-wide ATM/vault opening
+│   ├── GageActions.lua           Instantly sweeps and collects all hidden Gage Courier packages
+│   ├── JokerActions.lua          Bypasses minion limits & auto-converts all active cops into Jokers
+│   ├── CustodyActions.lua        Bypasses assault break timers to instantly respawn teammates from custody
+│   └── CorpseActions.lua         Silently sweeps and cleans all dead bodies and leftover body bags
 └── hooks/
-    └── OmnidirectionalSprint.lua [NEW] Unlocks 360-degree sprinting at full speed in any direction
+    ├── WeaponCombat.lua          [NEW] Infinite ammo, zero recoil, zero bullet cone spread
+    ├── FireModeOverhaul.lua      [NEW] Unlocks full-auto firemode toggling across all weapons
+    ├── PlayerInventoryHooks.lua  [NEW] Infinite cable ties, infinite body bags, infinite throwables
+    ├── WeaponSwapOverhaul.lua    [NEW] 3x fast weapon switching animation speed
+    ├── FastReload.lua            [NEW] 2.5x weapon reload speed multiplier
+    ├── MaskUpOverhaul.lua        [NEW] Instant mask equipping in casing mode (0.05s)
+    ├── SentryOverhaul.lua        [NEW] Invulnerable player-placed sentry guns
+    ├── MeleeOverhaul.lua         [NEW] Unlocks instant 100% full-charge damage on quick melee tap
+    ├── WeaponSway.lua            [NEW] Eliminates breathing sway & camera stance shake for laser precision
+    ├── LifecycleManager.lua      [NEW] Flushes and cancels active async DelayedCalls on level start/restart
+    └── OmnidirectionalSprint.lua Unlocks 360-degree sprinting at full speed in any direction
 ```
 
 ---

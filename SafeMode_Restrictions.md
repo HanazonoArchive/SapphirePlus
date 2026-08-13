@@ -29,11 +29,26 @@ When you join another player's hosted lobby as a client (assuming Safe Mode is e
 ### 1. No Go (Disabled Completely)
 These features are considered unfair advantages in a standard lobby and are entirely disabled when joining:
 - **God Mode** (Full invincibility — always neutralized as a client)
+- **Anti-Flashbang Shield** (Immunity to flashbang blindness and ringing)
+- **Instant Full-Charge Melee** (100% full charged melee on instant tap)
+- **Fast Weapon Reload** (2.5x reload speed acceleration)
+- **Instant Mask On** (Zero mask-up delay in casing mode)
+- **Instant Armor Recovery** (Zero armor regeneration delay)
+- **Sentry Gun Invulnerability** (Invulnerable sentry guns)
+- **Infinite Weapon Ammo** (No clip depletion)
+- **No Weapon Recoil** (Zero weapon kick)
+- **No Bullet Spread** (Laser accuracy)
+- **All Weapons Full Auto** (Auto firemode on all guns)
+- **Infinite Cable Ties** (Unlimited cable ties)
+- **Infinite Body Bags** (Unlimited body bags)
+- **Infinite Throwables & Grenades** (Unlimited explosives/throwables)
+- **Fast Weapon Swap** (3x swap speed)
+- **All Tactical In-Game Menu Actions** (Restock Supplies, Fix Drills, Open Deposit Boxes, Unlock Doors, Wipe Enemies, Breakout, Teleport Loot, etc.)
 - **Instant Interaction Timer** (No Interaction Cooldown)
 - **Infinite Stamina**
 - **No Fall Damage**
 - **Ignore Armor Speed Penalty**
-- **No Weapon Restrictions** (Heavy bags will restrict weapons as normal)
+- **No Weapon Restrictions** (Keep Body Bags When Loud)
 - **Auto-Answer Pagers**
 - **Affect Body Bags**
 - **AI Can't Alarm**

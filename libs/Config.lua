@@ -27,7 +27,22 @@ Sapphire.DefaultSettings = {
     DrillNoJams = false,
     InstantDrills = false,
     AutoCooker = false,
-    OmnidirectionalSprint = false
+    OmnidirectionalSprint = false,
+    AntiFlashbang = false,
+    InstantMeleeCharge = false,
+    NoWeaponSway = false,
+    FastReload = false,
+    InstantMaskUp = false,
+    FastArmorRegen = false,
+    SentryGodMode = false,
+    InfiniteAmmo = false,
+    NoWeaponRecoil = false,
+    NoBulletSpread = false,
+    AllWeaponsFullAuto = false,
+    InfiniteCableTies = false,
+    InfiniteBodyBags = false,
+    InfiniteThrowables = false,
+    FastWeaponSwitch = false
 }
 
 Sapphire.Settings = {}

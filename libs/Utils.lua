@@ -49,6 +49,21 @@ function Sapphire:NormalizeSettings()
     self.Settings.InstantDrills = self.Settings.InstantDrills == true
     self.Settings.AutoCooker = self.Settings.AutoCooker == true
     self.Settings.OmnidirectionalSprint = self.Settings.OmnidirectionalSprint == true
+    self.Settings.AntiFlashbang = self.Settings.AntiFlashbang == true
+    self.Settings.InstantMeleeCharge = self.Settings.InstantMeleeCharge == true
+    self.Settings.NoWeaponSway = self.Settings.NoWeaponSway == true
+    self.Settings.FastReload = self.Settings.FastReload == true
+    self.Settings.InstantMaskUp = self.Settings.InstantMaskUp == true
+    self.Settings.FastArmorRegen = self.Settings.FastArmorRegen == true
+    self.Settings.SentryGodMode = self.Settings.SentryGodMode == true
+    self.Settings.InfiniteAmmo = self.Settings.InfiniteAmmo == true
+    self.Settings.NoWeaponRecoil = self.Settings.NoWeaponRecoil == true
+    self.Settings.NoBulletSpread = self.Settings.NoBulletSpread == true
+    self.Settings.AllWeaponsFullAuto = self.Settings.AllWeaponsFullAuto == true
+    self.Settings.InfiniteCableTies = self.Settings.InfiniteCableTies == true
+    self.Settings.InfiniteBodyBags = self.Settings.InfiniteBodyBags == true
+    self.Settings.InfiniteThrowables = self.Settings.InfiniteThrowables == true
+    self.Settings.FastWeaponSwitch = self.Settings.FastWeaponSwitch == true
 end
 
 function Sapphire:IsMultiplayerSessionActive()
@@ -112,6 +127,21 @@ function Sapphire:GetEffectiveSettings()
         InstantDrills = self.Settings.InstantDrills,
         AutoCooker = self.Settings.AutoCooker,
         OmnidirectionalSprint = self.Settings.OmnidirectionalSprint,
+        AntiFlashbang = self.Settings.AntiFlashbang,
+        InstantMeleeCharge = self.Settings.InstantMeleeCharge,
+        NoWeaponSway = self.Settings.NoWeaponSway,
+        FastReload = self.Settings.FastReload,
+        InstantMaskUp = self.Settings.InstantMaskUp,
+        FastArmorRegen = self.Settings.FastArmorRegen,
+        SentryGodMode = self.Settings.SentryGodMode,
+        InfiniteAmmo = self.Settings.InfiniteAmmo,
+        NoWeaponRecoil = self.Settings.NoWeaponRecoil,
+        NoBulletSpread = self.Settings.NoBulletSpread,
+        AllWeaponsFullAuto = self.Settings.AllWeaponsFullAuto,
+        InfiniteCableTies = self.Settings.InfiniteCableTies,
+        InfiniteBodyBags = self.Settings.InfiniteBodyBags,
+        InfiniteThrowables = self.Settings.InfiniteThrowables,
+        FastWeaponSwitch = self.Settings.FastWeaponSwitch,
         SafeModeActive = false,
         ForceSafeModeHost = self.Settings.ForceSafeModeHost
     }
@@ -151,6 +181,20 @@ function Sapphire:GetEffectiveSettings()
         effective.InstantDrills = false
         effective.AutoCooker = false
         effective.OmnidirectionalSprint = false
+        effective.AntiFlashbang = false
+        effective.InstantMeleeCharge = false
+        effective.FastReload = false
+        effective.InstantMaskUp = false
+        effective.FastArmorRegen = false
+        effective.SentryGodMode = false
+        effective.InfiniteAmmo = false
+        effective.NoWeaponRecoil = false
+        effective.NoBulletSpread = false
+        effective.AllWeaponsFullAuto = false
+        effective.InfiniteCableTies = false
+        effective.InfiniteBodyBags = false
+        effective.InfiniteThrowables = false
+        effective.FastWeaponSwitch = false
     end
 
     return effective

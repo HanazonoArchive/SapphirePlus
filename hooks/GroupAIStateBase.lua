@@ -65,3 +65,17 @@ if GroupAIStateBase and not GroupAIStateBase._sapphire_police_hooked then
         end
     end
 end
+
+if ElementLaserTrigger and not ElementLaserTrigger._sapphire_laser_hooked then
+    ElementLaserTrigger._sapphire_laser_hooked = true
+    local orig_laser_executed = ElementLaserTrigger.on_executed
+    if orig_laser_executed then
+        function ElementLaserTrigger:on_executed(...)
+            local effective = Sapphire:GetEffectiveSettings()
+            if effective.Enabled and effective.AICantAlarm then
+                return
+            end
+            return orig_laser_executed(self, ...)
+        end
+    end
+end

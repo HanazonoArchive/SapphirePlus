@@ -253,3 +253,56 @@ function Sapphire.Loot:SecureAllBags()
     Sapphire:Log("SecureAllBags secured: " .. tostring(secured_count))
 end
 
+-- ============================================================
+-- OPEN ALL DEPOSIT BOXES & ATMS (Tactical Action 14)
+-- ============================================================
+-- Instantly opens all safe deposit boxes, ATMs, lockers, and
+-- security cages across the map.
+--
+-- Gated by Safe Mode for multiplayer clients.
+-- ============================================================
+function Sapphire.Loot:OpenAllDepositBoxes()
+    local effective = Sapphire:GetEffectiveSettings()
+    if effective.SafeModeActive then
+        self:Notify("Sapphire+: Open Deposit Boxes is disabled in Safe Mode.")
+        return
+    end
+
+    local player = managers.player and managers.player:player_unit()
+    if not alive(player) then
+        self:Notify("Sapphire+: Player unit not available.")
+        return
+    end
+
+    local opened_count = 0
+    pcall(function()
+        local interactables = managers.interaction and managers.interaction._interactive_units or {}
+        for _, unit in pairs(interactables) do
+            if alive(unit) and unit:interaction() then
+                local interaction = unit:interaction()
+                local is_active = (not interaction.active or interaction:active()) and not interaction._disabled
+                if is_active then
+                    local tweak = tostring(interaction.tweak_data or ""):lower()
+                    if tweak == "deposit_box" or tweak == "deposit_box_close" or
+                       tweak == "atm_open" or tweak == "atm_card" or
+                       tweak == "open_slash_close_sec_box" or tweak == "lockpick_locker" then
+                        pcall(function()
+                            interaction:interact(player)
+                            opened_count = opened_count + 1
+                        end)
+                    end
+                end
+            end
+        end
+    end)
+
+    if opened_count > 0 then
+        self:Notify("Sapphire+: Opened " .. tostring(opened_count) .. " deposit boxes and ATMs!")
+    else
+        self:Notify("Sapphire+: No closed deposit boxes or ATMs found.")
+    end
+
+    Sapphire:Log("OpenAllDepositBoxes opened: " .. tostring(opened_count))
+end
+
+

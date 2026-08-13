@@ -42,6 +42,21 @@ local setting_keys = {
     Sapphire_DrillNoJams         = "DrillNoJams",
     Sapphire_InstantDrills       = "InstantDrills",
     Sapphire_OmnidirectionalSprint = "OmnidirectionalSprint",
+    Sapphire_AntiFlashbang       = "AntiFlashbang",
+    Sapphire_InstantMeleeCharge  = "InstantMeleeCharge",
+    Sapphire_NoWeaponSway        = "NoWeaponSway",
+    Sapphire_FastReload          = "FastReload",
+    Sapphire_InstantMaskUp       = "InstantMaskUp",
+    Sapphire_FastArmorRegen      = "FastArmorRegen",
+    Sapphire_SentryGodMode       = "SentryGodMode",
+    Sapphire_InfiniteAmmo        = "InfiniteAmmo",
+    Sapphire_NoWeaponRecoil      = "NoWeaponRecoil",
+    Sapphire_NoBulletSpread      = "NoBulletSpread",
+    Sapphire_AllWeaponsFullAuto  = "AllWeaponsFullAuto",
+    Sapphire_InfiniteCableTies   = "InfiniteCableTies",
+    Sapphire_InfiniteBodyBags    = "InfiniteBodyBags",
+    Sapphire_InfiniteThrowables  = "InfiniteThrowables",
+    Sapphire_FastWeaponSwitch    = "FastWeaponSwitch",
 }
 
 local function parse_item_value(item, key)
@@ -57,7 +72,22 @@ local function parse_item_value(item, key)
        key == "MinDetectionRisk" or
        key == "DrillNoJams" or
        key == "InstantDrills" or
-       key == "OmnidirectionalSprint" then
+       key == "OmnidirectionalSprint" or
+       key == "AntiFlashbang" or
+       key == "InstantMeleeCharge" or
+       key == "NoWeaponSway" or
+       key == "FastReload" or
+       key == "InstantMaskUp" or
+       key == "FastArmorRegen" or
+       key == "SentryGodMode" or
+       key == "InfiniteAmmo" or
+       key == "NoWeaponRecoil" or
+       key == "NoBulletSpread" or
+       key == "AllWeaponsFullAuto" or
+       key == "InfiniteCableTies" or
+       key == "InfiniteBodyBags" or
+       key == "InfiniteThrowables" or
+       key == "FastWeaponSwitch" then
         return item:value() == "on"
     end
 
@@ -145,6 +175,51 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
 
         Sapphire_instant_drills_title = "Instant Drills (Zero Timer)",
         Sapphire_instant_drills_desc  = "Forces all drills, saws, and hacking devices to finish in 0.01 seconds. (Disabled in Safe Mode)",
+
+        Sapphire_anti_flashbang_title = "Anti-Flashbang Shield",
+        Sapphire_anti_flashbang_desc  = "Grants complete immunity against flashbang whiteout blinding screens and ear-ringing audio. (Disabled in Safe Mode)",
+
+        Sapphire_instant_melee_charge_title = "Instant Full-Charge Melee",
+        Sapphire_instant_melee_charge_desc  = "Quick-tap melee attacks automatically deliver 100% full charged damage and maximum knockdown impulses. (Disabled in Safe Mode)",
+
+        Sapphire_no_weapon_sway_title = "No Weapon Sway (Zero Drift)",
+        Sapphire_no_weapon_sway_desc  = "Completely eliminates stance breathing sway and camera bobbing for laser-steady crosshairs and sights.",
+
+        Sapphire_fast_reload_title = "Fast Weapon Reload (2.5x)",
+        Sapphire_fast_reload_desc  = "Accelerates magazine reloading and shotgun loading animations by 2.5x for ultra-responsive gunplay. (Disabled in Safe Mode)",
+
+        Sapphire_instant_mask_up_title = "Instant Mask On (Zero Delay)",
+        Sapphire_instant_mask_up_desc  = "Puts on your mask instantly in casing mode without holding the interact key for 2 seconds. (Disabled in Safe Mode)",
+
+        Sapphire_fast_armor_regen_title = "Instant Armor Recovery",
+        Sapphire_fast_armor_regen_desc  = "Instantly recovers all broken armor shields the moment damage stops, removing the standard 3-second regeneration delay. (Disabled in Safe Mode)",
+
+        Sapphire_sentry_god_mode_title = "Sentry Gun Invulnerability",
+        Sapphire_sentry_god_mode_desc  = "Protects all player-placed sentry guns from taking damage or breaking from bullets, fire, and explosives. (Disabled in Safe Mode)",
+
+        Sapphire_infinite_ammo_title = "Infinite Weapon Ammo",
+        Sapphire_infinite_ammo_desc  = "Current weapon clip automatically stays 100% full upon firing and never depletes. (Disabled in Safe Mode)",
+
+        Sapphire_no_weapon_recoil_title = "No Weapon Recoil",
+        Sapphire_no_weapon_recoil_desc  = "Completely removes vertical and horizontal recoil kick when firing any weapon. (Disabled in Safe Mode)",
+
+        Sapphire_no_bullet_spread_title = "No Bullet Spread (Laser Beam)",
+        Sapphire_no_bullet_spread_desc  = "Eliminates all bullet deviation cone spread for pin-point laser precision across all weapons. (Disabled in Safe Mode)",
+
+        Sapphire_all_weapons_full_auto_title = "All Weapons Full Auto",
+        Sapphire_all_weapons_full_auto_desc  = "Allows semi-automatic pistols, DMRs, and shotguns to switch to full-automatic fire mode. (Disabled in Safe Mode)",
+
+        Sapphire_infinite_cable_ties_title = "Infinite Cable Ties",
+        Sapphire_infinite_cable_ties_desc  = "Never run out of cable ties when taking civilians and hostages. (Disabled in Safe Mode)",
+
+        Sapphire_infinite_body_bags_title = "Infinite Body Bags",
+        Sapphire_infinite_body_bags_desc  = "Never run out of body bags when packing killed guards in stealth. (Disabled in Safe Mode)",
+
+        Sapphire_infinite_throwables_title = "Infinite Throwables & Grenades",
+        Sapphire_infinite_throwables_desc  = "Prevents throwables, shurikens, and grenades from depleting upon throwing. (Disabled in Safe Mode)",
+
+        Sapphire_fast_weapon_switch_title = "Fast Weapon Swap (3x Speed)",
+        Sapphire_fast_weapon_switch_desc  = "Triples the animation speed of switching between primary and secondary weapons. (Disabled in Safe Mode)",
 
         -- Stealth Tools
         Sapphire_ai_cant_alarm_title = "AI Can't Alarm",
@@ -492,6 +567,136 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         priority = 692
     })
 
+    MenuHelper:AddToggle({
+        id = "Sapphire_AntiFlashbang",
+        title = "Sapphire_anti_flashbang_title",
+        desc = "Sapphire_anti_flashbang_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.AntiFlashbang,
+        menu_id = menu_id,
+        priority = 691.7
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_InstantMeleeCharge",
+        title = "Sapphire_instant_melee_charge_title",
+        desc = "Sapphire_instant_melee_charge_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.InstantMeleeCharge,
+        menu_id = menu_id,
+        priority = 691.4
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_NoWeaponSway",
+        title = "Sapphire_no_weapon_sway_title",
+        desc = "Sapphire_no_weapon_sway_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.NoWeaponSway,
+        menu_id = menu_id,
+        priority = 691.1
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_FastReload",
+        title = "Sapphire_fast_reload_title",
+        desc = "Sapphire_fast_reload_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.FastReload,
+        menu_id = menu_id,
+        priority = 690.8
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_InstantMaskUp",
+        title = "Sapphire_instant_mask_up_title",
+        desc = "Sapphire_instant_mask_up_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.InstantMaskUp,
+        menu_id = menu_id,
+        priority = 690.5
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_FastArmorRegen",
+        title = "Sapphire_fast_armor_regen_title",
+        desc = "Sapphire_fast_armor_regen_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.FastArmorRegen,
+        menu_id = menu_id,
+        priority = 690.2
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_SentryGodMode",
+        title = "Sapphire_sentry_god_mode_title",
+        desc = "Sapphire_sentry_god_mode_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.SentryGodMode,
+        menu_id = menu_id,
+        priority = 689.9
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_InfiniteAmmo",
+        title = "Sapphire_infinite_ammo_title",
+        desc = "Sapphire_infinite_ammo_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.InfiniteAmmo,
+        menu_id = menu_id,
+        priority = 689.6
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_NoWeaponRecoil",
+        title = "Sapphire_no_weapon_recoil_title",
+        desc = "Sapphire_no_weapon_recoil_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.NoWeaponRecoil,
+        menu_id = menu_id,
+        priority = 689.3
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_NoBulletSpread",
+        title = "Sapphire_no_bullet_spread_title",
+        desc = "Sapphire_no_bullet_spread_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.NoBulletSpread,
+        menu_id = menu_id,
+        priority = 689.0
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_AllWeaponsFullAuto",
+        title = "Sapphire_all_weapons_full_auto_title",
+        desc = "Sapphire_all_weapons_full_auto_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.AllWeaponsFullAuto,
+        menu_id = menu_id,
+        priority = 688.7
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_InfiniteThrowables",
+        title = "Sapphire_infinite_throwables_title",
+        desc = "Sapphire_infinite_throwables_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.InfiniteThrowables,
+        menu_id = menu_id,
+        priority = 688.4
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_FastWeaponSwitch",
+        title = "Sapphire_fast_weapon_switch_title",
+        desc = "Sapphire_fast_weapon_switch_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.FastWeaponSwitch,
+        menu_id = menu_id,
+        priority = 688.1
+    })
+
     MenuHelper:AddDivider({
         id = "Sapphire_div_qol",
         size = 16,
@@ -549,6 +754,26 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         value = Sapphire.Settings.MinDetectionRisk,
         menu_id = menu_id,
         priority = 495
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_InfiniteCableTies",
+        title = "Sapphire_infinite_cable_ties_title",
+        desc = "Sapphire_infinite_cable_ties_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.InfiniteCableTies,
+        menu_id = menu_id,
+        priority = 494.5
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_InfiniteBodyBags",
+        title = "Sapphire_infinite_body_bags_title",
+        desc = "Sapphire_infinite_body_bags_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.InfiniteBodyBags,
+        menu_id = menu_id,
+        priority = 494.2
     })
 
     MenuHelper:AddToggle({

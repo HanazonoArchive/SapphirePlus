@@ -29,7 +29,26 @@ All features are fully configurable in-game and protected by an intelligent mult
 * **God Mode (Invincible):** Zeroes all incoming bullet and melee damage. A dedicated cheat-tier toggle, independent of "AI Can't Alarm"; automatically disabled by Safe Mode when joining as a multiplayer client.
 * **Infinite Stamina:** Prevents stamina drain **while carrying a loot bag**, so you never slow to a walk mid-carry. (It does not remove stamina drain when you are not carrying.)
 
-### Quality of Life & Pre-Planning
+* **Anti-Flashbang Shield:** Grants complete immunity against flashbang whiteout blinding screens, camera shake, and ear-ringing audio.
+* **Instant Full-Charge Melee:** Quick-tap melee attacks automatically deliver 100% full charged damage and maximum knockdown impulse without holding the key.
+* **No Weapon Sway (Zero Drift):** Nullifies stance breathing amplitudes across all stances for laser-steady crosshairs and precision aiming.
+* **Fast Weapon Reload (2.5x):** Accelerates primary and secondary weapon magazine and shotgun reloads by 2.5x.
+* **Instant Mask On:** Puts on your mask immediately in casing mode without holding the interaction key for 2 seconds.
+* **Instant Armor Recovery:** Regenerates broken armor shields instantly upon exiting combat without the standard 3-second delay.
+* **Sentry Gun Invulnerability:** Makes player-placed sentry guns immune to bullet, fire, and explosive damage.
+* **Infinite Weapon Ammo:** Prevents weapon clip depletion upon firing with zero reload downtime.
+* **No Weapon Recoil:** Completely eliminates vertical and horizontal recoil kick when firing any weapon.
+* **No Bullet Spread (Laser Beam):** Zeroes bullet cone deviation for pin-point laser accuracy on all guns.
+* **All Weapons Full Auto:** Enables full-automatic fire mode toggling on semi-auto pistols, DMRs, and shotguns.
+* **Infinite Cable Ties:** Unlimited cable ties to secure all civilians and hostages in stealth or crowd control.
+* **Infinite Body Bags:** Unlimited body bags to package and hide eliminated guards in stealth operations.
+* **Infinite Throwables & Grenades:** Prevents grenades, molotovs, and shurikens from depleting on throw.
+* **Fast Weapon Swap (3x Speed):** Triples weapon switching animation speed for rapid arsenal cycling.
+* **Disable All Alarm Lasers:** Tactical in-game action that instantly deactivates all laser grids, tripwires, and alarm sensor fields map-wide.
+* **Unlock & Open All Doors:** Tactical in-game action that instantly unlocks all doors, security rooms, and keycard gates.
+* **Open All Deposit Boxes & ATMs:** Tactical in-game action that instantly pops open all safe deposit boxes, ATMs, and lockers.
+* **Fix & Finish All Drills:** Tactical in-game action that instantly unjams and fast-forwards all active drills, saws, and hacking panels.
+* **Restock All Supplies:** Tactical in-game action that instantly replenishes player health, armor, weapon ammunition, throwables/grenades, cable ties, and body bags to 100% capacity.
 * **Unlimited Pre-Planning Favors:** Removes pre-planning favor budget limits and sets asset favor and offshore cash costs to $0. Purchase every asset and escape route without restriction.
 * **Extended Interaction Range:** Increases interaction distance up to 5x, allowing lockpicking, keycard grabbing, and pager answering through grates or from cover.
 * **Instant Interactions:** Completes interactions (bag pickup, cable tying, lockpicking, pager responses) immediately without waiting for progress bars.

@@ -80,6 +80,30 @@ function PlayerDamage:damage_fall(data)
     end
 end
 
+-- Suppress flashbang visual whiteout and audio ringing when AntiFlashbang is active
+local orig_on_flashbanged = PlayerDamage.on_flashbanged
+function PlayerDamage:on_flashbanged(sound_eff_mul, ...)
+    local effective = Sapphire:GetEffectiveSettings()
+    if effective.Enabled and effective.AntiFlashbang then
+        return
+    end
+    if orig_on_flashbanged then
+        return orig_on_flashbanged(self, sound_eff_mul, ...)
+    end
+end
+
+-- Fast Armor Regeneration: Eliminates armor recovery delay
+local orig_upd_armor_regen = PlayerDamage._upd_armor_regeneration
+function PlayerDamage:_upd_armor_regeneration(t, dt, ...)
+    local effective = Sapphire:GetEffectiveSettings()
+    if effective.Enabled and effective.FastArmorRegen and not self._dead and not self._bleed_out and self._regen_armor_queued then
+        self._armor_regenerate_timer = 0
+    end
+    if orig_upd_armor_regen then
+        return orig_upd_armor_regen(self, t, dt, ...)
+    end
+end
+
 -- Enforce God Mode via the native invincibility flag every frame. Layered on top
 -- of the game's own Global.god_mode so turning our toggle off restores the game's
 -- baseline instead of forcing false.

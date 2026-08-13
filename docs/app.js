@@ -8,18 +8,63 @@
 // ==========================================
 const devlogs = [
     {
-        version: "v0.6.0",
+        version: "v1.0.0",
         isLatest: true,
+        tag: "Milestone Expansion (20 New Features)",
+        items: [
+            { label: "Infinite Cable Ties", desc: "Never run out of cable ties when securing civilians and hostages in stealth or loud." },
+            { label: "Infinite Body Bags", desc: "Never run out of body bags when packaging killed guards in stealth operations." },
+            { label: "Infinite Throwables & Grenades", desc: "Prevents grenades, throwables, and shurikens from depleting on throw." },
+            { label: "Fast Weapon Swap (3x Speed)", desc: "Triples the animation speed of switching between primary and secondary weapons." },
+            { label: "Disable All Alarm Lasers", desc: "Tactical in-game action that instantly deactivates all mission laser triggers, tripwires, and security sensor grids map-wide." }
+        ]
+    },
+    {
+        version: "v0.9.0",
+        isLatest: false,
+        tag: "Ballistics & Banking Expansion",
+        items: [
+            { label: "Infinite Weapon Ammo", desc: "Keeps current weapon clip 100% full upon firing with zero ammo depletion." },
+            { label: "No Weapon Recoil", desc: "Completely eliminates vertical and horizontal camera recoil kick on all weapons." },
+            { label: "No Bullet Spread", desc: "Zeroes bullet cone deviation for pin-point laser precision across rifles, pistols, and shotguns." },
+            { label: "All Weapons Full Auto", desc: "Enables firemode switching to full-automatic on all semi-auto pistols, DMRs, and shotguns." },
+            { label: "Open All Deposit Boxes & ATMs", desc: "Tactical in-game action that instantly pops open all safe deposit boxes, ATMs, and lockers map-wide." }
+        ]
+    },
+    {
+        version: "v0.8.0",
+        isLatest: false,
+        tag: "Firepower & Utility Expansion",
+        items: [
+            { label: "Fast Weapon Reload", desc: "Accelerates weapon magazine and shotgun reload animations by 2.5x for instant combat responsiveness." },
+            { label: "Instant Mask On", desc: "Equips mask immediately in casing mode without holding the interaction button for 2 seconds." },
+            { label: "Instant Armor Recovery", desc: "Instantly recovers broken armor shields the moment damage stops, removing the 3-second recovery delay." },
+            { label: "Sentry Gun Invulnerability", desc: "Protects all player-placed sentry guns from taking damage or breaking from bullets, fire, or explosions." },
+            { label: "Fix & Finish All Drills", desc: "Tactical in-game action that unjams and fast-forwards all active drills, saws, and hacking panels across the map." }
+        ]
+    },
+    {
+        version: "v0.7.0",
+        isLatest: false,
+        tag: "Combat & Logistics Expansion",
+        items: [
+            { label: "Restock All Supplies", desc: "Tactical in-game action that instantly replenishes health, armor, all weapon ammo, grenades, cable ties, and body bags to 100%." },
+            { label: "Instant Full-Charge Melee", desc: "Quick-tap melee strikes automatically deal 100% full charged damage and maximum knockdown impulse without holding the key." },
+            { label: "Anti-Flashbang Shield", desc: "Suppresses flashbang whiteout blinding screens, camera shake, and ear-ringing audio entirely." },
+            { label: "No Weapon Sway", desc: "Nullifies stance breathing amplitudes across all stances, providing laser-steady weapon sights and crosshairs." },
+            { label: "Lifecycle Safety Manager", desc: "Automatically flushes and cleans up lingering async DelayedCalls on heist start or restart." }
+        ]
+    },
+    {
+        version: "v0.6.0",
+        isLatest: false,
         tag: "Tactical & Mayhem Expansion",
         items: [
             { label: "Army of Jokers", desc: "Instantly converts all active cops across the heist into an army of friendly criminal minions with max minion limits bypassed." },
             { label: "Gage Package Collector", desc: "Instantly collects all hidden Gage Courier packages on the map with a single in-game menu action." },
             { label: "Instant Custody Breakout", desc: "Instantly trades and brings all downed/dead teammates and AI companions back from custody." },
             { label: "Clean All Corpses", desc: "Silently sweeps and cleans all dead bodies and leftover body bags across the map." },
-            { label: "Ragdoll Space Program", desc: "Multiplies ragdoll death impulse physics to launch enemies into orbit upon lethal hits." },
-            { label: "360 Sprinting", desc: "Enables omnidirectional sprinting in all directions (sideways, backwards) without breaking sprint." },
-            { label: "Instant Melee Charge", desc: "Guarantees 100% full charged melee damage, range, and knockdown on instant tap." },
-            { label: "Gas Mask & Anti-Flashbang", desc: "Grants complete immunity against flashbang blinding screens, audio ringing, and tear gas damage." }
+            { label: "360 Sprinting", desc: "Enables omnidirectional sprinting in all directions (sideways, backwards) without breaking sprint." }
         ]
     },
     {
@@ -126,6 +171,34 @@ const features = [
         icon: "skull",
         desc: "Silently despawns all guards, Murkywater security, and cops across the map while shutting down all active security cameras without alarms or pagers."
     },
+    {
+        title: "Restock All Supplies",
+        category: "qol",
+        tag: "Tactical Action",
+        icon: "refresh-cw",
+        desc: "Instantly restores health, armor, all primary and secondary weapon ammunition, throwables/grenades, cable ties, and body bags to 100% maximum capacity."
+    },
+    {
+        title: "Fix & Finish All Drills",
+        category: "qol",
+        tag: "Tactical Action",
+        icon: "wrench",
+        desc: "Instantly unjams and fast-forwards all active drills, thermal saws, timelocks, and hacking panels across the entire map."
+    },
+    {
+        title: "Open All Deposit Boxes & ATMs",
+        category: "carry",
+        tag: "Tactical Action",
+        icon: "unlock",
+        desc: "Instantly unlocks and pops open all safe deposit boxes, ATMs, lockers, and security cages across the entire heist map."
+    },
+    {
+        title: "Disable All Alarm Lasers",
+        category: "stealth",
+        tag: "Tactical Action",
+        icon: "shield-alert",
+        desc: "Instantly deactivates all mission laser triggers, tripwires, and security sensor grids across the heist map."
+    },
 
     // --- COMBAT & MOVEMENT OVERHAULS ---
     {
@@ -155,6 +228,83 @@ const features = [
         tag: "Protection",
         icon: "shield-alert",
         desc: "Grants complete immunity against flashbang whiteout screens, audio ringing, and tear gas damage ticks."
+    },
+    {
+        title: "No Weapon Sway (Zero Drift)",
+        category: "qol",
+        tag: "Shooting",
+        icon: "crosshair",
+        desc: "Completely nullifies breathing sway and weapon stance bobbing for laser-steady crosshairs and precision aiming."
+    },
+    {
+        title: "Fast Weapon Reload (2.5x)",
+        category: "qol",
+        tag: "Combat",
+        icon: "zap",
+        desc: "Accelerates weapon magazine and shotgun reload animations by 2.5x for rapid combat cycling."
+    },
+    {
+        title: "Instant Mask On (Zero Delay)",
+        category: "stealth",
+        tag: "Stealth",
+        icon: "eye",
+        desc: "Puts on your mask instantly during casing mode without holding the interaction button for 2 seconds."
+    },
+    {
+        title: "Instant Armor Recovery",
+        category: "qol",
+        tag: "Combat",
+        icon: "shield",
+        desc: "Instantly regenerates broken armor shields the moment combat damage stops, eliminating the 3-second delay."
+    },
+    {
+        title: "Sentry Gun Invulnerability",
+        category: "qol",
+        tag: "Deployables",
+        icon: "crosshair",
+        desc: "Protects all player-placed sentry guns from taking damage or breaking from enemy bullets, fire, and explosives."
+    },
+    {
+        title: "Infinite Weapon Ammo",
+        category: "qol",
+        tag: "Combat",
+        icon: "infinity",
+        desc: "Current weapon clip automatically stays 100% full upon firing with zero ammo depletion."
+    },
+    {
+        title: "No Weapon Recoil",
+        category: "qol",
+        tag: "Shooting",
+        icon: "target",
+        desc: "Completely removes vertical and horizontal recoil kick when firing any semi or full auto weapon."
+    },
+    {
+        title: "No Bullet Spread (Laser Beam)",
+        category: "qol",
+        tag: "Shooting",
+        icon: "crosshair",
+        desc: "Eliminates all bullet deviation cone spread for pin-point laser precision across all weapons."
+    },
+    {
+        title: "All Weapons Full Auto",
+        category: "qol",
+        tag: "Firepower",
+        icon: "flame",
+        desc: "Allows semi-automatic pistols, DMRs, and shotguns to switch to full-automatic fire mode."
+    },
+    {
+        title: "Infinite Throwables & Grenades",
+        category: "qol",
+        tag: "Combat",
+        icon: "bomb",
+        desc: "Prevents grenades, throwables, and shurikens from depleting on throw, providing unlimited explosive support."
+    },
+    {
+        title: "Fast Weapon Swap (3x Speed)",
+        category: "qol",
+        tag: "Combat",
+        icon: "refresh-cw",
+        desc: "Triples the animation speed of switching between primary and secondary weapons for rapid tactical loadout cycling."
     },
     {
         title: "Carry Weight & Sprint Overhaul",
@@ -255,6 +405,20 @@ const features = [
         tag: "Stealth",
         icon: "phone-call",
         desc: "Automatically answers pagers immediately when a security guard is neutralized, preventing missed pagers while managing stealth objectives."
+    },
+    {
+        title: "Infinite Cable Ties",
+        category: "stealth",
+        tag: "Stealth",
+        icon: "user-check",
+        desc: "Never run out of cable ties when taking hostages and securing civilians during stealth or crowd control."
+    },
+    {
+        title: "Infinite Body Bags",
+        category: "stealth",
+        tag: "Stealth",
+        icon: "package",
+        desc: "Never run out of body bags when packaging killed guards and civilians in stealth operations."
     },
 
     // --- QUALITY OF LIFE & PRE-PLANNING ---

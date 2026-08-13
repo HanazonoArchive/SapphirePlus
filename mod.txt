@@ -2,7 +2,7 @@
     "name": "Sapphire+",
     "description": "Ultimate Carry Overhaul",
     "author": "YRH",
-    "version": "0.6.0",
+    "version": "1.0.0",
     "hooks": [
         {
             "hook_id": "lib/managers/playermanager",
@@ -49,6 +49,10 @@
             "script_path": "hooks/GroupAIStateBase.lua"
         },
         {
+            "hook_id": "lib/managers/mission/elementlasertrigger",
+            "script_path": "hooks/GroupAIStateBase.lua"
+        },
+        {
             "hook_id": "lib/managers/dlcmanager",
             "script_path": "hooks/DLCManager.lua"
         },
@@ -91,6 +95,66 @@
         {
             "hook_id": "lib/units/vehicles/animatedvehiclebase",
             "script_path": "hooks/CrashFixes.lua"
+        },
+        {
+            "hook_id": "lib/tweak_data/blackmarkettweakdata",
+            "script_path": "hooks/MeleeOverhaul.lua"
+        },
+        {
+            "hook_id": "lib/units/beings/player/states/playerstandard",
+            "script_path": "hooks/MeleeOverhaul.lua"
+        },
+        {
+            "hook_id": "lib/tweak_data/playertweakdata",
+            "script_path": "hooks/WeaponSway.lua"
+        },
+        {
+            "hook_id": "lib/managers/missionmanager",
+            "script_path": "hooks/LifecycleManager.lua"
+        },
+        {
+            "hook_id": "lib/units/weapons/raycastweaponbase",
+            "script_path": "hooks/FastReload.lua"
+        },
+        {
+            "hook_id": "lib/units/weapons/newraycastweaponbase",
+            "script_path": "hooks/FastReload.lua"
+        },
+        {
+            "hook_id": "lib/units/equipment/sentry_gun/sentrygundamage",
+            "script_path": "hooks/SentryOverhaul.lua"
+        },
+        {
+            "hook_id": "lib/units/equipment/sentry_gun/sentrygunweapon",
+            "script_path": "hooks/SentryOverhaul.lua"
+        },
+        {
+            "hook_id": "lib/tweak_data/playertweakdata",
+            "script_path": "hooks/MaskUpOverhaul.lua"
+        },
+        {
+            "hook_id": "lib/units/weapons/raycastweaponbase",
+            "script_path": "hooks/WeaponCombat.lua"
+        },
+        {
+            "hook_id": "lib/units/weapons/newraycastweaponbase",
+            "script_path": "hooks/WeaponCombat.lua"
+        },
+        {
+            "hook_id": "lib/units/cameras/fpcameraplayerbase",
+            "script_path": "hooks/WeaponCombat.lua"
+        },
+        {
+            "hook_id": "lib/tweak_data/weapontweakdata",
+            "script_path": "hooks/FireModeOverhaul.lua"
+        },
+        {
+            "hook_id": "lib/managers/playermanager",
+            "script_path": "hooks/PlayerInventoryHooks.lua"
+        },
+        {
+            "hook_id": "lib/units/beings/player/states/playerstandard",
+            "script_path": "hooks/WeaponSwapOverhaul.lua"
         }
     ],
     "keybinds": [
