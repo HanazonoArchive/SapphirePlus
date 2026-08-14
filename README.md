@@ -44,6 +44,7 @@ All features are fully configurable in-game and protected by an intelligent mult
 * **Infinite Body Bags:** Unlimited body bags to package and hide eliminated guards in stealth operations.
 * **Infinite Throwables & Grenades:** Prevents grenades, molotovs, and shurikens from depleting on throw.
 * **Fast Weapon Swap (3x Speed):** Triples weapon switching animation speed for rapid arsenal cycling.
+* **Stealth GPS (Patrol Path Visualizer):** Renders real-time 3D patrol lines and destination waypoints in world space for moving guards in stealth mode.
 * **Disable All Alarm Lasers:** Tactical in-game action that instantly deactivates all laser grids, tripwires, and alarm sensor fields map-wide.
 * **Unlock & Open All Doors:** Tactical in-game action that instantly unlocks all doors, security rooms, and keycard gates.
 * **Open All Deposit Boxes & ATMs:** Tactical in-game action that instantly pops open all safe deposit boxes, ATMs, and lockers.

@@ -64,6 +64,7 @@ function Sapphire:NormalizeSettings()
     self.Settings.InfiniteBodyBags = self.Settings.InfiniteBodyBags == true
     self.Settings.InfiniteThrowables = self.Settings.InfiniteThrowables == true
     self.Settings.FastWeaponSwitch = self.Settings.FastWeaponSwitch == true
+    self.Settings.StealthGPS = self.Settings.StealthGPS == true
 end
 
 function Sapphire:IsMultiplayerSessionActive()
@@ -142,6 +143,7 @@ function Sapphire:GetEffectiveSettings()
         InfiniteBodyBags = self.Settings.InfiniteBodyBags,
         InfiniteThrowables = self.Settings.InfiniteThrowables,
         FastWeaponSwitch = self.Settings.FastWeaponSwitch,
+        StealthGPS = self.Settings.StealthGPS,
         SafeModeActive = false,
         ForceSafeModeHost = self.Settings.ForceSafeModeHost
     }

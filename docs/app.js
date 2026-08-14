@@ -420,6 +420,13 @@ const features = [
         icon: "package",
         desc: "Never run out of body bags when packaging killed guards and civilians in stealth operations."
     },
+    {
+        title: "Stealth GPS (Patrol Path Visualizer)",
+        category: "stealth",
+        tag: "Stealth",
+        icon: "navigation",
+        desc: "Renders real-time 3D patrol lines and destination waypoints in world space for moving guards in stealth mode with zero performance drop."
+    },
 
     // --- QUALITY OF LIFE & PRE-PLANNING ---
     {

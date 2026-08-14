@@ -42,7 +42,8 @@ Sapphire.DefaultSettings = {
     InfiniteCableTies = false,
     InfiniteBodyBags = false,
     InfiniteThrowables = false,
-    FastWeaponSwitch = false
+    FastWeaponSwitch = false,
+    StealthGPS = false
 }
 
 Sapphire.Settings = {}

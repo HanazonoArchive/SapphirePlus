@@ -57,6 +57,7 @@ local setting_keys = {
     Sapphire_InfiniteBodyBags    = "InfiniteBodyBags",
     Sapphire_InfiniteThrowables  = "InfiniteThrowables",
     Sapphire_FastWeaponSwitch    = "FastWeaponSwitch",
+    Sapphire_StealthGPS          = "StealthGPS",
 }
 
 local function parse_item_value(item, key)
@@ -87,7 +88,8 @@ local function parse_item_value(item, key)
        key == "InfiniteCableTies" or
        key == "InfiniteBodyBags" or
        key == "InfiniteThrowables" or
-       key == "FastWeaponSwitch" then
+       key == "FastWeaponSwitch" or
+       key == "StealthGPS" then
         return item:value() == "on"
     end
 
@@ -242,6 +244,9 @@ Hooks:Add("LocalizationManagerPostInit", "Sapphire_Localization", function(loc)
 
         Sapphire_auto_answer_pagers_title = "Auto-Answer Pagers",
         Sapphire_auto_answer_pagers_desc  = "Automatically answers any pagers that spawn.",
+
+        Sapphire_stealth_gps_title = "Stealth GPS (Patrol Paths)",
+        Sapphire_stealth_gps_desc  = "Renders real-time 3D patrol lines and destination markers for moving guards in stealth mode.",
 
         -- Extras
         Sapphire_unlock_dlc_heists_title = "Unlock DLC Heists",
@@ -808,6 +813,16 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Sapphire_MenuPopulate", function(me
         value = Sapphire.Settings.AutoAnswerPagers,
         menu_id = menu_id,
         priority = 492
+    })
+
+    MenuHelper:AddToggle({
+        id = "Sapphire_StealthGPS",
+        title = "Sapphire_stealth_gps_title",
+        desc = "Sapphire_stealth_gps_desc",
+        callback = callback_id,
+        value = Sapphire.Settings.StealthGPS,
+        menu_id = menu_id,
+        priority = 491
     })
 
     MenuHelper:AddDivider({

@@ -752,3 +752,19 @@ PlayerDamage:clbk_feign_death() -- Feign Death RNG roll calculation
 
 ### Engine Logic:
 * Sweeps dead enemy body units (`World:find_units_quick("all", managers.slot:get_mask("corpses"))`) and calls `unit:set_slot(0)` or triggers corpse interaction directly to place into body bags automatically.
+
+---
+
+## 66. Guard Patrol Pathfinding & Stealth GPS Navigation
+
+### Engine Classes & Source Locations
+* **`CopActionWalk`**: `lib/units/enemies/cop/actions/lower_body/copactionwalk`
+* **`Application` / `Draw`**: 3D Debug render primitives (`draw_cylinder`, `draw_sphere`, `Draw:brush`)
+
+### Engine Logic:
+* Hooks `CopActionWalk:update(t)` to access `self._nav_path`.
+* Checks `managers.groupai:state():whisper_mode()` and `alive(self._unit)`.
+* Computes real-time world-space waypoint coordinates via `self._nav_point_pos(positions[i])`.
+* Draws 3D laser-projected navigation lines connecting waypoints directly to the guard's destination sphere.
+* Renders 3D overhead character labels rotated to face active player camera (`camera:rotation():x()` and `camera:rotation():z()`).
+
